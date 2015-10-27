@@ -56,7 +56,7 @@ EEPROM stores data permanently. data stays if power is off. SRAM loses data if p
 `;` is used for comment in assembly programming.
 
 `LDI` instruction is used to Load a data into a GPR
-```assembly
+```
 LDI Rd, k
 ```
 Load Imidiate value. Load value `k` into GPR `Rd` where 16 <= d <= 32. `k` can be any binary, hexadecimal or decimal number.
@@ -64,7 +64,7 @@ Load Imidiate value. Load value `k` into GPR `Rd` where 16 <= d <= 32. `k` can b
 ---------------------------------------------------------
 
 `LDS` instruction is used to load data into GPRs from a memory address
-```assembly
+```
 LDS Rd, K
 ```
 Load from data space. Load `Rd` with data from a memory address `K` where 0 <= d <= 32. `K` is a memory address between $0000 to $FFFF
@@ -72,7 +72,7 @@ Load from data space. Load `Rd` with data from a memory address `K` where 0 <= d
 ---------------------------------------------------------
 
 `STS` instruction is used to store data to a memory address from GPRs
-```assembly
+```
 STS K, Rd
 ```
 
@@ -81,7 +81,7 @@ Store directly into memory address `K` from GPR `Rd`. Here `K` is an address of 
 ---------------------------------------------------------
 
 `ADD` instruction is used to add the data of two GPRs
-```assembly
+```
 ADD Rd, Rr	       ; Rd = Rd + Rr`
 ```
 
@@ -90,7 +90,7 @@ Add register `Rd` and `Rr`. And store result in `Rd`
 ---------------------------------------------------------
 
 `IN` instruction is used to store data into GPRs from I/O registers
-```assembly
+```
 IN Rd, A
 ```
 Retrieve data from I/O register location `A` and store into the GPR `Rd`. `A` is the memory location of the I/O register. 0<= d <= 32, 0<= A <= 63
@@ -98,7 +98,7 @@ Retrieve data from I/O register location `A` and store into the GPR `Rd`. `A` is
 ---------------------------------------------------------
 
 `OUT` instruction is used to store value in I/O registers from GPRs
-```assembly
+```
 OUT A, Rr
 ```
 Store GPR `Rr`'s value to an I/O register who's location is `A`
@@ -106,7 +106,7 @@ Store GPR `Rr`'s value to an I/O register who's location is `A`
 ---------------------------------------------------------
 
 `MOV` instruction is used to copy data among GPRs
-```assembly
+```
 MOV Rd,Rr		; Rd = Rr
 ```
 
@@ -115,7 +115,7 @@ copy data from `Rr` to `Rd`.
 ---------------------------------------------------------
 
 `INC` instruction is used to increment data of a register by 1
-```assembly
+```
 INC Rd			; Rd = Rd + 1
 ```
 
@@ -124,7 +124,7 @@ Increment the value of `Rd` by 1.
 ---------------------------------------------------------
 
 `SUB` instruction is used to substract one GPR's value from another GPR's value
-```assembly
+```
 SUB Rd, Rr		; Rd = Rd - Rr
 ```
 substarct the value of `Rr` from the value of `Rd` and store the result into `Rd`.
@@ -132,14 +132,14 @@ substarct the value of `Rr` from the value of `Rd` and store the result into `Rd
 ---------------------------------------------------------
 
 `DEC` instruction is used to decrement the value of a GPR by 1
-```assembly
+```
 DEC Rd			; Rd = Rd - 1
 ```
 
 ---------------------------------------------------------
 
 `COM` instruction is used to make 1's complement of a GPR
-```assembly
+```
 COM Rd
 ```
 invert the bits of `Rd` and then store the value into `Rd`
@@ -149,7 +149,7 @@ invert the bits of `Rd` and then store the value into `Rd`
 `TST`(Test) instruction can be used to examine a register & set the status regtesr's flag according to the content of the register without performing an arithmetic instruction.
 
 Example:
-```assembly
+```
 OVER:	IN R20, PINB		; Load R20 with the content of I/O register PINB
 		TST R20				; Test R20
 		BREQ OVER			; Loop if R20 = 0
@@ -158,28 +158,28 @@ OVER:	IN R20, PINB		; Load R20 with the content of I/O register PINB
 ---------------------------------------------------------
 
 `NOP`(No Operation) instruction wastes time by spending one CPU cycle without executing any operation.
-```assembly
+```
 NOP			; Spend 1 CPU cycle doing nothing
 ```
 
 ---------------------------------------------------------
 
 `CLR`(Clear) instruction is used to clear a register's value or set to zero.
-```assembly
+```
 CLR R20		; R20 = 0
 ```
 
 ---------------------------------------------------------
 
 `PUSH` instruction is used to push data to memory stack
-```assembly
+```
 PUSH Rr 			; PUSH data into memory stack from GPR(0 <= r <= 31)
 ```
 
 ---------------------------------------------------------
 
 `POP` instruction is used to retrieve data back from memory stack
-```assembly
+```
 POP Rr 				; Pop data from the top of the stack and store into Rr
 ```
 Memory stack works in LIFO method
@@ -187,7 +187,7 @@ Memory stack works in LIFO method
 ## DIRECTIVES ##
 
 `.EQU` directive is used to define a constant value / Label for some value of address.
-```assembly
+```
 .EQU HEXNUM = 0xFF
 ```
 define `HEXNUM` as a constant hex value `0xFF`
@@ -195,7 +195,7 @@ define `HEXNUM` as a constant hex value `0xFF`
 ---------------------------------------------------------
 
 `.SET` directive is same as `.EQU` but value assigned by set can be re-assigned leter
-```assembly
+```
 .SET HEXNUM = 0xFF
 ```
 define `HEXNUM` as a hex value `0xFF`
@@ -203,7 +203,7 @@ define `HEXNUM` as a hex value `0xFF`
 ---------------------------------------------------------
 
 `.ORG` directive is used to specify start of a ROM location. Where codes will be burnt.
-```assembly
+```
 .ORG $0		; Burn From ROM location 0x0
 ```
 
@@ -237,14 +237,14 @@ SREG		| I | T | H | S | V | N | Z | C |
 ## BRANCHING INSTRUCTINS ##
 
 `BRNE` (Branch If Not Equal) instruction is used for looping. `BRNE` instruction uses the zero or Z flag in the status register. CPU jumps to target address if zero flag is low. Z = 0.
-```assembly
+```
 LABEL:	............	; loop body
 		............	; loop body
 		DEC Rn			; Z flag = 1 if Rn = 0. Decrement Rn untill it becomes zero 
 		BRNE LABEL		; Goto LABEL if Rn != 0 that means zero flag = 0
 ```
 Example: Add 10 times
-```assembly
+```
 LDI R16, 10
 LDI R20, 0
 LDI R21, 20
@@ -256,7 +256,7 @@ AGAIN:	ADD R20, R21
 ---------------------------------------------------------
 
 `BREQ` (BRanch If EQual). CPU jumps to target address if zero flag is High.
-```assembly
+```
 AGAIN:	IN R20, PORTB	; Load R20 from PORTB
 		TST R20			; Examine R20 and set Z & N flag accordingly
 		BREQ AGAIN		; if Z = 1, goto AGAIN
@@ -291,7 +291,7 @@ The **SP** is implemented as two registers. In I/O memory space there are two re
 When data is pushed into the stack SP decrements. When data is retrieved SP increments. Poping data from stack works in LIFO(Last In First Out) process. `RET` instruction is used to return back to caller.
 
 Example: Toggle all the bits of PORTB by sending 0x55 & 0xAA continuously. Put a time delay between each issuing data to PORTB.
-```assembly
+```
 .INCLUDE "M32DEF.INC"		; Include file
 .ORG 0						; Burn code into ROM memory starting at $0
 
@@ -385,7 +385,7 @@ Each PORTx, DDRX or PINx is 8 bits register. So the 8 bits are assosiated with c
 **Example of DDRx & PORTx registers role in outputting data:**
 
 Following code will toggle all 8 bits of Port B forever with some delay between on & off state:
-```assembly
+```
 LDI R16, 0xFF	; R16 = 0xFF = 0b11111111
 
 OUT DDRB, R16	; Make Port B an output port. As each bit of DDRB is 1,
@@ -415,7 +415,7 @@ L1:		LDI R16, 0x55	; R16 = 0x55 = 0b01010101
 PORTx effect pull up registors.
 
 Following code gets the data from the pins of port C and send it to port B after adding value 5 with it
-```assembly
+```
 LDI R16, 0x00	; R16 = 0x00 = 0b00000000
 
 OUT DDRC, R16	; Make port C an input port. As DDRC = 0b00000000, so each pin
@@ -442,7 +442,7 @@ L1:		IN R16, PINC	; Take input from Port C pins. And store bits in R16
 **Synchronizer delay:** The Input Circuit of the AVR has a delay of 1 Clock Cycle. That means the PIN registers represents the data that was present at the pin one clock cycle ago. So one cycle delay is used to get realtime data.
 
 Example:
-
+```
 .INCLUDE "M32DEF.INC"
 
 .EQU TEMPMEM 0x100	; Memory location
@@ -456,8 +456,8 @@ NOP					; No operation cycle. Synchronizer Delay.
 IN R16, PINB		; Take bits of PINB and store to R16
 
 STS TEMPMEM, R16	; Store R16 to memoty location
-
-; In the above code when the instruction "IN R16, PINB" is executed, the PINB registers contains the data, which was present at the pins on clock before. That is why NOP is used before this instruction. If NOP is omitted, the read data is the data of the pins when they were output pins.
+```
+In the above code when the instruction "IN R16, PINB" is executed, the PINB registers contains the data, which was present at the pins on clock before. That is why NOP is used before this instruction. If NOP is omitted, the read data is the data of the pins when they were output pins.
 
 ```
 		#######################################################
@@ -497,13 +497,13 @@ $2F			$0F			SPDR	|	$3F			$1F			EEARH
 **Following instructions are used to manipulate single bit:**
 
 `SBI`(Set Bit in I/O register) instruction is used to set a bit in I/O register. To make a bit 1.
-```assembly
+```
 SBI ioReg, bitNumber	; ioReg is the name of I/O register, which is any
 						; lower 32 I/O register. bitNumber(0 - 7) is the 
 						; position of the bit of the register to manipulate
 ```
 Example:
-```assembly
+```
 SBI PORTB, 5			; This will set the D5(6th) bit of the PORTB register
 						; to 1. As a result the PB4(5th) pin of Port B will
 						; output high
@@ -512,7 +512,7 @@ SBI PORTB, 5			; This will set the D5(6th) bit of the PORTB register
 -------------------------------------------------------------------------------
 
 `CBI`(Clear Bit in I/O register) instruction is used to clear a bit in I/O register. To make a bit 0.
-```assembly
+```
 CBI ioReg, bitNumber	; ioReg is the name of I/O register, which is any
 						; lower32 I/O register. bitNumber is the
 						; number of the bit of the register to manipulate
@@ -521,7 +521,7 @@ CBI ioReg, bitNumber	; ioReg is the name of I/O register, which is any
 -------------------------------------------------------------------------------
 
 Following code will toggle `PB0`(1st) pin of Port B continuously
-```assembly
+```
 SBI DDRB, 0				; Make PB0 an output pin. D0 = 1. So PB0 is configured
 						; as output pin.
 
@@ -543,12 +543,12 @@ LOOP:	 SBI PORTB, 0	; Make PB0 HIGH. As bit is set in D0 of PORTB.
 Following instructions are used for checking an input pin & make decisions based on the input pin's status.
 
 `SIBS`(Skip if Bit in I/O register is Set) instruction tests a bit and skip next instruction if it is HIGH.
-```assembly
+```
 SIBS ioReg, bitNumber	; Skip next instruction if bitNumber bit of ioReg
 						; register is HIGH
 ```
 The following program will keep monitoring the PB2 pin untill it becomes HIGH. When PB2 becomes HIGH it will write value $45 to Port C, and also send a HIGH-to-LOW pulse to PD3.
-```assembly
+```
 .INCLUDE M32DEF.INC
 
 	CBI DDRB, 2			; Configure PB2 as input
@@ -578,12 +578,12 @@ HERE:	RJUPM HERE		; Stay here forever
 -------------------------------------------------------------------------------
 
 `SIBC`(Skip if Bit in I/O register is cleared) instruction tests a bit and skip next instruction if it is LOW.
-```assembly
+```
 SIBC ioReg, bitNumber	; Skip next instruction if bitNumber bit of ioReg
 						; register is LOW
 ```
 A switch is connected to PB2. Following program will check the status of switch and send the letter 'N' if SW = 0 or send the letter 'Y' if SW = 1 to PORTD
-```assembly
+```
 .INCLUDE "M32DEF.INC"
 
 	CBI DDRB, 2				; Set PB2 as input
@@ -618,7 +618,7 @@ WRITE_Y:	LDI R16, 'Y'	; R16 = 'Y'
 This instruction adds register Rd with Rr and store the number into Rd. Z(Zero), C(Carry), N(Negative), V(Overflow), H(Half Carry), S(Sign) bits of the status register can be affected after this operation.
 
 Example:
-```assembly
+```
 LDI	R21, 0xF5		; Load 0xF5 into R21
 
 LDI R22, 0x0B		; LOad 0x0B into R22
@@ -641,7 +641,7 @@ STS 0x400, R21		; Store result into RAM memory space 0x400
 `ADC`(Add with carry) instruction is used to add with carry bit. As it add with carry bit, 16 bit addition is possible with ADC instruction. As when adding two 16 bit data operands we need to concerned about the carry out from lower byte to upper byte. Its is called multi byte addition.
 
 Example: Add 0x3CE7 with 0x3B8D
-```assembly
+```
 LDI R16, 0x8D		; R16 = 8D
 LDI R17, 0x3B		; R17 = 3B
 LDI R18, 0xE7		; R18 = E7
@@ -664,7 +664,7 @@ ADC R19, R17		; R19 = R19 + R17 + C(Carry out from previous operation)
 There are **five** instrtuctions for substraction in AVR. `SUB`(Subtract), `SBC`(Subtruct with borrow), `SBI`(Subtract immediate), `SBCI`(Subtract immediate with borrow), `SBIW`(Subtract a immediate value from register pair). C flag is used for borrow.
 
 **Subtraction Instruction Summary:**
-```assembly
+```
 SUB Rd, Rr		; Rd = Rd - Rr.	Borrow is not a concern for this instruction
 
 SBC	Rd, Rr		; Subtract with Borrow. Rd = Rd - Rr - C . In this case
@@ -707,7 +707,7 @@ So the result after the addition is 100011100 which is 1C with a carry. So the r
 After execution of the subtraction instructions if N = 0 or C = 0 the result is posative. Else if N = 1 or C = 1 the result is negative.
 ```
 **`SBC`, Subtracting 16 bit number example:** 0x2762 - 0x1296
-```assembly
+```
 LDI R16, 0x96		; Lower byte of the right hand operator
 LDI R17, 0x12		; Higher byte of the right hand operator
 LDI R18, 0x62		; Lower byte of the left hand operator
@@ -728,13 +728,13 @@ SBC R19, R17		; Subtract higher byte with carry. As lower byte
 --------------------------------------------------------------------------------
 
 There are 3 Multiplication instruction in AVR.
-```assembly
+```
 MUL Rd, Rr		; Multiply two unsigned numbers
 MULS Rd, Rr		; Multiply two signed numbers
 MULSU Rd, Rr	; Multiply signed number with unsigned number
 ```
 Result is **stored in R1(Higher byte) and R2(Lower byte) registers**.
-```assembly
+```
 LDI R23, 0x25	; R23 = 0x25
 LDI R24, 0x65	; R24 = 0x65
 
@@ -749,7 +749,7 @@ There is no division instruction. But division can be done by repeated subtracti
 So to devide in this method numerator is kept in a register. And the denuminator is subtracted repeatedly. So the quotient is the number of times subtracted. And the remainder is in the register.
 
 Example: devide 95 by 10
-```assembly
+```
 .DEF NUM = R20			; Define R20 as NUM
 .DEF DENUM = R21		; Define R21 as DENUM
 .DEF QUOTIENT = R22		; Define R22 as QUOTIENT
@@ -788,14 +788,14 @@ L1:		INC QUOTIENT	; Increment QUOTIENT
 --------------------------------------------------------------------------------
 
 **Logic `AND` operator:**
-```assembly
+```
 AND Rd, Rr		; Rd = Rd & Rr
 ANDI Rd, K		; Rd = Rd & K
 ```
 `AND` effects N, Z, S flags. N is the D7 bit of the result. Z = 1 if the result is zero.
 
 `AND` is often use to mask(Set to zero) bit. For example say I want to mask the D5 & D6 bits of 01100011. I can AND it with 10011111.
-```assembly
+```
 LDI R16, 0x63	; R16 = 0x63 = 0b01100011
 ANDI R16, 0x9F	; 0x63 & 0x9F = 01100011 & 10011111 = 00000011 = 0x03
 				; R16 = 0x03
@@ -804,7 +804,7 @@ ANDI R16, 0x9F	; 0x63 & 0x9F = 01100011 & 10011111 = 00000011 = 0x03
 --------------------------------------------------------------------------------
 
 **Logic `OR` operator:**
-```assembly
+```
 OR Rd, Rr		; Rd = Rd | Rr
 ORI Rd, K		; Rd = Rd | K
 ```
@@ -812,7 +812,7 @@ ORI Rd, K		; Rd = Rd | K
 is zero.
 
 OR is often used to set certain bits to 1. For example say I want to set the D3 & D4 bit of the 01100101 to 1. I can OR it with 00011000.
-```assembly
+```
 LDI R16, 0x65	; R16 = 0x65 = 0b01100101
 ORI R16, 0x18	; 0x65 | 0x18 = 01100101 | 00011000 = 01111101 = 0x7D
 				; R16 = 0x7D
@@ -821,7 +821,7 @@ ORI R16, 0x18	; 0x65 | 0x18 = 01100101 | 00011000 = 01111101 = 0x7D
 --------------------------------------------------------------------------------
 
 **Logic exclusive or `XOR`:**
-```assembly
+```
 XOR Rd, Rr		; Rd = Rd XOR Rr
 ```
 XOR effects N, Z, S flags. N is the D7 bit of the result. Z = 1 if the result
@@ -834,7 +834,7 @@ another application of XOR can be toggling the bits. 10101010 XOR 11111111 = 010
 --------------------------------------------------------------------------------
 
 **Logic Inverter / Complement `COM`:**
-```assembly
+```
 LDI R20, 0xAA	; R20 = 0xAA = 10101010
 COM R20			; R20 = 0x55 = 01010101
 ```
@@ -842,7 +842,7 @@ COM R20			; R20 = 0x55 = 01010101
 --------------------------------------------------------------------------------
 
 **Negation / 2's complement `NEG`:**
-```assembly
+```
 LDI R20, 0x56	; R20 = 0x56 = 01010110 = 86 in decimal
 NEG R20			; R20 = 2's complement of 0x56 = 10101001 + 1 = 10101010
 					  = 0xAA = -86 in decimal
@@ -851,7 +851,7 @@ NEG R20			; R20 = 2's complement of 0x56 = 10101001 + 1 = 10101010
 --------------------------------------------------------------------------------
 
 **Compare Instruction CP:**
-```assembly
+```
 CP Rd, Rr		; Compare Rd with Rr
 CPI Rd, K		; Compare Rd with imediate value K
 ```
@@ -916,11 +916,11 @@ BRVC LABEL		; BRanch if V flag is Cleared. Branch to LABEL if overflow
 **Rotational & Shift Instruction:**
 
 `ROR`(Rotate right) instruction rotate 1 bit from left to right through carry. As rotate from left to right after rotate command the carry flag enters to MSB and LSB exits to carry.
-```assembly
+```
 ROR Rd			; Rotate Rd right through carry
 ```
 Example
-```assembly
+```
 CLC				; Clear carry C = 0
 LDI R20, 0x26	; R20 = 0x26 = 0b00100110
 ROR R20			; R20 = 00010011	C = 0
@@ -931,11 +931,11 @@ ROR	R20			; R20 = 10000100	C = 1
 --------------------------------------------------------------------------------
 
 `ROL`(Rotate Left) instruction rotate 1 bit from right to left through carry. As rotate from right to left after rotate command the carry flag enters to LSB and MSB exits to carry.
-```assembly
+```
 ROL	Rd			; Rotate Rd left through carry
 ```
 ; Example
-```assembly
+```
 SEC				; Set carry C = 1
 LDI R20, 0x15	; R20 = 0x15 = 00010101
 ROL R20			; R20 = 00101011	C = 0
@@ -949,7 +949,7 @@ ROL R20			; R20 = 01011000	C = 1
 **Data serialization** is to send a byte of data one bit at a time. It can be done through 1 pin of the I/O pins or using serial ports. Rotate instruction can be used for data serialization.
 
 Example: Send 0x45 serially(One bit at a time) through PB1
-```assembly
+```
 LDI R16, 0x02			; R16 = 0x02 = 0b00000010
 OUT DDRB, R16			; PB1 is output pin
 
@@ -974,7 +974,7 @@ HERE:	JMP HERE		; After completing stay here forever
 **There are three logical shift operator in AVR:**
 
 `LSL`(Logical Shift Left) instruction shifts bits from right to left. After shift instruction 0 is entered into LSB and MSB exits to carry. Notice shift instruction multiply the content of the register by 2.
-```assembly
+```
 CLC					; Clear carry C = 0
 LDI R20, 0x26		; R20 = 0x26 = 00100110 = 38
 LSL R20				; R20 = 01001100 = 76	C = 0
@@ -986,7 +986,7 @@ LSL R20				; R20 = 00110000 = 48	C = 1
 --------------------------------------------------------------------------------
 
 `LSR`(Logical Shift Right) instruction shifts bits from left to right. After shift instruction 0 is entered into MSB and LSB exits to carry. Notice shift instruction devides the content of the register by 2.
-```assembly
+```
 CLC					; Clear carry C = 0
 LDI R20, 0x26		; R20 = 0x26 = 00100110 = 38
 LSR R20				; R20 = 00010011 = 19	C = 0
@@ -997,7 +997,7 @@ LSR R20				; R20 = 00000100 = 4	C = 1
 --------------------------------------------------------------------------------
 
 `ASR`(Arithmetic shift right) istruction can devide signed numbers by two. As ASR can shift bits to right without altering MSB. LSB exits to carry.
-```assembly
+```
 CLC					; C = 0
 LDI R20, 0xD0		; R20 = 11010000 = -48
 ASR R20				; R20 = 11101000 = -24	C = 0
@@ -1010,7 +1010,7 @@ ASR	R20				; R20 = 11111110 = -1	C = 1
 --------------------------------------------------------------------------------
 
 `SWAP` instruction swaps the nibble of a byte.
-```assembly
+```
 SWAP Rd				; Swaps nibble of Rd register where 0 <= d <= 31
 ```
 ```
@@ -1031,7 +1031,7 @@ Arithmetic & Logical expression can be used with constants
 **Logical operator:** &, |, ^ (exclusive or), ~ (not), << (shift left), >> (shift right)
 
 Example:
-```assembly
+```
 .EQU ALFA = 60						; .EQU directive is used to define constants
 .EQU BETA = 50
 .EQU C1 = 0x50
@@ -1054,12 +1054,12 @@ LDI R16, 0b00001100 << 2			; R16 = 00001100 << 2 = 00110000
 To manipulate status register's bits we need to remember the structure of the status register. For example if we want to set the Zero & Carry flag we have to set the d0 & d1 bit of the status register as we know that the d0 & d1 bits are the carry flag & zero flag.
 
 Example: Set carry & zero bit of status register.
-```assembly
+```
 LDI R20, 0b00000011
 OUT SREG, R20			; SREG = 00000011, so carry & zero flag is on
 ```
 To make this task easy & to remove the need of remembering sreg's structure name of each register  bits are defined in the avr microcontroller header files. For example in M32DEF.INC header file
-```assembly
+```
 .EQU SREG_C = 0		; Carry flag bit
 .EQU SREG_Z = 1		; Zero flag bit
 .EQU SREG_N = 2		; Negative flag bit
@@ -1070,17 +1070,17 @@ To make this task easy & to remove the need of remembering sreg's structure name
 .EQU SRGE_I = 7		; Global interrept flag bit
 ```
 This names can be used to easily manipulate flags. For example to set the zero flag and clear others:
-```assembly
+```
 LDI R16, 1<<SREG_Z	; R16 = 00000001 << 1 = 00000010
 OUT SREG, R16		; SREG = 00000010, So zero flag is on
 ```
 Set both V & S flag:
-```assembly
+```
 LDI R16, (1 << SREG_V) | (1 << SREG_S)	; R16 = 00001000 | 00000100 = 00001100
 OUT SREG, R16							; SREG = 00001100, So S & V flag is on
 ```
 Pin numbers are also define in the .INCLUDE file of avr. Example: To set PB4 & PB2 as output we can write.
-```assembly
+```
 .INCLUDE "M32DEF.INC"
 	LDI	R20, (1 << PB4 | 1 << PB2)	; R20 = (1 << 4 | 1 << 2)
     								; = 00010000 | 00000100 = 00010100
@@ -1091,7 +1091,7 @@ Pin numbers are also define in the .INCLUDE file of avr. Example: To set PB4 & P
 
 ; HIGH() & LOW() and low function give the higher and lower byte of a 16 bit value
 ; Example:
-```assembly
+```
 LDI R16, HIGH(0x4455)	; R16 = 0x44
 LDI R17, LOW(0x4455)	; R17 = 0x55
 ```
@@ -1114,7 +1114,7 @@ CPU can access data in various ways. The data could be in registers, in memory o
 **Single register address mode:** In this address mode operand is single register. imediate values can be used in this address mode. So its called immediate address mode too. Registers from R16 to R31 can be used in this address mode.
 
 Example:
-```assembly
+```
 NEG R16				; Negate R16 contents
 COM R16				; Take complement
 DEC R16				; Decrement R16's content by 1
@@ -1133,7 +1133,7 @@ ANDI R16, 0b00100101; AND R16 with 0x25
 **Two register address mode:** Instructions involving two registers.
 
 Example:
-```assembly
+```
 ADD R16, R17		; R16 = R16 + R17
 MOV R16, R17		; Move content of R17 to R16
 ```
@@ -1145,25 +1145,25 @@ MOV R16, R17		; Move content of R17 to R16
 **Direct address mode:** In this address mode content of RAM memory or I/O registers are accessed by their direct addresses.
 
 Example:
-```assembly
+```
 LDS R16, 0x200		; Load R16 with the contents of location $200
 STS 0x305, R20		; Save R20's contents is RAM location $305
 ```
 I/O registers can be accessed by their direct memory address or their direct I/O address. Direct memory address is used in direct memory instructions & I/O addressing is used in I/O instructions. For example following two instructions are same:
-```assembly
+```
 OUT 0x18, R16		; 0x18 is the I/O address of port B. 
 					; This instruction is sending content of R16 to port B.
 STS 0x38, R16		; 0x38 is the memory address of port B.
 					; This instruction also sending content of R16 to port B.
 ```
 I/O instructions are faster than memory instructions. also I/O registers name can be used instead of address. These names are defined in .INCLUDE file. Its safer and portable. As I/O addresses can be different in different AVR.
-```assembly
+```
 OUT PORTB, R16		; Send contents of R16 to port B
 ```
 In memory instructions 16 bit is reserved for memory location. So from $0000 to $FFFF locations of memory can be addressed. So 65536 bytes of data from RAM can be accessed. In I/O instructions address field is 6 bits. So from $00 to $3F addresses can be accessed. So total 64(0 to 63) I/O registers can be accessed. These are standard I/O register memory space.
 
 In some AVRs there is more than 64 I/O registers. These extra I/O registers are called extended I/O registers. As in I/O direct addressing mode address space is 6 bits, extended I/O registers can't be accessed via I/O direct addressing mode. For these direct memory addressing mode have to be used.
-```assembly
+```
 STS 0x62, R20		; Save content of R20 in PORT F, which is an extended I/O
 					; register in ATmega128
 ```
@@ -1188,12 +1188,12 @@ STS 0x62, R20		; Save content of R20 in PORT F, which is an extended I/O
 			 -------------------------------------
 ```
 `LD` instruction is used to read from the location pointed to by pointer. For example to read from location pointed by X:
-```assembly
+```
 LD R16, X		; Load R16 with the content of data memory location
 				; pointed to by X
 ```
 Load the content of data memory location 0x302 into R20:
-```assembly
+```
 LDI XL, 0x02		; Load R26(Lower byte of X) with 0x02
 LDI XH, 0x03		; Load R27(Higher byte of X) with 0x03.
 					; So, Now X is pointing to 0x302
@@ -1204,14 +1204,14 @@ LD R20, X			; Load R20 with content of location 0x302
 `ST` instruction is used to store a value into a location pointed to by a pointer.
 
 Example: Store the content of R20 into location 0x139F
-```assembly
+```
 LDI XL, 0x9F		; Load XL with lower byte of the address
 LDI XH, 0x13		; Load XH with higher byte of the address
 ST X, R20			; Store the content of R20 into location
 					; pointed to by X, 0x139F
 ```
 Indirect addressing mode makes accessing data dynamic rather than static. Like subsequent data can be accessed using loop. For example for copying $55 in memory location from $140 to $144 with direct addressing we can write:
-```assembly
+```
 LDI R20, 0x55		; data to save
 STS 0x140, R20		; Save 0x55 to location 0x140
 STS 0x141, R20		; Save 0x55 to location 0x141
@@ -1220,7 +1220,7 @@ STS 0x143, R20		; Save 0x55 to location 0x143
 STS 0x144, R20		; Save 0x55 to location 0x144
 ```
 But with indirect addressing with pointer we can write:
-```assembly
+```
 LDI R20, 0x55		; Data to save
 LDI R21, 5			; Loop counter
 
@@ -1233,14 +1233,14 @@ LOOP:	ST X, R20	; Store R20 into data memory location pointed to by X
 		BRNE R21	; contineue loop if R21 is not equal to zero
 ```
 **Auto increment:** Incrementing pointer's lower byte with INC instruction has a problem. If the address is 0x1FF, if we increment say XL, carry will not propagate into XH. In this case we can use auto increment feature:
-```assembly
+```
 LD Rn, X+			; Load Rn with the content of memory location pointed to
 					; by X and then increment X to point to the next location.
 					; In this case if there is a carry from lower byte of
 					; the address, carry will be propagate to higher byte.
 ```
 Using auto increment we can write above program:
-```assembly
+```
 LDI R20, 0x55		; Value to be stored
 LDI R21, 5			; Loop counter
 
@@ -1253,7 +1253,7 @@ LOOP:	ST X+, R20	; Store R20's content into memory pointed to by X.
 		BRNE LOOP	; Contineue loop is R21 is not equal to zero
 ```
 Example: RAM location $90 to $94 has ASCII character data. $90 = 'H', $91 = 'E', $92 = 'L', $93 = 'L', $94 = 'O'. Send them to port B, on byte at a time.
-```assembly
+```
 LDI R16, 0xFF
 OUT DDRB, R16			; Define port B as output
 LDI R17, 5				; Loop counter
@@ -1267,7 +1267,7 @@ LOOP:	LD R16, X+		; Load R16 with the content of X then increment
 		BRNE LOOP		; contineue loop if R17 not equal to zero
 ```
 Example: Data memory location $240 to $243 have following hex data. $240 = $7D, $241 = $EB, $242 = $C5, $243 = $5B. Add them together and store in locations $220 & $221
-```assembly
+```
 .EQU L_BYTE = 0x220		; Lower byte of the result to store
 .EQU H_BYTE = 0x221		; Higher byte of the result to store
 
@@ -1294,12 +1294,12 @@ HERE: RJUMP HERE		; Stay here forever
 -------------------------------------------------------------------------------------
 
 **Indirect addressing with displacement:** Suppose we want to read / write from a few bytes higher than where Z is pointing. In that case we can use indirect addressing with displacement. `LDD` & `STD` instruction is used for indirect addresing with displacement.
-```assembly
+```
 LDD Rn, Z+q			; Load Rn with the contents of memory location pointed to by Z+q
 STD Z+q, Rn			; Store content of Rn into location pointed to by Z+q
 ```
 Example: Store 0x55 into location 0x401 & 0x405
-```assembly
+```
 LDI R20, 0x55
 LDI ZL, 0x01
 LDI ZH, 0x04
@@ -1319,7 +1319,7 @@ AVRs have maximum of 8 megabytes of flash ROM & 64 kilobytes of SRAM. Flash ROM 
 If we allocate a fraction of a flash ROM memory, the assembler will allocate whole memory and load the un-used part of it with zero. For example if we allocate only a single byte data using .DB into a memory location, the data will be stored in the lower byte of the location. Higher byte will be loaded with zero.
 
 Example: Store some data into ROM memory location $500
-```assembly
+```
 .ORG 0x500					; Burn into ROM starting at $500
 
 DATA1: .DB 2,3,5,7			; 4 byte of data has been allocated. So first
@@ -1344,7 +1344,7 @@ DATA5: .DB "Hello, World"	; ASCII string. 'H' will be stored in
 							; be stored in the lower byte of $511 and so on.
 ```
 `.DW`(Define Word) can be used to allocated 2 byte from flash ROM location. So entire location can be allocated using `.DW` directive.
-```assembly
+```
 .ORG $600					; Burn into ROM starting at $600
 DATA: .DW 0x1234, 0xABCD	; First 2 byte hex data will be stored in $600
 							; Second 2 byte hex data will be stored in $601
@@ -1355,7 +1355,7 @@ DATA: .DW 0x1234, 0xABCD	; First 2 byte hex data will be stored in $600
 To fetch data from flash ROM a register poiter to the memory is neede. Z register can be used as a pointer. So fetching data from flash ROM is called register **indirect flash addressing mode**.
 
 `LPM`(Load Program Memory) instruction is used to load from ROM memory.
-```assembly
+```
 LPM Rn, Z					; Load Rn with data from ROM memory
 							; pointed to by Z
 
@@ -1373,19 +1373,19 @@ Notice to read lower byte from a location we can left shift location 1 bit then 
 Notice to read higher byte from a location we can left shift location 1 bit then logical or it with 1. Then load ZH with higher byte & ZL with lower byte. For example to read higher byte from `$0002(0000000000000010).` Left shift `0000000000000010` & or with 1, so `0000000000000010 << 1 | 1` **=** `0000000000000100 | 0000000000000001` **=** `0000000000000101`. Now load ZH with higher byte `ZH = 00000000(0x00)` & ZL with lower byte `ZL = 00000101(0x05)`. `LSB = 1`, so indicating higher byte rest of the bits `0000010(0x02)` indicating location $0002.
 
 Example: Read lower byte of $100 & store into R20
-```assembly
+```
 LDI ZH, HIGH(0x100 << 1)		; Load ZH with higher byte
 LDI ZL, LOW(0x100 << 1)			; Load ZL with lower byte
 LPM R20, Z						; Read lower byte of $100 pointed to by Z
 ```
 Example: Read higher byte of $100 & store into R20
-```assembly
+```
 LDI ZH, HIGH((0x100 << 1) | 1)	; Load ZH with higher byte
 LDI ZL, LOW((0x100 << 1) | 1)	; Load ZL with lower byte
 LPM R20, Z						; Read higher byte of $100 pointed to by Z
 ```
 Example: "HELLO WORLD", 0 is burnt into ROM starting at $500. Fetch & send to PORTB one byte at a time.
-```assembly
+```
 .ORG $0							; Burn into ROM starting at $0
 
 LDI R16, 0xFF
