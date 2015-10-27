@@ -23,15 +23,14 @@ me@my-pc:~/cheatsheets$ git init
 ```
 
 Now I will add files of my project to this directory. Lets say I have created a file called *git_and_github.md* which is my cheatsheet about git & github.
-```
-me@my-pc:~/cheatsheets$ ls
-git_and_github.md
-me@my-pc:~/cheatsheets$
-```
+
+`me@my-pc:~/cheatsheets$ ls`
+`git_and_github.md`
 
 **Checking status:** `git status` command gives the current status of the local repository.
+
+`me@my-pc:~/cheatsheets$ git status`
 ```
-me@my-pc:~/cheatsheets$ git status
 On branch master
 
 Initial commit
@@ -49,8 +48,8 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 Now `git status` gives:
 
+`me@my-pc:~/cheatsheets$ git status`
 ```
-me@my-pc:~/cheatsheets$ git status
 On branch master
 
 Initial commit
@@ -62,8 +61,9 @@ Changes to be committed:
 ```
 
 **Commiting:** To add the files into main repository we have to use `git commit` command. A commit message with `-m` option will have to add with this. Now each time we change project's files we have to use this command to add those changes into main repository.
+
+`me@my-pc:~/cheatsheets$ git commit git_and_github.md -m "Commit Message"`
 ```
-me@my-pc:~/cheatsheets$ git commit git_and_github.md -m "Commit Message"
 [master (root-commit) f779fa4] Commit Message
  1 file changed, 63 insertions(+)
  create mode 100644 git_and_github.md
@@ -104,8 +104,8 @@ This will have to do only once.
 
 **Pushing local repository:** `git push -u URL_ALIAS BRANCH_NAME` command is used to push / publish local repository into remote Repositorie. Where BRANCH_NAME is the branch name. Main branch is called *master*. There can be several branch. I will add my porject into *master* branch.
 
+`me@my-pc:~/cheatsheets$ git push -u origin master`
 ```
-me@my-pc:~/cheatsheets$ git push -u origin master
 Counting objects: 3, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (2/2), done.
