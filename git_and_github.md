@@ -1,10 +1,10 @@
 ## Introduction ##
 
-** Version Control System: ** Version control is a system that record changes to a file or set of files over time. Each change of those files can be tracked easily. So its is possible to revert back to a previous version etc.
+**Version Control System:** Version control is a system that record changes to a file or set of files over time. Each change of those files can be tracked easily. So its is possible to revert back to a previous version etc.
 
-** Git: ** Git is a command line program for distributed version controlling
+**Git:** Git is a command line program for distributed version controlling
 
-** GitHub: ** GitHub is a web-based Git repository hosting service. It offers all the distributed version control and software management functionality of Git. It makes it easy to save project remotely, version controlling, collaborate with multiple developers on a project etc.
+**GitHub:** GitHub is a web-based Git repository hosting service. It offers all the distributed version control and software management functionality of Git. It makes it easy to save project remotely, version controlling, collaborate with multiple developers on a project etc.
 
 ## Creating & Publishing Repository ##
 
@@ -15,7 +15,7 @@
 
 `me@my-pc:~$ mkdir cheatsheets`
 
-** initializing: ** Now I have to go to in my newly created directory & do `git init` command to initialize git. This will create a hidden folder *.git*, where git will store all its information about this project for tracking.
+**initializing:** Now I have to go to in my newly created directory & do `git init` command to initialize git. This will create a hidden folder *.git*, where git will store all its information about this project for tracking.
 
 ```
 me@my-pc:~$ cd cheatsheets
