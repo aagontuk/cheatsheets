@@ -69,6 +69,14 @@ me@my-pc:~/cheatsheets$ git commit git_and_github.md -m "Commit Message"
  create mode 100644 git_and_github.md
 ```
 
+**Updating changes:** After modifying a file, changes will have to send into staging area issuing `git add` again. And commit changes to repository using `git commit`. Adding & commiting can be done in a single command issuing `git commit -a`.
+
+`me@my-pc:~/cheatsheets$ git commit -a -m "updated content"`
+```
+[master 318a1c2] updated content
+ 1 file changed, 53 insertions(+), 5 deletions(-)
+```
+
 **Summary:**
 
 | Command | Description |
