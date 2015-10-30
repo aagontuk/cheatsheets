@@ -1104,10 +1104,10 @@ CPU can access data in various ways. The data could be in registers, in memory o
 
 1. Single Register or Immediate address mode(Only single register is involved)
 2. Two Register addressing mode
-3. Direct (Memory is accessed by their direct addresses)
-4. Indirect (Memory is accessed by using registers as pointers pointing to memory)
-5. Flash Direct (Direct access to flash rom by flash memory addresses)
-6. Flash Indirect (Accessed using pointers)
+3. Direct address mode(Memory is accessed by their direct addresses)
+4. Indirect address mode(Memory is accessed by using registers as pointers pointing to memory)
+5. Flash Direct address mode(Direct access to flash rom by flash memory addresses)
+6. Flash Indirect addressmode (Accessed using pointers)
 
 -------------------------------------------------------------------------------------
 
@@ -1232,7 +1232,7 @@ LOOP:	ST X, R20	; Store R20 into data memory location pointed to by X
 		DEC R21		; Decrement loop counter R21
 		BRNE R21	; contineue loop if R21 is not equal to zero
 ```
-**Auto increment:** Incrementing pointer's lower byte with INC instruction has a problem. If the address is 0x1FF, if we increment say XL, carry will not propagate into XH. In this case we can use auto increment feature:
+**Auto increment:** Incrementing pointer's lower byte with INC instruction has a problem. If the address is 0x1FF, if we increment  XL, carry will not propagate into XH. In this case we can use auto increment feature:
 ```
 LD Rn, X+			; Load Rn with the content of memory location pointed to
 					; by X and then increment X to point to the next location.
@@ -1249,8 +1249,9 @@ LDI XH, 0x01		; Higher byte of the address
 
 LOOP:	ST X+, R20	; Store R20's content into memory pointed to by X.
 					; And then increment X to point to next location.
+
 		DEC R21		; Decrement loop counter
-		BRNE LOOP	; Contineue loop is R21 is not equal to zero
+		BRNE LOOP	; Contineue loop if R21 is not equal to zero
 ```
 Example: RAM location $90 to $94 has ASCII character data. $90 = 'H', $91 = 'E', $92 = 'L', $93 = 'L', $94 = 'O'. Send them to port B, on byte at a time.
 ```
@@ -1312,7 +1313,7 @@ STD Z+4, R20
 
 ## ACCESSING FLASH ROM ##
 
-AVRs have maximum of 8 megabytes of flash ROM & 64 kilobytes of SRAM. Flash ROM is also called code space or progarm space. SRAM is also called data memory space. Each location in the flash ROM is 2 byte sized.
+AVRs have maximum of 8 megabytes of flash ROM & 64 kilobytes of SRAM. Flash ROM is also called code space or progarm space. SRAM is also called data memory space. **Each location in the flash ROM is 2 byte sized**.
 
 `.DB`(Define byte) directive can be used to allocate byte sized chunks from flash ROM. We can store byte sized data to ROM memory using .DB directive. Each memory location of flash ROM is 2 byte sized, but .DB allocates byte-sized chunks. So if we store few bytes of data using .DB, first byte will go to the lower byte of the location. Next byte will goto the higher byte of the location. Next byte will goto the lower byte of the next location and so on.
 
