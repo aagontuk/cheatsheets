@@ -1107,7 +1107,7 @@ CPU can access data in various ways. The data could be in registers, in memory o
 3. Direct address mode(Memory is accessed by their direct addresses)
 4. Indirect address mode(Memory is accessed by using registers as pointers pointing to memory)
 5. Flash Direct address mode(Direct access to flash rom by flash memory addresses)
-6. Flash Indirect addressmode (Accessed using pointers)
+6. Flash Indirect address mode (Accessed using pointers)
 
 -------------------------------------------------------------------------------------
 
@@ -1170,7 +1170,7 @@ STS 0x62, R20		; Save content of R20 in PORT F, which is an extended I/O
 
 --------------------------------------------------------------------------------------
 
-**Indirect memory addressing:** In this address mode rather than direct memory addresses, a pair of registers as a pointer to data memory is used. There are three pointers X, Y & Z. X consists of R26(Lower byte, XL) & R27(Higher byte, XH) register. Y consists of R28(Lower byte YL) & R29(Higher byte YH). Z consists of R30(Lower byte, ZL) & R31(Higher byte, ZH). So "LDI XL, 0x02" is same as "LDI R26, 0x02".
+**Indirect memory addressing:** In this address mode rather than direct memory addresses, a pair of registers as a pointer to data memory is used. There are three pointers X, Y & Z. X consists of R26(Lower byte, XL) & R27(Higher byte, XH) register. Y consists of R28(Lower byte YL) & R29(Higher byte YH). Z consists of R30(Lower byte, ZL) & R31(Higher byte, ZH). So "LDI R26, 0x02" can be written as "LDI XL, 0x02".
 ```
 			 15		XH					XL		 0
 			 -------------------------------------
@@ -1365,7 +1365,7 @@ LPM Rn, Z+					; Load Rn with data from ROM memory pointed
 							; to by Z.
 							; then increment Z to point to next location
 ```
-`LPM` instruction loads 1 byte from flash memory pointed to by Z. But each location in flash memory is 2 byte sized. So we have mention if we want to read the lower byte or higher byte. The least significant bit(LSB) of Z indicates whether higher or lower byte should be read. If LSB = 0, lower byte of the location pointed to by Z will be read, else higher byte will be read. So LSB of Z is used for indication & rest bits are used for addressing.
+`LPM` instruction loads 1 byte from flash memory pointed to by Z. But each location in flash memory is 2 byte sized. So we have to mention if we want to read the lower byte or higher byte. The least significant bit(LSB) of Z indicates whether higher or lower byte should be read. If LSB = 0, lower byte of the location pointed to by Z will be read, else higher byte will be read. So LSB of Z is used for indication & rest of the bits are used for addressing.
 
 For example if we want to read lower byte from location $0000, we have to load ZH with 0x00 & ZL with 0x00 (0b00000000). As LSB of ZL is zero lower byte will be read. if we want to read higher byte we have to load ZL with 0x01 (0b00000001). As LSB is 1 higher byte will be read. Similarly to read lower byte from $0001 we have to load ZH with 0x00 & ZL with 0x02 which is 00000010 in binary. LSB is indicating lower byte & rest of the bits are indicating address $00001. To read higher byte we have to load ZL with 0x03 which is 00000011 in binary. LSB is indicating higher byte & rest bits indicating location $0001.
 
