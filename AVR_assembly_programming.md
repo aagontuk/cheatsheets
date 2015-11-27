@@ -308,7 +308,7 @@ BACK:	LDI R16, 0x55		; Load R16 with 0x55
 		LDI R16, 0xAA		; Load R16 with 0xAA
 		OUT PORTB, R16		; Send 0xAA to PORTB
 		CALL DELAY			; Call delay subroutine
-		RJUMP BACK			; Keep doing it forever
+		RJMP BACK			; Keep doing it forever
 
 ;-----------	Delay Subroutine	-------------
 
@@ -405,7 +405,7 @@ L1:		LDI R16, 0x55	; R16 = 0x55 = 0b01010101
 
 		CALL DELAY		
 
-		RJUMP L1		; Do this forever
+		RJMP L1		; Do this forever
 ```
 
 -------------------------------------------------------------------------------
@@ -434,7 +434,7 @@ L1:		IN R16, PINC	; Take input from Port C pins. And store bits in R16
 
 		OUT PORTB, R16	; Send R16 data to Port B
 
-		RJUMP L1		; Do it forever
+		RJMP L1		; Do it forever
 ```
 
 -------------------------------------------------------------------------------
@@ -535,7 +535,7 @@ LOOP:	 SBI PORTB, 0	; Make PB0 HIGH. As bit is set in D0 of PORTB.
 
 		 CALL DELAY
 
-		 RJUMP LOOP		; Do this forever
+		 RJMP LOOP		; Do this forever
 ```
 
 -------------------------------------------------------------------------------
@@ -561,7 +561,7 @@ The following program will keep monitoring the PB2 pin untill it becomes HIGH. W
 
 AGAIN:	SIBS PINB, 2	; Check PB2 input. If HIGH skip next instruction
 
-		RJUMP AGAIN		; Keep monitoring if PB2 is LOW. If HIGH skip this
+		RJMP AGAIN		; Keep monitoring if PB2 is LOW. If HIGH skip this
 						; instruction
 
 		LDI R16, 0x45	; R16 = 0x45
@@ -594,19 +594,19 @@ A switch is connected to PB2. Following program will check the status of switch 
 
 WRITE_N:	SIBC DDRB, 2	; Check PB2 input. Skip next instruction it it is LOW
 
-			RJUMP WRITEY	; execute this if PB2 is HIGH. Else skip.
+			RJMP WRITEY	; execute this if PB2 is HIGH. Else skip.
 
 			LDI R16, 'N'	; R16 = 'N'
 
 			OUT PORTD, R16	; Write 'N' to Port D
 
-			RJUMP WRITEN	; Check Again.
+			RJMP WRITEN	; Check Again.
 
 WRITE_Y:	LDI R16, 'Y'	; R16 = 'Y'
 
 			OUT PORTD, R16	; Write R16 to Port D
 
-			RJUMP WRITEN	; Check Again.
+			RJMP WRITEN	; Check Again.
 ```
 
 ## ARITHMETIC & LOGICAL OPERATIONS
@@ -1289,7 +1289,7 @@ L2:	DEC R16
 
 STS L_BYTE, R20			; Store lower byte of the result into $220
 STS H_BYTE, R21			; Store higher byte of the result into $221
-HERE: RJUMP HERE		; Stay here forever
+HERE: RJMP HERE		; Stay here forever
 ```
 
 -------------------------------------------------------------------------------------
@@ -1401,9 +1401,9 @@ LOOP:	LPM R16, Z+				; Load R16 with data pointed to by Z
 		CPI R16, 0				; Compare R16's value with zero
 		BREQ END				; Branch if R16 is 0
 		OUT PORTB, R16			; Send to PORT B
-		RJUMP LOOP
+		RJMP LOOP
 
-END:	RJUM END
+END:	RJMP END
 
 .ORG $500						; Burn into ROM starting at $500
 
