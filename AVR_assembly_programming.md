@@ -1420,7 +1420,7 @@ ROMDATA: .DB "HELLO WORLD", 0
 
 Bit oriented instruction uses only one addressing mode, the direct addressing mode. There is no register indirect addressing mode for bit oriented instructions. Also there is no bit oriented instructions for program memory.
 
-### Manipulation of the bits of GPRs ###
+### Manipulating the bits of GPRs ###
 ---
 
 **Setting the bits of GPRs:** `SBR`(Set Bits of GPR) instruction is used to set the bits of GPRs. It has following format:
@@ -1452,3 +1452,125 @@ CBR R16, 0b10100100		; R16 = 00010010 = 0x12
 ```
 
 CBR is also a byte oriented instruction.
+
+**Copying a bit from one GPR to another GPR:** We can use the `T`(Temporary) flag of the `SREG`(status register) to copy a bit from one register to another register. `BST`(Bit store from register to T) instruction is used store a bit from a register to T. `BLD` isntruction is used to copy a bit from T to another register. These instructions has following format:
+
+```
+BST Rd, b		; Store b th bit of Rd into T
+BLD Rr, b		; Copy the T flag to b th bit of Rr
+				; Here b is from 0 to 7
+```
+
+Example:
+
+```
+BST R16, 3		; Copy bit 3 of R16 to T
+BLD R17, 4		; Copy the T flag to bit 4 of R17
+```
+
+Example: A switch is connected to PB4. Write a program to get the status of the switch and save it to D0 of the internal RAM location 0x200
+
+```
+.EQU LOC = 0x200
+
+CBI DDRB, 4		; Clear bit 4 of DDRB to make PB4 input pin
+IN R16, PINB	; Collect whole byte data from PINB
+
+BST R16, 4		; Store bit 4 of R16 to T. As bit 4 is the
+				; status of PB4
+
+LDI R17, 0x00	; R17 = 0
+BLD R17, 0		; Copy T flag to bit 0 of R17
+
+STS LOC, R17	; Store R17 in the RAM location 0x200
+
+HERE: RJMP HERE	; Infinite Loop
+```
+
+**Checking a bit:** To check if a bit of a general purpose register is set or cleared we can use `SBRS`( **S**kip next instruction if **B**it in **R**egister is **S**et ) and `SBRC`( **S**kip next instruction if **B**it in **R**egister is **C**leared ). These two instructions have following format:
+
+```
+SBRS Rd, b		; Skip next instruction if the bit b of Rd is HIGH
+
+SBRC Rr, b		; Skip next instruction if the bit b of Rr is LOW
+```
+
+Example:
+
+```
+LDI R17, 0b10001010
+SBRS R17, 3				; Skip next instruction if bit 3 of R is set
+LDI R20, 0xAA			; This will be skipped
+LDI R20, 0x55
+```
+
+Example: A switch is connected to pin PC7. Check the status of switch. If switch is HIGH send 'Y' to Port D. Else send 'N' to Port D.
+
+```
+OUT DDRD, 0xFF			; D is output pin
+
+CBI DDRC, 7				; PC7 is input pin
+
+LOOP:	IN R16, PINC	; Take data from PINC
+
+		SBRS R16, 7		; Skip next if bit 7 of R16 is HIGH
+		RJMP SHOWY		; jump to SENDY
+
+		LDI R17, 'Y'	; R16 = 'Y'
+		OUT PORTD, R17	; Send 'Y' to PORTD
+
+		RJMP LOOP		; Continue loop
+
+SHOWY:	LDI R17, 'N'	; R17 = 'Y'
+		OUT PORTD, R17	; Send 'Y' to PORTD
+
+		RJMP LOOP		; Continue loop
+```
+
+### Manipulating the bits of I/O Registers ###
+
+**Setting & Clearing Bit:** To set and clear lower 32 I/O register(I/O address 0 to 31) we can use `SBI`( **S**et **B**it in **I**/O Register ) and `CBI`( **C**lear **B**it in **I**/O Register ) instruction.
+
+```
+SBI PORTA, 1			; Set bit 1 of PORTA
+CBI PORTB, 5			; Clear bit 5 of PORTB
+```
+
+Example: Toggle PB2 200 times
+
+```
+SBI DDRB, 2				; PB2 is output
+LDI R16, 200
+
+LOOP:	SBI PORTB, 2	; PB2 is HIGH
+		CBI PORTB, 2	; PB2 is LOW
+
+		DEC R16
+		BRNE LOOP
+
+HERE: RJMP HERE			; Infinite Loop
+```
+
+**Checking the bits of I/O Registers:** To check if the bit of a I/O register is set or cleared we can use `SBIS`(Skip next instruction if Bit in I/O register is Set) and`SBIC`(Skip next instruction if Bit in I/O register is Cleared).
+
+Example: A switch is connected to pin PC7. Check the status of switch. If switch is HIGH send 'Y' to Port D. Else send 'N' to Port D.
+
+```
+CBI DDRC, 7				; PC7 is input pin
+
+LDI R16, 0xFF
+OUT DDRD, R16			; Port D is output
+
+LOOP:	SBIS PINC, 7	; Skip next if PC7 is HIGH
+		RJMP SHOWN
+
+		LDI R16, 'Y'
+		OUT PORTD, R16
+
+		RJMP LOOP
+
+SHOWN:	LDI R16, 'N'
+		OUT PORTD, R16
+		
+		RJMP LOOP
+```
