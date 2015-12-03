@@ -1423,4 +1423,32 @@ Bit oriented instruction uses only one addressing mode, the direct addressing mo
 ### Manipulation of the bits of GPRs ###
 ---
 
-  
+**Setting the bits of GPRs:** `SBR`(Set Bits of GPR) instruction is used to set the bits of GPRs. It has following format:
+
+```
+SBR Rd, K
+```
+
+Here K is a 8 bit value and Rd is any GPR from R16 to R31. This instruction sets the bits of the GPR if thoes bits in K are set to 1 regardless of the previous value of the GPR. Following instruction sets the 2nd, 5th and 7th bit of R16.
+
+```
+LDI R16, 0b10110010		; R16 = 0xB2
+SBR R16, 0b10100100		; Now R16 = 0b10110110 = 0xB6
+```
+
+SBR is a byte oriented instruction as it manipulate whole byte at a time. Also SBI is just another name for the ORI.
+
+**Clearing the bits of GPRs:** `CBR`(Clear bits of GPR) instruction is used to clear the specific bits from the GPR. It has following format:
+
+```
+CBR Rd, K
+```
+
+K is a 8 bit value and Rd is any GPR from R16 to R31. This istruction clear the bits of GPR if thoes bits in K are set to 1 regardless of the previous value of the GPR. Following instruction will clear the 2nd, 5th and 7th bit from R16:
+
+```
+LDI R16, 0b10110110		; R16 = 0xB6
+CBR R16, 0b10100100		; R16 = 00010010 = 0x12
+```
+
+CBR is also a byte oriented instruction.
