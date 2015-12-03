@@ -1398,7 +1398,7 @@ LDI ZL, LOW(ROMDATA << 1)
 LOOP:	LPM R16, Z+				; Load R16 with data pointed to by Z
 								; then increment
                                 
-		CPI R16, 0				; Compare R16's value with zero
+		CPI R16, 0				; Compare R16 value with zero
 		BREQ END				; Branch if R16 is 0
 		OUT PORTB, R16			; Send to PORT B
 		RJMP LOOP
@@ -1415,3 +1415,12 @@ ROMDATA: .DB "HELLO WORLD", 0
 **Look up table:** TO DO
 
 -------------------------------------------------------------------------------------
+
+## AVR BIT ADDRESSABILITY ##
+
+Bit oriented instruction uses only one addressing mode, the direct addressing mode. There is no register indirect addressing mode for bit oriented instructions. Also there is no bit oriented instructions for program memory.
+
+### Manipulation of the bits of GPRs ###
+---
+
+  
