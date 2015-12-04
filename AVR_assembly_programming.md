@@ -1528,6 +1528,7 @@ SHOWY:	LDI R17, 'N'	; R17 = 'Y'
 ```
 
 ### Manipulating the bits of I/O Registers ###
+---
 
 **Setting & Clearing Bit:** To set and clear lower 32 I/O register(I/O address 0 to 31) we can use `SBI`( **S**et **B**it in **I**/O Register ) and `CBI`( **C**lear **B**it in **I**/O Register ) instruction.
 
@@ -1574,3 +1575,47 @@ SHOWN:	LDI R16, 'N'
 		
 		RJMP LOOP
 ```
+
+### Status Register's Bit Addressability ###
+---
+
+**Status Reguster:**
+
+```
+Bit:	 D7							 D0
+		---------------------------------
+SREG:	| I | T | H | S | V | N | Z | C |
+		---------------------------------
+
+I = Global Interrupt		V = Overflow Flag
+T = Bit Copy				N = Negative Flag
+H = Half Carry				Z = Zero Flag
+S = Sign Flag				C = Carry Flag
+```
+
+**Manipulating Status Register's Bits:** `BSET` and `BCLR` instruction can be used to set and clear the bit of a status register.
+
+```
+BSET s			; Set the bit s of status register
+BCLR s			; Clear the bit s of status register
+```
+
+Example:
+
+```
+BSET 0			; Set carry flag, C = 1
+BCLR 1			; Clear Zero flag Z = 0
+```
+
+There are also dedicated instructions for setting and clearing each flags. Shown in the following table:
+
+| Instruction 	| Action 			    		| Instruction 	| Action 							|
+| -------------	| ----------------------		| ----------	| ------------------------------- 	|
+| SEC		  	| Set Carry, C = 1				| CLC		  	| Clear Carry, C = 0				|
+| SEZ			| Set Zero, Z = 1				| CLZ			| Clear Zero, Z = 0					|
+| SEN			| Set Negative, N = 1			| CLN			| Clear Negative, N = 0				|
+| SEV			| Set Overflow, V = 1			| CLV			| Clear Overflow, V = 0				|
+| SEH			| Set Half Carry, H = 1			| CLH			| Clear Half Carry, H = 0			|
+| SES			| Set Sign, S = 1				| CLS			| Clear sign, S = 0					|
+| SET			| Set Temporary, T = 1			| CLT			| Clear Temporary, T = 0			|
+| SEI			| Set Global Interrupt, I = 1	| CLI			| Clear Global Interrupt, I = 0		|
