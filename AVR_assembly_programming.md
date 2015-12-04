@@ -1619,3 +1619,42 @@ There are also dedicated instructions for setting and clearing each flags. Shown
 | SES			| Set Sign, S = 1				| CLS			| Clear sign, S = 0					|
 | SET			| Set Temporary, T = 1			| CLT			| Clear Temporary, T = 0			|
 | SEI			| Set Global Interrupt, I = 1	| CLI			| Clear Global Interrupt, I = 0		|
+
+**Checking Status Register Bits:** `BRBS`(Branch if status register Bit is Set) and `BRBC`(Branch if status register Bit is Cleared) instruction can be used to examine status register flags and take decisions according to their value.
+
+```
+BRBS s,k		; Branch if bit s is set and go to relative address k
+BRBC s,k		; Branch if bit s is cleared and go to relative address k
+```
+
+Example:
+
+```
+BRBS 0, L1		; Branch if bit 0 of SREG is set and goto L1
+LDI R17, 0xFF	; Otherwise insert 0xFF into R17
+
+L1:				; address L1
+```
+
+There are also dedicated branching instruction for each flag bits.
+
+### Bit Addressability of Internal RAM ###
+---
+
+Internal RAM is not bit addressable. So to manipulate single bit, content of internal RAM should be loaded into a GPR first, then GPR bit addressable features can be used.
+
+Example: Check if the internal RAM location 0x195 contains an even number. If it contains even number then send it to Port B. Else make it even then send it to Port B.
+
+```
+LDI R16, 0xFF
+OUT DDRB, R16
+
+LOOP:	LDS R16, 0x195
+
+		SBRS R16, 0				; If bit 0 is not set, then its even. So go to PRINT
+		RJMP PRINT				; Otherwise ignore this instruction as it is not even
+		CBR R16, 0b00000001		; Make it even by clearing bit 0
+
+PRINT:	OUT PORTB, R16
+		RJMP LOOP
+```
