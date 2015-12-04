@@ -1555,7 +1555,7 @@ HERE: RJMP HERE			; Infinite Loop
 
 Example: A switch is connected to pin PC7. Check the status of switch. If switch is HIGH send 'Y' to Port D. Else send 'N' to Port D.
 
-```avr-as
+```avr
 CBI DDRC, 7				; PC7 is input pin
 
 LDI R16, 0xFF
