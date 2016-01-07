@@ -1,10 +1,23 @@
 ## Introduction ##
 
-**Version Control System:** Version control is a system that record changes to a file or set of files over time. Each change of those files can be tracked easily. So its is possible to revert back to a previous version etc.
+**Version Control System:** Version control is a system that records changes to a file or set of files over time. Each change of those files can be tracked easily. So its is possible to revert back to a previous version etc.
 
 **Git:** Git is a command line program for distributed version controlling
 
 **GitHub:** GitHub is a web-based Git repository hosting service. It offers all the distributed version control and software management functionality of Git. It makes it easy to save project remotely, version controlling, collaborate with multiple developers on a project etc.
+
+## Configuring Git ##
+
+**Configure Name & Email:** First we have to add name and email. If no name or email is added pc's username will be used as username and host name will be used as email.
+
+```
+me@my-pc:~$ git config --global user.name 'name'
+me@my-pc:~$ git config --global user.email 'me@example.com'
+```
+
+**Configure color:** Configure git so that terminal output becomes color coded.
+
+`git config --global color.ui 'auto'`
 
 ## Creating & Publishing Repository ##
 
@@ -42,7 +55,7 @@ Untracked files:
 
 nothing added to commit but untracked files present (use "git add" to track)
 ```
-**Add to staging area:** So its saying there is an untracked file. After adding cotents to my files I have to add the files to staging area using `git add` command, So that git can track those files & their contents. Now I am adding *git_and_github.md* file to staging area.
+**Add to staging area:** So its saying there is an untracked file. After adding contents to my files I have to add the files to staging area using `git add` command, So that git can track those files & their contents. Now I am adding *git_and_github.md* file to staging area.
 
 `me@my-pc:~/cheatsheets$ git add git_and_github.md`
 
@@ -90,7 +103,7 @@ Changes to be committed:
 
 Now I will publish my local repository to a remote repository like GitHub.
 
-**Setup GitHub:** Create GitHub accout. Set up ssh(optional) etc.
+**Setup GitHub:** Create GitHub accout. [Set up ssh](https://help.github.com/articles/generating-ssh-keys/) (optional) etc.
 
 **Creating a remote repository:** Now I have to create a repository in GitHub which will be the remote repository for my local repository. My local repository will be synced in this remote repository. Repositories can be public or private.
 
