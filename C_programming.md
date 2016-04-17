@@ -180,3 +180,7 @@ int main(){
 	return 0;
 }
 ```
+
+##### Bit Fields #####
+
+Bit field is used to pack several variable into a machine word. Bit fields are declared just like regular structure. But variable type have to be `unsigned int` and bit length of each variable is specified using `:` operator.
