@@ -145,3 +145,38 @@ int close(int fileDescriptor);
 ```
 
 Closes a file.
+
+---
+
+### User Defined Types ###
+
+##### Enumerated Types #####
+
+```c
+enum Type{
+	INT,	// INT = 0
+	DOUBLE,	// DOUBLE = 1
+	CHAR	// CHAR = 2
+};
+
+int main(){
+	/* Can be treated like regular variable */
+	enum Type t;
+
+	/* Value assignment can be one of the enum members */
+	t = INT;
+
+	/* Can be used directly without a enumerated variable */
+	if(t == INT){
+		printf("This is an integer.\n");
+	}
+	else if(t == DOUBLE){
+		printf("This is a double.\n");
+	}
+	else if(t == CHAR){
+		printf("This is a character variable.\n");
+	}
+
+	return 0;
+}
+```
