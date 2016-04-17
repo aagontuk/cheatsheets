@@ -183,4 +183,13 @@ int main(){
 
 ##### Bit Fields #####
 
-Bit field is used to pack several variable into a machine word. Bit fields are declared just like regular structure. But variable type have to be `unsigned int` and bit length of each variable is specified using `:` operator.
+Bit field is used to pack several variables into a machine word. Bit fields are declared just like regular structures. But variable type have to be **unsigned int** and bit length of each variable is specified using **:** operator.
+
+```c
+struct flags{
+	unsigned int is_color:1	// 1 bit length
+	unsigned int is_sound:1	// 1 bit length
+	unsigned int is_open:1	// 1 bit length
+	unsigned int status:4	// 4 bit length
+};
+```
