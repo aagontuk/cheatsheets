@@ -2,11 +2,11 @@
 
 #### QString ####
 
-```qt
+```c++
 QString hello = "Hello, World";
 qDebug() << hello << "\n";
 ```
-```qt
+```c++
 int number = 10;
 QString string = "This a cute string";
 QString show = QString("My number is: %1 and my string is: %2\n").arg(number).arg(string);
