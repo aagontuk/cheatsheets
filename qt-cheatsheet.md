@@ -13,13 +13,13 @@ QString show = QString("My number is: %1 and my string is: %2\n").arg(number).ar
 qDebug() << show;
 ```
 
-#### QStringStream ####
+#### QTextStream ####
 
 ```c++
 QString qstr;
-QStringStream cout(stdout);				/* stream text to stdout */
-QStringStream cin(stdin);				/* take input from stdin */
-QStringStream toStringObject(&qstr);	/* store in a Qstring */
+QTextStream cout(stdout);				/* stream text to stdout */
+QTextStream cin(stdin);				/* take input from stdin */
+QTextStream toStringObject(&qstr);	/* store in a Qstring */
 
 cout << "Hello, world!\n"
 cout << QString("First prime number is: %1\n").arg(2);
@@ -32,26 +32,23 @@ toStringObject << "This is a literal string\n" << QString("A QString with number
 cout << qstr;
 ```
 
-#### QFile ####
+#### Taking Commandline Arguments ####
 
 ```c++
-QFile file("myTextFile.txt");
-file.open(QIODevice::WriteOnly);
+#include <QCoreApplication>
+#include <QStringList>
+#include <QDebug>
 
-QStringStream outFile(&file);
-outFile << "Hello, World!" << "\n";
+int main(int argc, char *argv[]){
+	QCoreApplication app(argc, argv);
 
-file.close();
-```
+	QStringList argList = app.arguments();
 
-```c++
-QFile file("myTextFile.txt");
-if(file.open(QIODevice::ReadOnly)){
-	QStringSteam inFile(&file);
-	QString text;
+	foreach(const QString &str, argList){
+		qDebug() << str;
+	}
 
-	inFile >> text;
-	qDebug() << text;
+	return EXIT_SUCCESS;
 }
 ```
 
@@ -100,6 +97,96 @@ int main(){
 }
 ```
 
+#### QDir, QFileInfo, QDirIterator ####
+
+```c++
+#include <QCoreApplication>
+#include <QStringList>
+#include <QDebug>
+#include <QDir>
+
+int main(int argc, char *argv[]){
+	QCoreApplication app(argc, argv);
+
+	QDir dir = QDir::current();
+	if(app.arguments().size() > 1){
+		dir = app.arguments()[1];
+	}
+
+	dir.setSorting(QDir::Name);
+	
+	QDir::Filters df = QDir::Files | QDir::NoDotAndDotDot;
+
+	QStringList dirList = dir.entryList(df, QDir::Name);
+
+	foreach(const QString &entry, dirList){
+		QFileInfo fileInfo(dir, entry);
+		qDebug() << fileInfo.absoluteFilePath();
+	}
+
+	return EXIT_SUCCESS;
+}
+```
+
+```c++
+/* Will search all mp3 file in a given directory
+ * And its subdirectories
+ */
+
+#include <QCoreApplication>
+#include <QStringList>
+#include <QDebug>
+#include <QDir>
+#include <QDirIterator>
+#include <QTextStream>
+
+int main(int argc, char *argv[]){
+	QCoreApplication app(argc, argv);
+
+	QTextStream cout(stdout);
+	QTextStream cerr(stderr);
+
+	QDir dir = QDir::current();
+	if(app.arguments().size() > 1){
+		dir = app.arguments()[1];
+	}
+
+	if(!dir.exists()){
+		cerr << dir.path() << " doesn't exist!\n";
+		return -1;
+	}
+
+	QDirIterator qdi(dir.absolutePath(), QStringList() << "*.mp3", QDir::NoSymLinks | QDir::Files, QDirIterator::Subdirectories);
+	while(qdi.hasNext()){
+		cout << qdi.next() << "\n";
+	}
+
+	return EXIT_SUCCESS;
+}
+```
+
+#### QFile ####
+
+```c++
+QFile file("myTextFile.txt");
+file.open(QIODevice::WriteOnly);
+
+QTextStream outFile(&file);
+outFile << "Hello, World!" << "\n";
+
+file.close();
+```
+
+```c++
+QFile file("myTextFile.txt");
+if(file.open(QIODevice::ReadOnly)){
+	QStringSteam inFile(&file);
+	QString text;
+
+	inFile >> text;
+	qDebug() << text;
+}
+```
 QDialog
 QInputDialog
 QFileDialog
