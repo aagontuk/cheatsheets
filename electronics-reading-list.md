@@ -37,3 +37,7 @@
 #### MPU6050 Motion Sensor ####
 
 1. [MPU6050 - Dummy's Code](http://dummyscodes.blogspot.com/2014/07/mpu6050-gy-521-breakout-arduino-mega.html)
+
+### PCB , Wering, Connecting Components ###
+
+1. [PCB Basics - SparkFun](https://learn.sparkfun.com/tutorials/pcb-basics)
