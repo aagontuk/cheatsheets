@@ -40,4 +40,7 @@
 
 ### PCB , Wering, Connecting Components ###
 
-1. [PCB Basics - SparkFun](https://learn.sparkfun.com/tutorials/pcb-basics)
+1. [Powering Up a project - SparkFun](https://learn.sparkfun.com/tutorials/how-to-power-a-project)
+2. [Working With Wires - SpurkFun](https://learn.sparkfun.com/tutorials/working-with-wire)
+3. [Connectors](https://learn.sparkfun.com/tutorials/connector-basics)
+4. [PCB Basics - SparkFun](https://learn.sparkfun.com/tutorials/pcb-basics)
