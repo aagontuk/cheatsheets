@@ -24,19 +24,25 @@
 1. [Serial Communication: Asynchronous - SparkFun](https://learn.sparkfun.com/tutorials/serial-communication)
 2. [Conversion from RS-232 to TTL - SparkFun](https://www.sparkfun.com/tutorials/215?_ga=1.116247750.1322506424.1461952557)
 
-#### Serial Peripheral Interface (SPI) ####
+##### Serial Peripheral Interface (SPI) #####
 
 1. [SPI - SparkFun](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi)
 
-#### Inter Integrated Circuit (I2C) ####
+##### Inter Integrated Circuit (I2C) #####
 
 1. [I2C - SparkFun](https://learn.sparkfun.com/tutorials/i2c)
 
 ### Sensors ###
 
-#### MPU6050 Motion Sensor ####
+##### MPU6050 Motion Sensor #####
 
 1. [MPU6050 - Dummy's Code](http://dummyscodes.blogspot.com/2014/07/mpu6050-gy-521-breakout-arduino-mega.html)
+
+### Motors ###
+
+##### DC Motors #####
+
+1. [L293D Motor Driver - Robot Platform](http://www.robotplatform.com/howto/L293/motor_driver_1.html)
 
 ### PCB , Wering, Connecting Components ###
 
