@@ -4,6 +4,8 @@
 
 ```c++
 QString hello = "Hello, World";
+QString text = QString(I have %1 taka!).arg(10);
+QString *textPtr = new QString("A Beautiful Text");
 qDebug() << hello << "\n";
 ```
 ```c++
@@ -187,6 +189,12 @@ if(file.open(QIODevice::ReadOnly)){
 	qDebug() << text;
 }
 ```
+
+#### QDate ####
+
+`QDate::currentDate()` returns current date
+
+ 
 QDialog
 QInputDialog
 QFileDialog

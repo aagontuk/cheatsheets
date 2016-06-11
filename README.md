@@ -9,3 +9,4 @@
 ##### Reading Lists #####
 
 1. [Electronics](https://github.com/rashfaqur/cheatsheets/blob/master/electronics-reading-list.md)
+2. [Programming](https://github.com/rashfaqur/cheatsheets/blob/master/programming-reading-list.md)
