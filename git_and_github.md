@@ -8,7 +8,7 @@
 
 ## Configuring Git ##
 
-**Configure Name & Email:** First we have to add name and email. If no name or email is added pc's username will be used as username and host name will be used as email.
+**Configure Name & Email:** First we have to add name and email. If no name or email is added pc's username will be used as username and host name will be used as email. This username and email is for your local repository and have no relation with remote repository's(like github) username and email.
 
 ```
 me@my-pc:~$ git config --global user.name 'name'
@@ -73,7 +73,7 @@ Changes to be committed:
 	new file:   git_and_github.md
 ```
 
-**Commiting:** To add the files into main repository we have to use `git commit` command. A commit message with `-m` option will have to add with this. Now each time we change project's files we have to use this command to add those changes into main repository.
+**Commiting:** To add the files into main repository we have to use `git commit` command. A commit message with `-m` option will have to add with this. Now each time we change project's files we have to use this command to add those changes into main repository. Commit message can be anything you want. Usually it is used for specifying what has been added or changed in a specific version of a file. It will also your github commit message when we will upload our local repository to remote github repository.
 
 `me@my-pc:~/cheatsheets$ git commit git_and_github.md -m "Commit Message"`
 ```
@@ -108,6 +108,7 @@ Now I will publish my local repository to a remote repository like GitHub.
 **Creating a remote repository:** Now I have to create a repository in GitHub which will be the remote repository for my local repository. My local repository will be synced in this remote repository. Repositories can be public or private.
 
 I am creating a repository named *cheatsheets* in GitHub. The repository URL of github are in this form *github.com/USERNAME/REPOSITORYNAME.git*. So my newly created repository's URL will be: https://github.com/rashfaqur/cheatsheets.git. For SSH it will be *git@github:USERNAME/REPOSITORYNAME.git*. In my case it is *git@github.com:rashfaqur/cheatsheets.git*
+*Note:* If you want to use SSH you have to use SSH type URL for SSH to work.
 
 **Adding remote repository into local repository:** Now I have to add my remote repository URL / address using `git remote add URL_ALIAS URL` command, so that my local repository can know my remote repository. Were URL is my remote repository's URL and URL_ALIAS is a sudo name for remote repository URL so that I don't have to type URL in future. URL_ALIAS can be any name. Commonly  *origin* is used. I am using *origin* & SSH URL.
 
