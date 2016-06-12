@@ -108,6 +108,7 @@ Now I will publish my local repository to a remote repository like GitHub.
 **Creating a remote repository:** Now I have to create a repository in GitHub which will be the remote repository for my local repository. My local repository will be synced in this remote repository. Repositories can be public or private.
 
 I am creating a repository named *cheatsheets* in GitHub. The repository URL of github are in this form *github.com/USERNAME/REPOSITORYNAME.git*. So my newly created repository's URL will be: https://github.com/rashfaqur/cheatsheets.git. For SSH it will be *git@github:USERNAME/REPOSITORYNAME.git*. In my case it is *git@github.com:rashfaqur/cheatsheets.git*
+
 *Note:* If you want to use SSH you have to use SSH type URL for SSH to work.
 
 **Adding remote repository into local repository:** Now I have to add my remote repository URL / address using `git remote add URL_ALIAS URL` command, so that my local repository can know my remote repository. Were URL is my remote repository's URL and URL_ALIAS is a sudo name for remote repository URL so that I don't have to type URL in future. URL_ALIAS can be any name. Commonly  *origin* is used. I am using *origin* & SSH URL.
