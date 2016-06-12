@@ -54,6 +54,89 @@ int main(int argc, char *argv[]){
 }
 ```
 
+#### Making a basic QT class with signals and slots ####
+
+We will create our own string class base on QString. Our class name will be MyString. All QT classes inherits QObject class as base class. Q_OBJECT macro will be used for signals and slots. Slots are just regular member function. They are called when a signal is emitted. signals are only function prototypes. Their arguments must match with the slots, they are emitted. Slots can be called as regular member function too. In the constructor QObject argument is taken as parent so that others can make QObject as parent for safe memory deallocation.
+
+###### MyString.h ######
+```c++
+#include <QObject>
+#include <QString>
+
+class MyString: public QObject{
+
+    Q_OBJECT
+
+private:
+    QString m_text;
+
+public:
+    MyString(const QString& text, QObject *parent = 0);
+
+    const QString& text(void) const;
+    int getLengthOfText(void) const;
+
+public slots:
+    void setText(const QString&);
+
+signals:
+    void textChanged(const QString&);
+};
+```
+
+###### MyString.cpp ######
+```c++
+#include <QObject>
+#include <QString>
+#include "MyString.h"
+
+MyString::MyString(const QString& text, QObject *parent)
+    : QObject(parent), m_text(text) {}
+
+const QString& MyString::text(void) const {
+    return m_text;
+}
+
+int MyString::getLengthOfText() const {
+    return m_text.size();
+}
+
+void MyString::setText(const QString& text){
+    if(text == m_text)
+        return;
+
+    m_text = text;
+
+    emit textChanged(m_text);
+}
+```
+
+###### main.cpp ######
+```c++
+#include <QObject>
+#include <QDebug>
+#include "MyString.h"
+
+int main(){
+    QObject parent;
+    MyString *a, *b;
+
+    a = new MyString(QString("Hello, World!"), &parent);
+    b = new MyString(QString("I am Bee"), &parent);
+
+    qDebug() << a->text();
+    qDebug() << b->text();
+
+    a->setText(QString("a changed so, b will change too"));
+    QObject::connect(a, SIGNAL(textChanged(const QString&)), b, SLOT(setText(const QString&)));
+
+    qDebug() << a->text();
+    qDebug() << b->text();
+
+    return 0;
+}
+```
+
 #### QList, QStringList, QStringList::iterator, QListIterator<QString> ####
 
 ```c++
