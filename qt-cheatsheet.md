@@ -188,18 +188,26 @@ MyDialog::MyDialog(){
     btnLayout->addStretch();
     btnLayout->addWidget(red);
 
-    lblLayout->addWidget(label);
+    
     lblLayout->addStretch();
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
     mainLayout->addStretch();
-    mainLayout->addLayout(lblLayout);
+    
     mainLayout->addLayout(btnLayout);
     mainLayout->addStretch();
 
     connect(blue, SIGNAL(clicked()), this, SLOT(blueClicked()));
     connect(red, SIGNAL(clicked()), this, SLOT(redClicked()));
+}
+
+void MyDialog::blueClicked(){
+    QMessageBox::information(this, "Your Choice", "Welcome to Matrix!");
+}
+
+void MyDialog::redClicked(){
+    QMessageBox::information(this, "Your Choice", "Good Bye!");
 }
 ```
 
