@@ -137,6 +137,87 @@ int main(){
 }
 ```
 
+#### Basic QT Dialog with Button, Label and MessageBox ####
+
+Our class ingerits from QDialog. It has to public slots for two buttons.
+
+###### mydialog.h ######
+```c++
+#ifndef __DIALOG_H__
+#define __DIALOG_H__
+
+#include <QDialog>
+#include <QObject>
+
+class MyDialog: public QDialog{
+
+    Q_OBJECT
+
+public:
+    MyDialog();
+
+public slots:
+    void blueClicked();
+    void redClicked();
+};
+
+#endif
+```
+
+###### mydialog.cpp ######
+```c++
+#include "mydialog.h"
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QMessageBox>
+#include <QLabel>
+
+MyDialog::MyDialog(){
+    resize(300, 400);
+
+    QLabel *label = new QLabel("Select:");
+
+    QPushButton *blue = new QPushButton("Blue Pill");
+    QPushButton *red = new QPushButton("Red Pill");
+
+    QHBoxLayout *btnLayout = new QHBoxLayout;
+    QHBoxLayout *lblLayout = new QHBoxLayout;
+
+    btnLayout->addWidget(blue);
+    btnLayout->addStretch();
+    btnLayout->addWidget(red);
+
+    lblLayout->addWidget(label);
+    lblLayout->addStretch();
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+
+    mainLayout->addStretch();
+    mainLayout->addLayout(lblLayout);
+    mainLayout->addLayout(btnLayout);
+    mainLayout->addStretch();
+
+    connect(blue, SIGNAL(clicked()), this, SLOT(blueClicked()));
+    connect(red, SIGNAL(clicked()), this, SLOT(redClicked()));
+}
+```
+
+###### main.cpp ######
+```c++
+#include <QApplication>
+#include "mydialog.h"
+
+int main(int argc, char *argv[]){
+    QApplication app(argc, argv);
+
+    MyDialog mdlg;
+    mdlg.show();
+
+    return app.exec();
+}
+```
+
 #### QList, QStringList, QStringList::iterator, QListIterator<QString> ####
 
 ```c++
