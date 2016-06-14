@@ -226,6 +226,146 @@ int main(int argc, char *argv[]){
 }
 ```
 
+#### Basic QMainWindow with Central Widget, Menu Bar, Tool Bar ####
+
+###### mywindow.h ####
+```c++
+#ifndef __MY_WINDOW_H__
+#define __MY_WINDOW_H__
+
+#include <QMainWindow>
+#include <QOBject>
+
+class QAction;
+class QTextEdit;
+
+class MyWindow: public QMainWindow{
+
+    Q_OBJECT
+
+private:
+    QAction *actionNew;
+    QAction *actionCut;
+    QAction *actionAbout;
+    QAction *actionClose;
+
+    QTextEdit *editText;
+
+    void setupActions();
+    void setupMenu();
+    void setupToolBar();
+
+public:
+    MyWindow();
+
+public slots:
+    void newFile();
+    void cut();
+};
+
+#endif
+```
+
+###### mywindow.cpp ######
+```c++
+#include <QMainWindow>
+#include <QAction>
+#include <QString>
+#include <QTextEdit>
+#include <QAction>
+#include <QMenu>
+#include <QMenuBar>
+#include <QToolBar>
+#include <QApplication>
+#include "mywindow.h"
+
+MyWindow::MyWindow(){	
+	setWindowTitle(QString("Untitled[*]"));
+
+	editText = new QTextEdit(this);	
+	
+	setCentralWidget(editText);
+
+	connect(editText->document(), SIGNAL(modificationChanged(bool)), this, SLOT(setWindowModified(bool)));
+
+	setupActions();
+	setupMenu();
+	setupToolBar();
+}
+
+void MyWindow::setupActions(){
+	actionNew = new QAction(tr("New"), this);
+	actionNew->setShortcut(tr("Ctrl+N"));
+	actionNew->setStatusTip(tr("Open a new document"));
+
+	connect(actionNew, SIGNAL(triggered()), this, SLOT(newFile()));
+
+	actionCut = new QAction(tr("Cut"), this);
+	actionCut->setShortcut(tr("Ctrl+X"));
+	actionCut->setStatusTip(tr("Cut"));
+	actionCut->setEnabled(false);
+
+	connect(editText, SIGNAL(copyAvailable(bool)), actionCut, SLOT(setEnabled(bool)));
+	connect(actionCut, SIGNAL(triggered()), this, SLOT(cut()));
+
+	actionAbout = new QAction(tr("About QT"), this);
+	actionAbout->setStatusTip(tr("About QT Toolkit"));
+
+	connect(actionAbout, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+
+	actionClose = new QAction(tr("&Quit"), this);
+	actionClose->setShortcut(tr("Ctrl+Q"));
+	actionClose->setStatusTip(tr("Close"));
+
+	connect(actionClose, SIGNAL(triggered()), qApp, SLOT(quit()));
+}
+
+void MyWindow::setupMenu(){
+	QMenu *fileMenu = menuBar()->addMenu(tr("File"));
+	fileMenu->addAction(actionNew);
+	fileMenu->addSeparator();
+	fileMenu->addAction(actionClose);
+
+	QMenu *editMenu = menuBar()->addMenu(tr("Edit"));
+	editMenu->addAction(actionCut);
+
+	QMenu *helpMenu = menuBar()->addMenu(tr("Help"));
+	helpMenu->addAction(actionAbout);
+}
+
+void MyWindow::setupToolBar(){
+	QToolBar *toolBar;
+	toolBar = addToolBar(tr("Tool"));
+
+	toolBar->addAction(actionNew);
+	toolBar->addSeparator();
+	toolBar->addAction(actionCut);
+}
+
+void MyWindow::newFile(){
+
+}
+
+void MyWindow::cut(){
+
+}
+```
+
+###### main.cpp ######
+```c++
+#include <QApplication>
+#include "mywindow.h"
+
+int main(int argc, char *argv[]){
+    QApplication app(argc, argv);
+
+    MyWindow mainwindow;
+    mainwindow.show();
+
+    return app.exec();
+}
+```
+
 #### QList, QStringList, QStringList::iterator, QListIterator<QString> ####
 
 ```c++
