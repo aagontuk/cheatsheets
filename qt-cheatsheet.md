@@ -1,5 +1,18 @@
 ### QT Cheatsheet ###
 
+#### Index ####
+
+1. [QString](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qstring)
+2. [QTextStream](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qtextstream)
+3. [Taking Commandline Arguments](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#taking-commandline-arguments)
+4. [Making a basic QT class with signals and slots](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#making-a-basic-qt-class-with-signals-and-slots)
+5. [Basic QT Dialog with Button, Label and MessageBox](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#basic-qt-dialog-with-button-label-and-messagebox)
+6. [Basic QMainWindow with Central Widget, Menu Bar, Tool Bar](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#basic-qmainwindow-with-central-widget-menu-bar-tool-bar)
+7. [QList, QStringList, QStringList::iterator, QListIterator](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qlist-qstringlist-qstringlistiterator-qlistiterator)
+8. [QDir, QFileInfo, QDirIterator](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qdir-qfileinfo-qdiriterator)
+9. [QFile](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qfile)
+10. [QDate](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qdate)
+
 #### QString ####
 
 ```c++
@@ -505,9 +518,3 @@ if(file.open(QIODevice::ReadOnly)){
 #### QDate ####
 
 `QDate::currentDate()` returns current date
-
- 
-QDialog
-QInputDialog
-QFileDialog
-QMessageBox
