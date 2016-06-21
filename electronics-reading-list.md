@@ -55,3 +55,10 @@
 ##### MPU6050 Motion Sensor #####
 
 1. [MPU6050 - Dummy's Code](http://dummyscodes.blogspot.com/2014/07/mpu6050-gy-521-breakout-arduino-mega.html)
+
+### Controlling ###
+
+##### PID Controll #####
+
+1. [PID Control Using Arduino](http://www.maelabs.ucsd.edu/mae156alib/control/PID-Control-Ardunio.pdf)
+2. [PID Control - Book Chapter](https://www.cds.caltech.edu/~murray/courses/cds101/fa04/caltech/am04_ch8-3nov04.pdf)
