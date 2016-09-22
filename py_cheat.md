@@ -112,17 +112,131 @@ all the lines are concatenated togather
 where line breaks appear
 ```
 
+### Lists ###
 
+List object is sequence object. They are mutable.
 
+```python
+>>> list = [1, 2.3, 'foo']	# Creating list object
+>>> len(list)				# Finding length
+3
+>>> list[0]					# Can be indexed
+1
+>>> list[-1]
+'foo'
+>>> list[1:3]				# Slicing
+[2.3, 'foo']
+>>> list + ['bar']			# Concatenation
+[1, 2.3, 'foo', 'bar']
+>>> list = list + ['bar']	# Mutability
+>>> list
+[1, 2.3, 'foo', 'bar']
+```
 
+#### Type specific operations ####
 
+1. Can hold different types of object
+2. No fixed size
+3. Mutable.
 
+```python
+>>> list = [1, 'foo']
+>>> list.append('bar')		# Add an item at the end of the list
+>>> list
+[1, 'foo', 'bar']
+>>> list.insert(1, 'baz')	# Insert an item at a specific index
+>>> list
+[1, 'baz', 'foo', 'bar']
+>>> list.pop(1)				# return and remove an item from a specific
+'baz'						# index
+>>> list
+[1, 'foo', 'bar']
+>>> list.remove('bar')		# remove first occurance of an item found
+>>> list					# in the list
+[1, 'foo']
+```
 
+As list is a mutable object there are methods that can change a list object in place.
 
+```python
+>>> list = ['heaven', 'and', 'hell']
+>>> list.sort()							# Sort List
+>>> list
+['and', 'heaven', 'hell']
+>>> list.reverse()						# Reverse sort List
+>>> list
+['hell', 'heaven', 'and']
+```
 
+Lists can be nested.
 
+```python
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+>>> matrix[0]
+[1, 2, 3]
+>>> matrix[0][0]
+1
+```
 
+#### List Comprehensions ####
 
+List comprehension is a way to build a new list running an expression on each item in a sequence, once at a time.
+
+```python
+>>> matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+>>> col2 = [row[1] for row in matrix]
+>>> col2
+[2, 5, 8]
+>>> list = [var for var in range(0, 11)]
+>>> list
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+[num for num in range(0, 11) if num % 3 == 0]	# Filtering
+[0, 3, 6, 9]
+```
+
+### Dictionary ###
+
+Dictionaries are used to store value in a key value pair.
+
+1. Mutable
+2. Values are stored in a key value pair
+3. Stores any type of objects
+4. Can be nested
+
+```python
+band = {'name':'Bangla', 'albums':2}			# Creation
+>>> band
+{'albums': 2, 'name': 'Bangla'}
+>>> band['name']								# Indexing by key
+'Bangla'
+>>> band['started'] = 1999						# Mutable
+>>> band
+{'started': 1999, 'albums': 2, 'name': 'Bangla'}
+```
+
+**Type Specific Methods:**
+
+```python
+>>> dic = {'c':1, 'a':2, 'b':3}
+>>> dic
+{'a': 2, 'c': 1, 'b': 3}
+>>> dic.keys()					# Returns List of the keys
+['a', 'c', 'b']
+```
+
+**Iterating over a Dictionary:**
+
+```python
+>>> dic = {'c':1, 'a':2, 'b':3}
+>>> dic
+{'a': 2, 'c': 1, 'b': 3}
+>>> for key in dic.keys():
+...     print "key: %s\tValue: %s" % (key, dic[key])
+... 
+key: a	Value: 2
+key: c	Value: 1
+key: b	Value: 3
+```
 
 
 
