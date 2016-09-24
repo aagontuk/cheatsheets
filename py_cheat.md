@@ -2,12 +2,14 @@
 
 ### Python Data Types ###
 
-Numbers		- 1.23, 123, 3+4i
-Strings		- "hello, world"
-Lists		- [1, 'hello', ['I', 'am', 'list', 'in', 'a', 'list'], 4.5]
-Dictionary	- {"key":"value", 'foo':0, 'bar':'drink'}
-Tuples		- (4, 'hello', 3.14)
-Others		- set, types, booleans, none
+| Object Type | Example                                                   |
+| :---------- | --------------------------------------------------------: |
+| Numbers     | 1.23, 123, 3+4i											  |
+| Strings     | "hello, world"											  |
+| Lists       | [1, 'hello', ['I', 'am', 'list', 'in', 'a', 'list'], 4.5] |
+| Dictionary  | {"key":"value", 'foo':0, 'bar':'drink'}					  |
+| Tuples      | (4, 'hello', 3.14)										  |
+| Others      | set, types, booleans, none								  |
 
 *Numbers, Strings, Tupples are immutable. Means they can't be changed after creation*
 *Lists and Dictionaries are mutable*
@@ -55,7 +57,7 @@ Strings can be concatenated using + sign and repeated using * sign.
 'I am little bunny foo fooI am little bunny foo fooI am little bunny foo foo'
 ```
 
-**Every operation we have performed on string can be performed other sequence objects like lists and tupples**
+*Every operation we have performed on string can be performed other sequence objects like lists and tupples*
 
 #### Some methods ####
 
@@ -83,7 +85,7 @@ string = "Hello, how are you\n\n\n"
 65
 ```
 
-**\0 or null terminator doesn't end python strings**
+*\0 or null terminator doesn't end python strings*
 ```python
 >>> s = 'A\0B\0C'
 >>> s
