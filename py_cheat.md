@@ -238,8 +238,117 @@ key: c	Value: 1
 key: b	Value: 3
 ```
 
+### Tuples ###
+
+Python tuples are list like sequence object. But they are immutable.
+
+```python
+>>> T = (1, 2, 3, 4)
+>>> T
+(1, 2, 3, 4)
+>>> T[0]
+1
+>>> len(T)
+4
+>>> T[1] = 10
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+```
+
+### Sets ###
+
+Collection of unique elements. Supports usual mathematical set operations.
+
+```python
+>>> x = set('hello')
+>>> x
+set(['h', 'e', 'l', 'o'])
+>>> y = set(['w', 'o', 'r', 'l', 'd'])
+>>> y
+set(['d', 'r', 'o', 'w', 'l'])
+>>> x & y
+set(['l', 'o'])
+>>> x | y
+set(['e', 'd', 'h', 'l', 'o', 'r', 'w'])
+>>> x - y
+set(['h', 'e'])
+```
+
+## Python Data Types In Detail ##
+
+### Numbers ##
+
+#### Numeric Display Formats ####
+
+`repr()` display numbers as in code.
+`str()` coverts into more user friendly looks.
+`oct()` converts decimal into octal
+`hex()` converts decimal into hexadecimal
+`int(string, base)` converts strings into numbers.
 
 
+#### Decimal Object ####
+
+Fixed precision representation of numbers.
+
+```python
+>>> 0.1 + 0.2 - 0.3
+5.551115123125783e-17							# The problem
+>>> from decimal import Decimal
+>>> Decimal(0.1) + Decimal(0.2) - Decimal(0.3)	# Solution
+Decimal('2.775557561565156540423631668E-17')
+>>> Decimal('0.1') + Decimal('0.2') - Decimal('0.3')
+Decimal('0.0')
+>>> Decimal(1) / Decimal(7)
+Decimal('0.1428571428571428571428571429')
+>>> decimal.getcontext().prec = 4				# Precision
+>>> Decimal(1) / Decimal(7)
+Decimal('0.1429')
+```
+
+### Strings ###
+
+Different Forms:
+---
+1. Single Quotes: 'he said, "hello"'
+2. Double Quotes: "Robin's book"
+3. Block of strings: """string block""", '''String Block'''
+4. Raw strings: r'\thello, world\n'
+5. Unicode strings: u'\u0986\u09AE\u09BE\u09B0'
+---
+
+```python
+>>> print 'he said, "hello"'
+he said, "hello"
+>>> print "Robin's book"
+Robin's book
+>>> print """Once upon a time
+... there was a         man
+... one day"""
+Once upon a time
+there was a		man
+one day
+>>> print r'\thello, world\n'
+\thello, world\n
+>>> print u'\u0986\u09AE\u09BE\u09B0'
+আমার
+```
+
+#### Character Code Conversions ####
+
+`ord('char')` convert char into ints ASCII value.
+`chr(value)` convert from ASCII to character.
+
+#### String Formating ####
+
+```python
+>>> print "%s:%d\t%s:%d" % ("Alice", 40, "Bob", 50)
+Alice:40	Bob:50
+>>>
+>>>print "My List: %s" % [1, 2, 3]
+My List: [1, 2, 3]
+```
 
 
 
