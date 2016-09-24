@@ -352,9 +352,23 @@ Alice:40	Bob:50
 My List: [1, 2, 3]
 ```
 
-
-
-
+| Format Code	| Meaning 					|
+| :------------ | ------------------------: |
+| %s			| String					|
+| %r			| Raw string				|
+| %c			| Character					|
+| %d			| Integer					|
+| %i			| Integer					|
+| %u			| Unsigned Integer			|
+| %o			| Octal						|
+| %x			| Hexadecima(lower)			|
+| %X			| Hexadecimal(Upper)		|
+| %e			| Floating point Exponent	|
+| %E			| e, but uppercase			|
+| %f			| Floating point decimal	|
+| %g			| e or f					|
+| %G			| E or f					|
+| %%			| literal %					|
 
 
 
