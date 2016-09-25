@@ -5,6 +5,7 @@
 1. [Git & GitHub](https://github.com/rashfaqur/cheatsheets/blob/master/git_and_github.md)
 2. [AVR Assembly Programming](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md)
 3. [C Programming](https://github.com/rashfaqur/cheatsheets/blob/master/C_programming.md)
+4. [Python Programming](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md)
 
 ##### Reading Lists #####
 
