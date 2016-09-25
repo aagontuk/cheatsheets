@@ -416,7 +416,7 @@ My List: [1, 2, 3]
 ['F', 'o', 'o', 'B', 'a', 'r', 'F', 'o', 'o', 'B', 'a', 'r']
 ```
 
-'string.join(list)' - join list items with string.
+`string.join(list)` - join list items with string.
 
 ```python
 >>> ''.join(L)	# Join list item of L with empty string
@@ -439,19 +439,220 @@ My List: [1, 2, 3]
 `string.rstrip()` - remove whitespaces from the end of the string.
 </br>
 `string.upper()` - Convert all characters into uppercase.
+</br>
+`string.endswith(substring)` - Check if the string ends with specified substring.
 
+### Lists ###
 
+* Some basic operations.
+```python
+>>> len([1, 2, 3])			# Length
+3
+>>>
+>>> [1, 2, 3] + [4, 5, 6]	# Concatenation
+[1, 2, 3, 4, 5, 6]
+>>>
+>>> [1, 2] * 3				# Repetition
+[1, 2, 1, 2, 1, 2]
+>>>
+>>> 2 in [1, 2, 3]			# Membership Check
+True
+>>>
+>>> for i in [1, 2, 3]:		# Iteration
+...     print i
+... 
+1
+2
+3
+```
 
+* Indexing, Slicing, Nesting
+```python
+>>> list = [1, 2, 3]
+>>> list[0]				# Indexing
+1
+>>>
+>>> list[1:3]			# Slicing
+[2, 3]
+>>> matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]	# Nesting
+>>> matrix[0][0]
+1
+```
 
+* Mutability
+```python
+>>> list = [1, 'foo', 2, 'bar']
+>>> list[3] = 'baz'				# Changing in place using indexing
+>>> list
+[1, 'foo', 2, 'baz']
+>>> list[1:3] = [2, 3]			# Changing in place using slicing
+>>> list
+[1, 2, 3, 'baz']
+>>>
+>>> del list[0]					# Delete one item from list
+>>> list
+[2, 3, 'baz']
+>>>
+>>> del list[1:]				# Delete a section from list
+>>> list
+[2]
+>>>
+>>> list = [1, 2, 3, 4]
+>>> list[1:3] = []				# Another way of deleting a section
+>>> list
+[1, 4]
+```
 
+#### List Methods ####
 
+* `list.append(item)` - To append item at the end of the list.
+* `list.extend(argList)` - Append multiple items at the end of the list at once.
+* `list.insert(index, item)` - To insert item at index index of the list.
+* `list.pop([index])` - Remove item from list at index index. If index isn't specified default is the last item.
+* `list.remove(item)` - Remove first occurence of the item from the list.
+* `list.sort()` - Sort List.
+* `list.reverse()` - Reverse sort the list.
 
+```python
+>>> mList = [1, 2]
+>>> mList.append(3)			# Append at the end of the list
+>>> mList
+[1, 2, 3]
+>>>
+>>>
+>>> mList.extend([4, 5])	# Extend list with multiple items
+>>> mList
+[1, 2, 3, 4, 5]
+>>>
+>>>
+>>> mList.insert(1, 9)		# Insert at specific index
+>>> mList
+[1, 9, 2, 3, 4, 5]
+>>>
+>>>
+>>> mList.pop()
+5
+>>> mList
+[1, 9, 2, 3, 4]
+>>> mList.pop(1)
+9
+>>> mList
+[1, 2, 3, 4]
+>>>
+>>>
+>>> mList.remove(4)
+>>> mList
+[1, 2, 3]
+>>>
+>>>
+>>> mList.reverse()
+>>> mList
+[3, 2, 1]
+>>> mList.sort()
+>>> mList
+[1, 2, 3]
+```
 
+### Dictionaries ###
 
+* Creation:
+```python
+>>> dic = {'foo':0, 'bar':1, 'baz':2}
+>>> dic
+{'baz': 2, 'foo': 0, 'bar': 1}			# Notice Order Scambled
+>>>
+>>> dic['foo']							# Fetching value using key
+0
+```
 
+* Some basic operations
+```python
+>>> dic
+{'baz': 2, 'foo': 0, 'bar': 1}
+>>> len(dic)					# Length
+3
+>>>
+>>> 'foo' in dic				# Key membership check
+True
+>>> dic.has_key('bar')			# Key membership check
+True
+>>> dic.keys()					# Gives a list of all keys
+['baz', 'foo', 'bar']
+>>>
+>>> dic
+{'goo': 3, 'foo': 5, 'bar': 1}
+>>> for key in dic.keys():		# Iterating
+...     print dic[key]
+... 
+3
+5
+1
+```
 
+* Mutability
+```python
+>>> dic
+{'baz': 2, 'foo': 0, 'bar': 1}
+>>> dic['goo'] = 3							# Adding new entry
+>>> dic
+{'baz': 2, 'goo': 3, 'foo': 0, 'bar': 1}
+>>>
+>>>
+>>> dic['foo'] = 5							# Changing existing entry
+>>> dic
+{'baz': 2, 'goo': 3, 'foo': 5, 'bar': 1}
+>>>
+>>>
+>>> del dic['baz']							# Deleting an entry
+>>> dic
+{'goo': 3, 'foo': 5, 'bar': 1}
+```
 
+* Some methods
+```python
+>>> dic
+{'goo': 3, 'foo': 5, 'bar': 1}
+>>> dic.keys()							# Returns a list of all keys
+['goo', 'foo', 'bar']
+>>>
+>>> dic.values()						# Returns a list of all values
+[3, 5, 1]
+>>>
+>>> dic.items()							# Returns a list of tupples of 
+[('goo', 3), ('foo', 5), ('bar', 1)]	# key/value pair
+>>>
+>>> dic.get('foo')						# Fetching
+5
+>>>
+>>> dic2 = {'zoo':10, 'loo':40}
+>>> dic.update(dic2)					# Exteding multiple items
+>>> dic
+{'goo': 3, 'bar': 1, 'foo': 5, 'loo': 40, 'zoo': 10}
+>>>
+>>> dic.pop('zoo')						# Deliting item
+10
+>>> dic
+{'goo': 3, 'bar': 1, 'foo': 5, 'loo': 40}
+```
 
+### Tupples ###
+
+Almost all properties are same as list, except tupples are immutable.
+```python
+>>> t = (0, 1, 2)			# Creation
+>>> t
+(0, 1, 2)
+>>> t[1]					# Indexing
+1
+>>> t + (3, 4)				# Concatenation
+(0, 1, 2, 3, 4)
+>>> (1, 2) * 3				# Repeatition
+(1, 2, 1, 2, 1, 2)
+>>> t
+(0, 1, 2)
+>>> t[1:]					# Slicing
+(1, 2)
+```
 
 
 
