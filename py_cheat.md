@@ -312,13 +312,13 @@ Decimal('0.1429')
 ### Strings ###
 
 Different Forms:
----
+
 1. Single Quotes: 'he said, "hello"'
 2. Double Quotes: "Robin's book"
 3. Block of strings: """string block""", '''String Block'''
 4. Raw strings: r'\thello, world\n'
 5. Unicode strings: u'\u0986\u09AE\u09BE\u09B0'
----
+
 
 ```python
 >>> print 'he said, "hello"'
@@ -369,6 +369,84 @@ My List: [1, 2, 3]
 | %g			| e or f					|
 | %G			| E or f					|
 | %%			| literal %					|
+
+**Dictionary base string formating:** "%(name)s has %(value)d taka" % {'name':'ashik', 'value':50}
+
+#### String Methods ####
+
+`string.replace('old', 'new')` - replce old substring with new substring from string and return new string.
+```python
+>>> str  = "hello, world"
+>>> str.replace('world', 'bob')
+'hello, bob'
+>>> str
+'hello, world'
+>>>
+>>>
+>>> str = 'FooBarFooBar'
+>>> str
+'FooBarFooBar'
+>>> str.replace('Bar', 'Baz')		# Replace all occurance
+'FooBazFooBaz'
+>>> str.replace('Bar', 'Baz', 1)	# Replace only first occurance
+'FooBazFooBar'
+>>>
+```
+
+`string.find('substring')` - Find the index of the first occurance of the substring from string.
+```python
+>>> str = 'hello, world'
+>>> str
+'hello, world'
+>>> where = str.find('ello')
+>>> where
+1
+>>> str = str[:where] + 'ola' + str[(where + 4):]	# Replace trick
+>>> str
+'hola, world'
+```
+
+`list(string)` - convert string into list.
+
+```python
+>>> str
+'FooBarFooBar'
+>>> L = list(str)
+>>> L
+['F', 'o', 'o', 'B', 'a', 'r', 'F', 'o', 'o', 'B', 'a', 'r']
+```
+
+'string.join(list)' - join list items with string.
+
+```python
+>>> ''.join(L)	# Join list item of L with empty string
+'FooBarFooBar'
+```
+
+`string.split(delimiters)` - split string into a list according to specified delimiters. Default delimiter is whitespaces if nothing specified.
+
+```python
+>>> str = 'Sing me song you are a singer'
+>>> str.split()		# No delimiters specified. Default whitespaces.
+['Sing', 'me', 'song', 'you', 'are', 'a', 'singer']
+>>>
+>>>
+>>> str = 'Warfaze, Black, Artcell'
+>>> str.split(', ')	# Used ', ' as delimiter
+['Warfaze', 'Black', 'Artcell']
+```
+
+`string.rstrip()` - remove whitespaces from the end of the string.
+</br>
+`string.upper()` - Convert all characters into uppercase.
+
+
+
+
+
+
+
+
 
 
 
