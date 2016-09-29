@@ -1,6 +1,16 @@
-## NCURSES API ##
+# NCURSES API #
 
-### INDEX ###
+## Index ##
+
+* [Initializing Functions](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#initialization-functions)
+* [Input / Output Functions](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#input--output-functions)
+
+  * [Output Functions](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#output-functions)
+  * [Input Functions](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#input-functions)
+
+* [Attributes](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#attributes)
+* [Managing Windows](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#managing-windows)
+* [Links](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#links)
 
 ### Initialization Functions ###
 
@@ -21,7 +31,7 @@ For each input/output functions there are four types of function.
 * w type		: `wprintw(window, string)` - print string in the current cursor position of the specified window.
 * w ed mv type	:` mvwprintw(window, y, x, string)` - move to x, y and then print string in the specified window.
 
-### Output Function ###
+#### Output Functions ####
 
 * `printw(string)` - print string.
 * `addch(ch, attributes)` - print single character.
@@ -29,7 +39,7 @@ For each input/output functions there are four types of function.
 
 **NB:** Each function has corresponding mv, w, mvw functions.
 
-### Input Functions ###
+#### Input Functions ####
 
 * `ch = getch()` - to get a character from keyboard.
 * `scanw()` - `scanf()` like function.
@@ -76,3 +86,8 @@ Here is a list of some attributes:
 * `delwin(WINDOW *win)` - To remove a window.
 * `box(window, vchar, hchar)` - vchar & hchar is ther char which will be used to draw boxes vertical and horizontal lines.
 * `wborder(window, ls, rs, ts, bt, tl, tr, bl, br)` - 2 - 8 arguments are character for drawing ls(left side), rs(right side) of the box.
+
+### Links ###
+
+* [Ncurses Programming HOWTO](http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/)
+* [Ncurses Manual Pages](http://invisible-island.net/ncurses/man/ncurses.3x.html)
