@@ -4,10 +4,8 @@
 
 * [Initializing Functions](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#initialization-functions)
 * [Input / Output Functions](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#input--output-functions)
-
   * [Output Functions](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#output-functions)
   * [Input Functions](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#input-functions)
-
 * [Attributes](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#attributes)
 * [Managing Windows](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#managing-windows)
 * [Links](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md#links)

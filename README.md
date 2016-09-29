@@ -6,6 +6,7 @@
 2. [AVR Assembly Programming](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md)
 3. [C Programming](https://github.com/rashfaqur/cheatsheets/blob/master/C_programming.md)
 4. [Python Programming](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md)
+5. [Ncurses Programming](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md)
 
 ##### Reading Lists #####
 
