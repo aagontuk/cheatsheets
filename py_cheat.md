@@ -283,11 +283,11 @@ set(['h', 'e'])
 
 #### Numeric Display Formats ####
 
-`repr()` display numbers as in code.
-`str()` coverts into more user friendly looks.
-`oct()` converts decimal into octal
-`hex()` converts decimal into hexadecimal
-`int(string, base)` converts strings into numbers.
+`repr()` display numbers as in code.				</br>
+`str()` coverts into more user friendly looks.		</br>
+`oct()` converts decimal into octal					</br>
+`hex()` converts decimal into hexadecimal			</br>
+`int(string, base)` converts strings into numbers.	</br>
 
 
 #### Decimal Object ####
@@ -340,7 +340,18 @@ one day
 #### Character Code Conversions ####
 
 `ord('char')` convert char into ints ASCII value.
+</br>
 `chr(value)` convert from ASCII to character.
+</br>
+`eval(str)` - convert a string into python executable code.
+```python
+>>> list = [1, 2, 3]
+>>> str = '%s' % list	# List is converted into a string
+>>> str
+'[1, 2, 3]'
+>>> eval(str)			# String is converted back to list
+[1, 2, 3]
+```
 
 #### String Formating ####
 
@@ -642,6 +653,8 @@ Almost all properties are same as list, except tupples are immutable.
 >>> t = (0, 1, 2)			# Creation
 >>> t
 (0, 1, 2)
+>>> tt = (2,)				# Single element tupple
+>>>
 >>> t[1]					# Indexing
 1
 >>> t + (3, 4)				# Concatenation
@@ -653,6 +666,65 @@ Almost all properties are same as list, except tupples are immutable.
 >>> t[1:]					# Slicing
 (1, 2)
 ```
+
+### File ###
+
+`open(path, mode, buffering)` function opens a file and returns a file object which can be used to read and write files.
+</br>
+Open modes:
+| Mode   | Effect													|
+|: ----: | -------------------------------------------------------- |
+| r      | open file in read mode. Default, if nothing specified.	|
+| w		 | Open file in write mode.									|
+| a		 | Open file in append mode									|
+
+#### Methods ####
+
+* `file.write(str)` - write a string to a file.
+```python
+>>> outf = open('myfile', 'w')
+>>> outf.write('hello, world\n')
+>>> outf.close()
+```
+
+* `file.read()` - Reads whole file.
+```python
+>>> fin = open('myfile')	# Default read mode
+>>> print fin.read()
+
+hello, world!
+I am foo.
+I am bar.
+
+>>>
+```
+
+* `file.readline()` - Returns a line from a file including \n.
+
+```python
+>>> fin.seek(0)
+>>> fin.readline()
+'hello, world!\n'
+```
+
+* `file.readlines()` - Returns a list of all lines from a file.
+
+```python
+>>> fin = open('myfile')
+>>> fin.read()
+'hello, world!\nI am foo.\nI am bar.'
+>>> fin.seek(0)
+>>> fin.readlines()
+['hello, world!\n', 'I am foo.\n', 'I am bar.']
+```
+
+#### Python Pickles ####
+
+#### Python Shelve ####
+
+#### Packed Binary ####
+
+
 
 
 
