@@ -317,11 +317,17 @@ Different Forms:
 2. Double Quotes: "Robin's book"
 3. Block of strings: """string block""", '''String Block'''
 4. Raw strings: r'\thello, world\n'
-5. Unicode strings: u'\u0986\u09AE\u09BE\u09B0'
+5. Byte Strings: b'spam'	**(Python 3)**
+6. Unicode strings: u'\u0986\u09AE\u09BE\u09B0' **(in 2.6 only)**
+
+In python 3 there are three string types. `str` is used for unicode text(ASCII and others). `bytes` is used
+for bynary data. `bytearray` is mutable variant of bytes.
 
 
 ```python
->>> print 'he said, "hello"'
+>>> print 'he said, "hello"'	\\ Python 2.6
+he said, "hello"
+>>> print ('he said, "hello"')	\\ Have to use brackets in python 3
 he said, "hello"
 >>> print "Robin's book"
 Robin's book
