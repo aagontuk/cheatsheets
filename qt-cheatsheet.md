@@ -8,6 +8,7 @@
 4. [Making a basic QT class with signals and slots](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#making-a-basic-qt-class-with-signals-and-slots)
 5. [Basic QT Dialog with Button, Label and MessageBox](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#basic-qt-dialog-with-button-label-and-messagebox)
 5. [Resource File](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#resource-file)
+5. [Creating Actions for Menu Bar, Tool Bar]()
 6. [Basic QMainWindow with Central Widget, Menu Bar, Tool Bar](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#basic-qmainwindow-with-central-widget-menu-bar-tool-bar)
 7. [QList, QStringList, QStringList::iterator, QListIterator](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qlist-qstringlist-qstringlistiterator-qlistiterator)
 8. [QDir, QFileInfo, QDirIterator](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qdir-qfileinfo-qdiriterator)
@@ -243,6 +244,7 @@ int main(int argc, char *argv[]){
 #### Resource File ####
 resource file is used to keep track of the resources used in the application. For resource file root is the project folder. Lets say we have kept new.png, cut.png and close.png int the images folder under project folder. We will add these to qt resource file. resource file's file extension is qrc.
 
+
 ###### resources.qrc ######
 ```xml
 <!DOCTYPE RCC><RCC version="1.0">
@@ -256,9 +258,20 @@ resource file is used to keep track of the resources used in the application. Fo
 </RCC>
 ```
 
+use: QIcon(":/images/new.png")
+
 ###### project.pro ######
 ```
 RESOURCES += resources.qrc
+```
+
+#### Creating Actions for Menu Bar, Tool Bar ####
+
+```c++
+QAction *actionNew = new QAction(tr("&New"), this);
+actionNew->setIcon(QIcon(":/images/new.png"));
+actionNew->setShortcut(QKeySequence::New);
+actionNew->setStatusTip(tr("Create New File"));
 ```
 
 #### Basic QMainWindow with Central Widget, Menu Bar, Tool Bar ####

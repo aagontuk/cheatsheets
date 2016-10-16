@@ -671,7 +671,9 @@ Almost all properties are same as list, except tupples are immutable.
 
 `open(path, mode, buffering)` function opens a file and returns a file object which can be used to read and write files.
 </br>
+
 Open modes:
+
 | Mode   | Effect													|
 |: ----: | -------------------------------------------------------- |
 | r      | open file in read mode. Default, if nothing specified.	|
