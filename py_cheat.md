@@ -316,7 +316,9 @@ Different Forms:
 1. Single Quotes: 'he said, "hello"'
 2. Double Quotes: "Robin's book"
 3. Block of strings: """string block""", '''String Block'''
-4. Raw strings: r'\thello, world\n'
+4. Raw strings: r'\thello, world\n'. Take each characters leterally, omits escape
+   sequences. e.g. r"C:\new\values". But raw string won't work for a string ended
+   with backslash. r"...\"; This is invalid.
 5. Byte Strings: b'spam'	**(Python 3)**
 6. Unicode strings: u'\u0986\u09AE\u09BE\u09B0' **(in 2.6 only)**
 
@@ -327,18 +329,23 @@ for bynary data. `bytearray` is mutable variant of bytes.
 ```python
 >>> print 'he said, "hello"'	\\ Python 2.6
 he said, "hello"
+
 >>> print ('he said, "hello"')	\\ Have to use brackets in python 3
 he said, "hello"
+
 >>> print "Robin's book"
 Robin's book
+
 >>> print """Once upon a time
 ... there was a         man
 ... one day"""
 Once upon a time
 there was a		man
 one day
+
 >>> print r'\thello, world\n'
 \thello, world\n
+
 >>> print u'\u0986\u09AE\u09BE\u09B0'
 আমার
 ```
