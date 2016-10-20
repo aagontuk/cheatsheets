@@ -51,6 +51,7 @@ cout << qstr;
 
 #### Taking Commandline Arguments ####
 
+###### main.cpp ######
 ```c++
 #include <QCoreApplication>
 #include <QStringList>
@@ -67,6 +68,20 @@ int main(int argc, char *argv[]){
 
 	return EXIT_SUCCESS;
 }
+```
+
+Project file.
+
+###### simple.pro ######
+```
+TEMPLATE = app      # Type. Can be lib, subdir etc
+TARGET = simple     # Executable name
+
+QT += core
+
+INCLUDEPATH += .
+HEADERS =
+SOURCES = main.cpp
 ```
 
 #### Making a basic QT class with signals and slots ####

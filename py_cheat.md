@@ -35,16 +35,36 @@ d
 l
 ```
 
-**Slicing:** Extract a section of a string in one step. str[m:n] will produce 'str[m]str[n-1]'. Default value of m is 0 and n is the length of the string.
+#### Slicing ####
+
+Extract a section of a string in one step. str[m:n] will produce 'str[m]str[n-1]'. Default value of m is 0 and n is the length of the string.
+
 ```python
->>> print str[7:10]
+>>> print str[7:10]		# Slice from 7 to 10(non-inclusive)
 'Wor'
->>> str[:]
+
+>>> str[:]				# Slice from start to end */
 'Hello, World'
->>> str[:4]
+
+>>> str[:4]				# Slice from start upto 4
 'Hell'
->>> str[:-1]
+
+>>> str[:-1]			# Slice from start upto last item
 'Hello, Worl'
+```
+
+General format of slicing is x[i:j:k]. Where k is the step size from i upto j.
+k can be negative, in that case slice will occur from i upto j in reverse order. Default value of k is 1.
+
+```python
+>>> "12345678"[1:6:2]	# From index 1 upto index 6 and step size 2
+'246'
+
+"hello"[::2]			# Entire string, step size 2
+'hlo'
+
+"hello"[::-1]			# Entire string. Step size 1. But as the step
+'olleh'					# size is negetive, slicing will be done in reverse order
 ```
 
 Strings can be concatenated using + sign and repeated using * sign.
@@ -283,12 +303,13 @@ set(['h', 'e'])
 
 #### Numeric Display Formats ####
 
-`repr()` display numbers as in code.				</br>
-`str()` coverts into more user friendly looks.		</br>
-`oct()` converts decimal into octal					</br>
-`hex()` converts decimal into hexadecimal			</br>
-`int(string, base)` converts strings into numbers.	</br>
-
+`repr()` display numbers as in code.					</br>
+`str()` Convert numbers into string.					</br>
+`oct()` converts decimal into octal						</br>
+`hex()` converts decimal into hexadecimal				</br>
+`int(string, base)` - converts strings into numbers.	</br>
+`float()` - Coverts strings into floating point number.	</br>
+`bin()` - Converts integer to binary					</br>
 
 #### Decimal Object ####
 
@@ -357,26 +378,32 @@ one day
 `chr(value)` convert from ASCII to character.
 </br>
 `eval(str)` - convert a string into python executable code.
+
 ```python
 >>> list = [1, 2, 3]
+
 >>> str = '%s' % list	# List is converted into a string
+
 >>> str
 '[1, 2, 3]'
+
 >>> eval(str)			# String is converted back to list
 [1, 2, 3]
 ```
 
 #### String Formating ####
 
+##### String Formating Expression ######
+
 ```python
->>> print "%s:%d\t%s:%d" % ("Alice", 40, "Bob", 50)
+>>> print("%s:%d\t%s:%d" % ("Alice", 40, "Bob", 50))
 Alice:40	Bob:50
 >>>
->>>print "My List: %s" % [1, 2, 3]
+>>>print("My List: %s" % [1, 2, 3])
 My List: [1, 2, 3]
 ```
 
-| Format Code	| Meaning 					|
+| Type Code	| Meaning 					|
 | :------------ | ------------------------: |
 | %s			| String					|
 | %r			| Raw string				|
@@ -394,7 +421,16 @@ My List: [1, 2, 3]
 | %G			| E or f					|
 | %%			| literal %					|
 
+General conversion code structure: %[(name)][flags][width][.precision]typecode </br>
+
 **Dictionary base string formating:** "%(name)s has %(value)d taka" % {'name':'ashik', 'value':50}
+
+##### String Formating Method Calls #####
+
+```python
+>>> 'Distance between {0} and {1} is {2} km'.format('Dhaka', 'Khulna', 279.6)
+'Distance between Dhaka and Khulna is 279.6 km'
+```
 
 #### String Methods ####
 
