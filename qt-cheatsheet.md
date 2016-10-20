@@ -86,10 +86,13 @@ SOURCES = main.cpp
 
 #### Making a basic QT class with signals and slots ####
 
-We will create our own string class base on QString. Our class name will be MyString. All QT classes inherits QObject class as base class. Q_OBJECT macro will be used for signals and slots. Slots are just regular member function. They are called when a signal is emitted. signals are only function prototypes. Their arguments must match with the slots, they are emitted. Slots can be called as regular member function too. In the constructor QObject argument is taken as parent so that others can make QObject as parent for safe memory deallocation.
+We will create our own string class based on QString. Our class name will be MyString. All QT classes inherits QObject class as base class. Q_OBJECT macro will be used for signals and slots. Slots are just regular member functions. They are called when a signal is emitted. signals are only function prototypes. Their arguments must match with the slots, they are emitted. Slots can be called as regular member function too. In the constructor QObject argument is taken as parent so that others can make QObject as parent for safe memory deallocation.
 
 ###### MyString.h ######
 ```c++
+#ifndef MYSTRING_H
+#define MYSTRING_H
+
 #include <QObject>
 #include <QString>
 
@@ -112,6 +115,8 @@ public slots:
 signals:
     void textChanged(const QString&);
 };
+
+#endif
 ```
 
 ###### MyString.cpp ######
@@ -157,10 +162,11 @@ int main(){
     qDebug() << a->text();
     qDebug() << b->text();
 
-    a->setText(QString("a changed so, b will change too"));
     QObject::connect(a, SIGNAL(textChanged(const QString&)), b, SLOT(setText(const QString&)));
 
-    qDebug() << a->text();
+    a->setText(QString("a changed so, b will change too"));
+    
+	qDebug() << a->text();
     qDebug() << b->text();
 
     return 0;
@@ -568,3 +574,23 @@ if(file.open(QIODevice::ReadOnly)){
 #### QDate ####
 
 `QDate::currentDate()` returns current date
+
+### Serial Ports in QT ###
+
+#### QSerialPortInfo ####
+
+`QList<QSerialPortInfo> QSerialPortInfo::availablePorts()` - availablePorst() static function returns a list of
+available devices. Available devices are returned as QSerialPortInfo object 										</br>
+
+**Functions:** </br>
+
+`QString portName()` - Return device port name. E.g ttyACM0, ttyUSB0 												</br>
+`QString systemLocation()` - Returns port path / location. E.g /dev/ttyACM0 										</br>
+`QString description` - Returns device description. 																</br>
+`QString manufacturer` - Returns device manufacturer.																</br>
+`QString serialNumber()` - Return device serial number.																</br>
+`bool hasProductIdentifier()` - True if the device has valid product identifier number.								</br>
+`quint16 productIdentifier()` - Returns product identifier number.													</br>
+`bool hasVendorIdentifier()` - Returns true if the device has valid product number.									</br>
+`quint16 vendorIdentifier()` - Returns vendor identifier number.													</br>
+`bool isBusy()` - returns True if the serial port is busy.															</br>
