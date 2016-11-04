@@ -12,6 +12,7 @@
 | Others      | set, types, booleans, none								  |
 
 *Numbers, Strings, Tupples are immutable. Means they can't be changed after creation*
+</br>
 *Lists and Dictionaries are mutable*
 
 ### Strings ###
@@ -21,7 +22,9 @@ Example: 'hello, world', "I am me" etc
 `len()` function gives the length of the string.
 ```python
 >>> str = "Hello, World"
->>> print len(str)
+>>> print len(str)			# Python 2
+12
+>>> print(len(str))			# Python 3
 12
 ```
 
@@ -724,7 +727,7 @@ Almost all properties are same as list, except tupples are immutable.
 Open modes:
 
 | Mode   | Effect													|
-|: ----: | -------------------------------------------------------- |
+| :----: | -------------------------------------------------------: |
 | r      | open file in read mode. Default, if nothing specified.	|
 | w		 | Open file in write mode.									|
 | a		 | Open file in append mode									|
