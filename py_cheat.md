@@ -797,3 +797,21 @@ Tool to store python object in a file directly with no to-or-from string convers
 #### Python Shelve ####
 
 #### Packed Binary ####
+
+## Python Statement And Syntax ##
+
+### Notes about python statement and syntax ###
+
+* Python statements are ended by new lines. No semicolon is needed.
+```python
+a = 40			# Statement
+x = a + 10		# Another Statement
+```
+
+* Semicolons can be used to use multiple statements in a single line.
+```python
+a = 40; b = 60; print(a + b)
+```
+
+* Brackets (first, second or third) are used to span single statement in multiple
+lines.
