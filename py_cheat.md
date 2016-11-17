@@ -351,10 +351,10 @@ for bynary data. `bytearray` is mutable variant of bytes.
 
 
 ```python
->>> print 'he said, "hello"'	\\ Python 2.6
+>>> print 'he said, "hello"'	# Python 2.6
 he said, "hello"
 
->>> print ('he said, "hello"')	\\ Have to use brackets in python 3
+>>> print ('he said, "hello"')	# Have to use brackets in python 3
 he said, "hello"
 
 >>> print "Robin's book"
@@ -736,7 +736,7 @@ Open modes:
 
 * `file.write(str)` - write a string to a file.
 ```python
->>> outf = open('myfile', 'w')
+>>> outf = open('myfile', 'w')		# Creates a file object
 >>> outf.write('hello, world\n')
 >>> outf.close()
 ```
@@ -774,18 +774,26 @@ I am bar.
 
 #### Python Pickles ####
 
+Tool to store python object in a file directly with no to-or-from string conversion.
+
+```python
+# Storing Object
+
+>>> list = [1, 2, 3]
+>>> list
+[1, 2, 3]
+>>> fobj = open("file.bin", "wb")
+>>> pickle.dump(list, fobj)
+>>> fobj.close()
+
+# Restoring object from file
+
+>>> fobj = open("file.bin", "rb")
+>>> l = pickle.load(fobj)
+>>> l
+[1, 2, 3]
+```
+
 #### Python Shelve ####
 
 #### Packed Binary ####
-
-
-
-
-
-
-
-
-
-
-
-
