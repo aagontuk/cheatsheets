@@ -815,3 +815,162 @@ a = 40; b = 60; print(a + b)
 
 * Brackets (first, second or third) are used to span single statement in multiple
 lines.
+```python
+x = (a + b +
+	 c + d)
+
+list = [1, 2, 3,
+	    4, 5, 6]
+```
+
+* Also `\` can be used to span single statement in multiple lines.
+```python
+x = a + b + \
+	 c + d
+```
+
+* In python colons are used for compound statements (Statements which have nested
+blocks)
+```python
+if x > y:
+	print("%d is larger" % x)
+```
+
+* Nested blocks are nested using indentations. Curly braces are not needed.
+```python
+if x > y:
+	a = x
+	b = y
+```
+
+* For single line block statement can be placed right after colon.
+```python
+if x > y: print(x)
+```
+
+### Assignment Statement ###
+
+* Assignments create object references.
+* Names are created when first assigned.
+* Names must be assigned before being referenced.
+
+#### Different types of assignment statement: ####
+```python
+>>> spam = 'hello, world'				# Basic form
+>>> spam
+'hello, world'
+>>> spam, ham = 'hello', 'world'		# Tupple assignment(Positional)
+>>> spam, ham
+('hello', 'world')
+>>> [spam, ham] = ['hello', 'world']	# List assignment(Positional)
+>>> spam, ham
+('hello', 'world')
+>>> 
+>>> a, b, c, d = 'spam'					# Sequence assignment
+>>> a, b, c, d
+('s', 'p', 'a', 'm')
+>>> 
+>>> a, *b = 'spam'						# Extended sequence unpacking
+>>> a
+'s'
+>>> b
+['p', 'a', 'm']
+>>> spam = ham = 'launch'				# Multiple assignment
+>>> spam, ham
+('launch', 'launch')
+```
+
+In case of multiple assignment all the variables point to the same object(same piece of memory)
+```python
+>>> spam = ham = [1, 2, 3]	# spam & ham are pointing to same object
+>>> spam
+[1, 2, 3]
+>>> ham
+[1, 2, 3]
+>>> spam[1] = 4				# spam changed
+>>> spam
+[1, 4, 3]
+>>> ham						# ham changed too as they are pointing to same object
+[1, 4, 3]
+```
+
+#### Concatenation VS In-place assignment: ####
+
+In case of concatenation must create a new object, copy it in the object on the
+left, then copy it on the right. So it is slower. On the other hand in case of
+in-place  assignment new item is just added at the end of the memory block.
+
+```python
+>>> L = [1, 2]
+>>> L = L + [3, 4]		# Concatenation: Slower
+>>> L
+[1, 2, 3, 4]
+>>> L.extend([5, 6])	# In-place assignment: Faster
+>>> L
+[1, 2, 3, 4, 5, 6]
+>>> L += [7, 8]			# Python automaticaly use the faster method
+```
+
+```python
+>>> L = [1, 2]
+>>> M = L			# M & L are shared object
+>>> M
+[1, 2]
+>>> L
+[1, 2]
+>>> 
+>>> L = L + [3]		# Concatenation
+>>> L
+[1, 2, 3]			# L changed
+>>> M
+[1, 2]				# But M isn't as concatenation creates new object
+>>>
+>>> M = L			# M is pointing to L
+>>> M
+[1, 2, 3]
+>>> 
+>>> L += [4]		# In-place assignment
+>>> L
+[1, 2, 3, 4]		# L is changed
+>>> M
+[1, 2, 3, 4]		# M is changed too as augmented assignmets are in-place
+```
+
+#### Python variable naming convension ####
+
+* Names that begin with single underscore(`_X`) are not imported by from module
+import * statement
+
+* Names that begin with two leading and trailing underscore(`__X__`) are system
+defined and have special meaning to interpreter.
+
+* Names that begin with two leading underscore(`__X`) are localized to enclosing
+classes
+
+* Class names usually starts with uppercase letters.
+
+* Module names starts with lowercase letters.
+
+### Print Statement ###
+
+#### Printing To A File ####
+
+Using `file` argument of the print() function:
+```python
+>>> print("hello, world", file = open("hello.txt", "w"))
+>>> open("hello.txt").read()
+'hello, world\n'
+```
+
+Using `sys.stdout`:
+```python
+>>> import sys
+>>> tmp = sys.stdout
+>>> 
+>>> sys.stdout = open("hello.txt", "w")
+>>> print("hello, world!")
+>>> 
+>>> sys.stdout = tmp
+>>> open("hello.txt").read()
+'hello, world!\n'
+```
