@@ -798,6 +798,34 @@ Tool to store python object in a file directly with no to-or-from string convers
 
 #### Packed Binary ####
 
+### Boolean Values In Python ###
+
+* Non zero numbers are true.
+* Non empty objects are true.
+
+Example:
+```python
+>>> bool(0)
+False
+>>> bool(1)
+True
+>>> bool(50)
+True
+>>> 
+>>> bool([])
+False 
+>>> bool([1, 2])
+True
+>>>
+>>> bool({})
+False
+>>> bool({'spam': '2$'})
+True
+>>>
+>>> bool(None)
+False
+```
+
 ## Python Statement And Syntax ##
 
 ### Notes about python statement and syntax ###
@@ -973,4 +1001,117 @@ Using `sys.stdout`:
 >>> sys.stdout = tmp
 >>> open("hello.txt").read()
 'hello, world!\n'
+```
+
+### Pyhton If Statement ###
+
+Structure:
+```
+if <test1>:
+	<statement1>
+elif <test2>:
+	<statement2>
+else:
+	<statement3>
+```
+
+**No switch case** in python. Work around with if:
+```python
+>>> choice = 'gam'
+>>> 
+>>> if choice == 'spam':
+...     print("0$")
+... elif choice == 'ham':
+...     print("1$")
+... elif choice == 'gam':
+...     print("2$")
+... else:
+...     print("Bad Choice!")
+... 
+2$
+```
+
+Example:
+```python
+>>> if 1:
+...     print("One!")
+... 
+One!
+>>> 
+>>> if not 1:
+...     print("One!")
+... else:
+...     print("None!")
+... 
+None!
+```
+
+Dictionary based work around (Less typing!):
+```python
+>>> choice = 'jam'
+>>> 
+>>> print({'spam': '0$',
+...        'ham': '1$',
+...        'gam': '2$'}.get(choice, 'Bad choice!'))
+Bad choice!
+```
+
+#### Logical Operators in Python ####
+
+`and` operator:
+```python
+if X and Y:			# True if X and Y both True
+	# Do something
+```
+
+Return Value: `and` didn't return True or False. Returns first object which is
+false(zero or empty) from left to right. If expression is true returns right most 
+object.
+```python
+>>> 1 and 2
+2
+>>> [] and 2
+[]
+>>> 1 and [] and 2
+[]
+```
+
+`or` operator:
+```python
+if X or Y:			# True if X or Y is True
+	# Do something
+```
+
+Return value: `or` didn't return True or False. Returns first object which is true
+(non-zero / non-empty) from left to right.
+```python
+>>> 2 or 3
+2
+>>> [] or 3
+3
+>>> {} or 3 or [] 
+3
+```
+
+`not` operator:
+```python
+if not X:			# Invert logic
+	# Do something
+```
+
+Return value: Returns True or False
+
+#### if/else Ternary Expression ###
+
+Consider following code:
+```python
+if X:
+	A = Y
+else:
+	A = Z
+```
+
+**Ternary alternative:**
+```python
+A = Y if X else Z
 ```
