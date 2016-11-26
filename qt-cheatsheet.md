@@ -576,6 +576,68 @@ if(file.open(QIODevice::ReadOnly)){
 
 `QDate::currentDate()` returns current date
 
+### QThread ###
+
+Make a custom class inherited from QThread. Override `Thread::run()` method which will do the heavy works.
+Each thread is started with `Thread::start()` method.
+
+###### main.cpp ######
+```c++
+#include <QCoreApplication>
+#include "mythread.h"
+
+int main(int argc, char **argv){
+    QCoreApplication app(argc, argv);
+
+    MyThread th1("A"), th2("B"), th3("C");
+
+    th1.start();
+    th2.start();
+    th3.start();
+
+    return app.exec();
+}
+```
+
+###### mythread.h ######
+```c++
+#ifndef MYTHREAD_H
+#define MYTHREAD_H
+
+#include <QThread>
+#include <QString>
+
+class MyThread: public QThread {
+
+public:
+    explicit MyThread(QString str);
+
+    void run();
+
+private:
+    QString name;
+};
+
+#endif
+```
+
+###### mythread.cpp ######
+```c++
+#include "mythread.h"
+#include <QDebug>
+
+MyThread::MyThread(QString s)
+    : name(s)
+{
+}
+
+void MyThread::run(){
+    for(int i = 0; i <= 100; i++){
+        qDebug() << this->name << ":" << i;
+    }
+}
+```
+
 ### Serial Ports in QT ###
 
 #### QSerialPortInfo ####
