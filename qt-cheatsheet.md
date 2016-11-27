@@ -14,7 +14,8 @@
 8. [QDir, QFileInfo, QDirIterator](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qdir-qfileinfo-qdiriterator)
 9. [QFile](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qfile)
 10. [QDate](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qdate)
-11. [Serial Ports in QT](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#serial-ports-in-qt)
+11. [QThread](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qthread)
+12. [Serial Ports in QT](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#serial-ports-in-qt)
 
 #### QString ####
 
