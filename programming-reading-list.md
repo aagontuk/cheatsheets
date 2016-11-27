@@ -2,6 +2,7 @@
 
 1. [GNU Make](https://github.com/aagontuk/cheatsheets/blob/master/programming-reading-list.md#gnu-make)
 2. [Serial Programming](https://github.com/aagontuk/cheatsheets/blob/master/programming-reading-list.md#serial-programming)
+3. [C Programming](https://github.com/aagontuk/cheatsheets/blob/master/programming-reading-list.md#c-programming)
 
 #### GNU Make ####
 
@@ -15,3 +16,7 @@
 4. [Serial Programming Wikibook](https://en.wikibooks.org/wiki/Serial_Programming/Serial_Linux)
 5. [Arduino Serial C Program by todbot](https://github.com/todbot/arduino-serial)
 6. [Understanding UNIX termios VMIN and VTIME](http://unixwiz.net/techtips/termios-vmin-vtime.html)
+
+#### C Programming ####
+
+1. [Multithreading in C, POSIX style](http://softpixel.com/~cwright/programming/threads/threads.c.php)
