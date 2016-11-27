@@ -1,7 +1,12 @@
 ## INDEX ##
 
 1. [File I/O](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#file-io)
+  * [High Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#high-level-access)
+  * [Error Handling](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#error-handling)
+  * [Low Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#low-level-access)
 2. [User Defined Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#user-defined-types)
+  * [Enumerated Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#enumerated-types)
+  * [Bit Fields](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#bit-fields)
 
 ### FILE I/O ###
 
@@ -74,7 +79,7 @@ int fclose(FILE *filePointer);
 
 Closes a file.
 
-#### Error Handaling ####
+#### Error Handling ####
 
 ```c
 int ferror(FILE *filePointer);	/* Returns non zero if an error occurs */
