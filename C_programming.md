@@ -1,6 +1,11 @@
+## INDEX ##
+
+1. [File I/O](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#file-io)
+2. [User Defined Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#user-defined-types)
+
 ### FILE I/O ###
 
-###### High Level Access ######
+#### High Level Access ####
 
 ```c
 #include <stdio.h>	/* Header files for the bellow functions */
@@ -69,7 +74,7 @@ int fclose(FILE *filePointer);
 
 Closes a file.
 
-###### Error Handaling ######
+#### Error Handaling ####
 
 ```c
 int ferror(FILE *filePointer);	/* Returns non zero if an error occurs */
@@ -81,7 +86,7 @@ void perror(FILE *filePointer, chars *s);
 
 Prints interactive error message to filePointer if no argument specified Or s.
 
-##### Low Level Access #####
+#### Low Level Access ####
 
 ```c
 #include <fcntl.h>	/* Header file for the bellow functions */
@@ -150,7 +155,7 @@ Closes a file.
 
 ### User Defined Types ###
 
-##### Enumerated Types #####
+#### Enumerated Types ####
 
 ```c
 enum Type{
@@ -181,7 +186,7 @@ int main(){
 }
 ```
 
-##### Bit Fields #####
+#### Bit Fields ####
 
 Bit field is used to pack several variables into a machine word. Bit fields are declared just like regular structures. But variable type have to be **unsigned int** and bit length of each variable is specified using **:** operator.
 
