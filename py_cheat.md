@@ -1115,3 +1115,19 @@ else:
 ```python
 A = Y if X else Z
 ```
+
+### Python While And For Loops ###
+
+#### While loop general format ####
+
+```
+while <test1>:
+	<statement1>
+	if <test2>: break		# Exit loop now. Skip else part
+	if <test3>: continue	# Continue to test1
+
+else:						# Execute only if loop is exited without break
+	<statement2>
+```
+
+**pass:** Do nothing. Just and empty statement place holder.
