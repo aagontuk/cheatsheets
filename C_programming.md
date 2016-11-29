@@ -5,6 +5,7 @@
   * [Error Handling](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#error-handling)
   * [Low Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#low-level-access)
 2. [User Defined Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#user-defined-types)
+  * [Structure](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#structure)
   * [Enumerated Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#enumerated-types)
   * [Bit Fields](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#bit-fields)
 
@@ -159,6 +160,29 @@ Closes a file.
 ---
 
 ### User Defined Types ###
+
+#### Structure ####
+
+**Creating a structure:**
+```c
+struct packet{
+	int size;
+	double length;
+	double breadth;
+};
+```
+
+**Usage:**
+```c
+/* structure variable */
+struct packet p;
+p.size = 50;
+
+/* structure pointer */
+struct packet *p;
+p = (struct packet *)malloc(sizeof(struct packet));
+p->size = 100;
+```
 
 #### Enumerated Types ####
 
