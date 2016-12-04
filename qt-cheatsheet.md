@@ -16,6 +16,7 @@
 10. [QDate](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qdate)
 11. [QThread](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#qthread)
 12. [Serial Ports in QT](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#serial-ports-in-qt)
+13. [Short GUI for Sending Characters to Arduino](https://github.com/rashfaqur/cheatsheets/blob/master/qt-cheatsheet.md#short-gui-for-sending-characters-to-arduino)
 
 #### QString ####
 
@@ -658,3 +659,133 @@ Functions:
 `bool hasVendorIdentifier()` - Returns true if the device has valid product number.									</br>
 `quint16 vendorIdentifier()` - Returns vendor identifier number.													</br>
 `bool isBusy()` - returns True if the serial port is busy.															</br>
+
+### Short GUI for Sending Characters to Arduino ###
+
+###### main.cpp ######
+```c++
+#include <QApplication>
+#include "dialog.h"
+
+int main(int argc, char *argv[]){
+    QApplication app(argc, argv);
+
+    Dialog dialog;
+    dialog.show();
+
+    return app.exec();
+}
+```
+
+###### dialog.h ######
+```c++
+#ifndef DIALOG_H
+#define DIALOG_H
+
+#include <QDialog>
+#include <QSerialPort>
+
+class QLabel;
+class QPushButton;
+class QComboBox;
+class QLineEdit;
+
+class Dialog: public QDialog{
+    Q_OBJECT
+
+public:
+    Dialog(QWidget *parent = 0);
+
+public slots:
+    void connect();
+    void send();
+
+private:
+    QLabel *portLabel;
+    QComboBox *portComboBox;
+    QPushButton *connectButton;
+    QLabel *dataLabel;
+    QLineEdit *dataLineEdit;
+    QPushButton *sendButton;
+    QSerialPort serialPort;
+};
+
+#endif
+```
+
+###### dialog.cpp ######
+```c++
+#include "dialog.h"
+#include <QLabel>
+#include <QPushButton>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QGridLayout>
+#include <QSerialPortInfo>
+#include <QByteArray>
+#include <QDebug>
+
+Dialog::Dialog(QWidget *parent)
+	: QDialog(parent)
+	, portLabel(new QLabel("Port:"))
+	, portComboBox(new QComboBox())
+	, connectButton(new QPushButton("Connect"))
+	, dataLabel(new QLabel("Data:"))
+	, dataLineEdit(new QLineEdit())
+	, sendButton(new QPushButton("Send"))
+
+{
+	QList<QSerialPortInfo> infos = QSerialPortInfo::availablePorts();
+	for(const QSerialPortInfo &info : infos){
+		portComboBox->addItem(info.portName());
+	}
+
+	QGridLayout *mainLayout = new QGridLayout;
+	mainLayout->addWidget(portLabel, 0, 0);
+	mainLayout->addWidget(portComboBox, 0, 1);
+	mainLayout->addWidget(connectButton, 0, 2);
+	mainLayout->addWidget(dataLabel, 1, 0);	
+	mainLayout->addWidget(dataLineEdit, 1, 1, 1, 2);
+	mainLayout->addWidget(sendButton, 2, 1, 1, 1);
+	setLayout(mainLayout);
+
+	QObject::connect(connectButton, SIGNAL(clicked()), this, SLOT(connect()));
+	QObject::connect(sendButton, SIGNAL(clicked()), this, SLOT(send()));
+}
+
+void Dialog::connect(){
+	if(serialPort.isOpen()){
+		serialPort.close();
+		connectButton->setText("Connect");
+		return;
+	}
+
+	serialPort.setPortName(portComboBox->currentText());
+	serialPort.setBaudRate(QSerialPort::Baud9600);
+
+	if(!serialPort.open(QIODevice::WriteOnly)){
+		qDebug() << QString("Error: %1").arg(serialPort.errorString());
+		return;
+	}
+
+	connectButton->setText("Disconnect");
+	return;
+}
+
+void Dialog::send(){
+	QByteArray ba = dataLineEdit->text().toLocal8Bit();
+
+	if(ba.isEmpty()){
+		qDebug() << "No data!";
+		return;
+	}
+
+	if(serialPort.isOpen() && serialPort.isWritable()){
+		qint64 bytesWritten = serialPort.write(ba);
+		serialPort.flush();
+		qDebug() << QString("%1 bytes written!").arg(bytesWritten);
+	}
+
+	return;
+}
+```
