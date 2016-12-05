@@ -662,6 +662,8 @@ Functions:
 
 ### Short GUI for Sending Characters to Arduino ###
 
+[!ping arduino](http://i.imgur.com/vyRTMlR.png)
+
 ###### main.cpp ######
 ```c++
 #include <QApplication>
