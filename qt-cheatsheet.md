@@ -662,7 +662,7 @@ Functions:
 
 ### Short GUI for Sending Characters to Arduino ###
 
-![ping arduino](http://i.imgur.com/vyRTMlR.png)
+![ping arduino](http://i.imgur.com/8FnMVu8.png)
 
 ###### main.cpp ######
 ```c++
@@ -670,12 +670,12 @@ Functions:
 #include "dialog.h"
 
 int main(int argc, char *argv[]){
-    QApplication app(argc, argv);
+	QApplication app(argc, argv);
 
-    Dialog dialog;
-    dialog.show();
+	Dialog dialog;
+	dialog.show();
 
-    return app.exec();
+	return app.exec();
 }
 ```
 
@@ -693,23 +693,32 @@ class QComboBox;
 class QLineEdit;
 
 class Dialog: public QDialog{
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    Dialog(QWidget *parent = 0);
+	Dialog(QWidget *parent = 0);
 
 public slots:
-    void connect();
-    void send();
+	void connect();
+	void send();
+	void handlePortError(const QString &error);
+	void handleResponse();
+
+signals:
+	void portError(const QString &error);
 
 private:
-    QLabel *portLabel;
-    QComboBox *portComboBox;
-    QPushButton *connectButton;
-    QLabel *dataLabel;
-    QLineEdit *dataLineEdit;
-    QPushButton *sendButton;
-    QSerialPort serialPort;
+	QLabel *portLabel;
+	QComboBox *portComboBox;
+	QPushButton *connectButton;
+	QLabel *dataLabel;
+	QLineEdit *dataLineEdit;
+	QPushButton *sendButton;
+	QLabel *statusLabel;
+	QLabel *status;
+	QLabel *replyLabel;
+	QLabel *reply;
+	QSerialPort serialPort;
 };
 
 #endif
@@ -735,6 +744,10 @@ Dialog::Dialog(QWidget *parent)
 	, dataLabel(new QLabel("Data:"))
 	, dataLineEdit(new QLineEdit())
 	, sendButton(new QPushButton("Send"))
+	, statusLabel(new QLabel("Status:"))
+	, status(new QLabel())
+	, replyLabel(new QLabel("Reply:"))
+	, reply(new QLabel())
 
 {
 	QList<QSerialPortInfo> infos = QSerialPortInfo::availablePorts();
@@ -749,10 +762,16 @@ Dialog::Dialog(QWidget *parent)
 	mainLayout->addWidget(dataLabel, 1, 0);	
 	mainLayout->addWidget(dataLineEdit, 1, 1, 1, 2);
 	mainLayout->addWidget(sendButton, 2, 1, 1, 1);
+	mainLayout->addWidget(statusLabel, 3, 0);
+	mainLayout->addWidget(status, 3, 1, 1, 2);
+	mainLayout->addWidget(replyLabel, 4, 0);
+	mainLayout->addWidget(reply, 4, 1, 1, 2);
 	setLayout(mainLayout);
 
 	QObject::connect(connectButton, SIGNAL(clicked()), this, SLOT(connect()));
 	QObject::connect(sendButton, SIGNAL(clicked()), this, SLOT(send()));
+	QObject::connect(this, SIGNAL(portError(const QString)), this, SLOT(handlePortError(const QString)));
+	QObject::connect(&serialPort, SIGNAL(readyRead()), this, SLOT(handleResponse()));
 }
 
 void Dialog::connect(){
@@ -765,10 +784,12 @@ void Dialog::connect(){
 	serialPort.setPortName(portComboBox->currentText());
 	serialPort.setBaudRate(QSerialPort::Baud9600);
 
-	if(!serialPort.open(QIODevice::WriteOnly)){
-		qDebug() << QString("Error: %1").arg(serialPort.errorString());
+	if(!serialPort.open(QIODevice::ReadWrite)){
+		emit portError(QString("Error: %1").arg(serialPort.errorString()));
 		return;
 	}
+
+	status->setText(QString("Connected to %1.").arg(serialPort.portName()));
 
 	connectButton->setText("Disconnect");
 	return;
@@ -778,16 +799,44 @@ void Dialog::send(){
 	QByteArray ba = dataLineEdit->text().toLocal8Bit();
 
 	if(ba.isEmpty()){
-		qDebug() << "No data!";
+		status->setText(QString("No data!"));
 		return;
 	}
 
 	if(serialPort.isOpen() && serialPort.isWritable()){
 		qint64 bytesWritten = serialPort.write(ba);
 		serialPort.flush();
-		qDebug() << QString("%1 bytes written!").arg(bytesWritten);
+
+		if(bytesWritten == -1){
+			emit portError(QString("Write failed! %1").arg(serialPort.errorString()));
+			return;
+		}
+		else if(bytesWritten != ba.size()){
+			emit portError(QString("Can't write all data! %1").arg(serialPort.errorString()));
+			return;
+		}
+	
+		status->setText(QString("%1 bytes written!").arg(bytesWritten));
 	}
 
 	return;
+}
+
+void Dialog::handlePortError(const QString &error){
+	status->setText(error);	
+}
+
+void Dialog::handleResponse(){
+	if(serialPort.isOpen() && serialPort.isReadable()){
+		QByteArray readData = serialPort.readAll();
+		while(serialPort.waitForReadyRead(5000)){
+			readData += serialPort.readAll();
+		}
+
+		reply->setText(readData);
+		return;
+	}
+
+	emit portError(QString("Port isn't open or not readable"));
 }
 ```
