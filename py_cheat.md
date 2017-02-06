@@ -834,6 +834,8 @@ Tool to store python object in a file directly with no to-or-from string convers
 
 ### Boolean Values In Python ###
 
+Boolean values are two constant objects **True** and **False**.
+
 * Non zero numbers are true.
 * Non empty objects are true.
 
@@ -1164,7 +1166,7 @@ else:						# Execute only if loop is exited without break
 	<statement2>
 ```
 
-**pass:** Do nothing. Just and empty statement place holder.
+**pass:** Do nothing. Just an empty statement place holder.
 
 ## Tricks ##
 
