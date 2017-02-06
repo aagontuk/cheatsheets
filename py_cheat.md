@@ -20,7 +20,7 @@
   1. [Notes About Python Statements And Syntax](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#notes-about-python-statements-and-syntax)
   2. [Assignment Statement](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#assignment-statement)
   3. [Print Statement](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#print-statement)
-  4. [Python If Statement](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-if-statement)
+  4. [Python If Statement](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#pyhton-if-statement)
   5. [Python While And For Loops](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-while-and-for-loops)
 
 5. [Tricks](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#tricks)
@@ -134,6 +134,12 @@ string = "Hello, how are you\n\n\n"
 ```python
 >>> ord('A')
 65
+```
+
+`chr()` function converts ASCII value to character.
+```python
+>>> chr(65)
+'A'
 ```
 
 *\0 or null terminator doesn't end python strings*
