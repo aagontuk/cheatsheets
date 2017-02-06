@@ -4,6 +4,24 @@
   2. [Strings](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#strings)
   3. [Lists](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#lists) 
   4. [Dictionary](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#dictionary)
+  5. [Tuples](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#tuples)
+  6. [Sets](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#sets)
+
+2. [Python Data Types In Details](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-data-types-in-details)
+  1. [Numbers](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#numbers)
+  2. [Strings](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#strings-1)
+  3. [Lists](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#lists-1)
+  4. [Dictionaries](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#dictionaries)
+  5. [Tuples](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#tuples-1)
+  6. [File](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#file)
+  7. [Boolean Values In Python](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#boolean-values-in-python) 
+
+3. [Python Statements and Syntax](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-statements-and-syntax)
+  1. [Notes About Python Statements And Syntax](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#notes-about-python-statements-and-syntax)
+  2. [Assignment Statement](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#assignment-statement)
+  3. [Print Statement](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#print-statement)
+  4. [Python If Statement](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-if-statement)
+  5. [Python While And For Loops](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-while-and-for-loops)
 
 ## Python Object Types ##
 
@@ -307,7 +325,7 @@ set(['e', 'd', 'h', 'l', 'o', 'r', 'w'])
 set(['h', 'e'])
 ```
 
-## Python Data Types In Detail ##
+## Python Data Types In Details ##
 
 ### Numbers ##
 
@@ -705,7 +723,7 @@ True
 {'goo': 3, 'bar': 1, 'foo': 5, 'loo': 40}
 ```
 
-### Tupples ###
+### Tuples ###
 
 Almost all properties are same as list, except tupples are immutable.
 ```python
@@ -833,9 +851,9 @@ True
 False
 ```
 
-## Python Statement And Syntax ##
+## Python Statements And Syntax ##
 
-### Notes about python statement and syntax ###
+### Notes about python statements and syntax ###
 
 * Python statements are ended by new lines. No semicolon is needed.
 ```python
