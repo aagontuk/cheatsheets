@@ -1,10 +1,17 @@
+## Index ##
+1. [Python Object Types](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-object-types)
+  1. [Python Data Types](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-data-types)
+  2. [Strings](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#strings)
+  3. [Lists](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#lists) 
+  4. [Dictionary](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#dictionary)
+
 ## Python Object Types ##
 
 ### Python Data Types ###
 
 | Object Type | Example                                                   |
 | :---------- | --------------------------------------------------------: |
-| Numbers     | 1.23, 123, 3+4i											  |
+| Numbers     | 1.23, 123, 3+4j											  |
 | Strings     | "hello, world"											  |
 | Lists       | [1, 'hello', ['I', 'am', 'list', 'in', 'a', 'list'], 4.5] |
 | Dictionary  | {"key":"value", 'foo':0, 'bar':'drink'}					  |
