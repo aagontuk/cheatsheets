@@ -1152,9 +1152,9 @@ else:
 A = Y if X else Z
 ```
 
-### Python While And For Loops ###
+### Python While Loop ###
 
-#### While loop general format ####
+#### While loop's general format ####
 
 ```
 while <test1>:
@@ -1167,6 +1167,88 @@ else:						# Execute only if loop is exited without break
 ```
 
 **pass:** Do nothing. Just an empty statement place holder.
+
+### Python For Loop ###
+
+#### For loop's general format ####
+
+```
+for <target> in <object>/<sequence>:
+	<statements>
+	if <test>: break
+	if <test>: continue
+else:
+	<statements>
+```
+
+* Any sequence works in for loop
+
+```python
+>>> for i in [1, 2, 3]:
+...     print(i, end = '\t')
+... else:
+...     print("")
+... 
+1	2	3	
+>>> 
+>>> for ch in "abc":
+...     print(ch, end = '\t')
+... else:
+...     print("")
+... 
+a	b	c
+```
+
+#### Tupple assignment / Sequence Unpacking in for loop ####
+
+```python
+>>> for (a, b) in [(1, 2), (3, 4)]:
+...     print("%d, %d" % (a, b))
+... 
+1, 2
+3, 4
+```
+
+#### Some sequence unpacking example ####
+
+```python
+>>> for ((a, b), c) in [((1, 2), 3), ((4, 5), 6)]:
+...     print(a, b, c)
+... 
+1 2 3
+4 5 6
+>>> for ((x, y), z) in [((1, 2), 3), ("XY", 'Z')]:
+...     print(x, y, z)
+... 
+1 2 3
+X Y Z
+```
+
+#### Using for loop for iterating through dictionary ####
+
+```python
+>>> dict = {1: 'a', 2: 'b', 3: 'c'}
+>>> for key in dict.keys():
+...     print("Key: %d\tValue: %c" % (key, dict[key]))
+... 
+Key: 1	Value: a
+Key: 2	Value: b
+Key: 3	Value: c
+>>> 
+>>> for key, value in list(dict.items()):
+...     print(key, value)
+... 
+1 a
+2 b
+3 c
+```
+
+## Python Keywords and symbols ##
+
+### At a glance ###
+
+`[]` - Make a list.
+'{}' - Make a dictionary.
 
 ## Tricks ##
 
