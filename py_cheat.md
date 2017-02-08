@@ -1246,20 +1246,76 @@ Key: 3	Value: c
 3 c
 ```
 
+#### Using Range ####
+
+`range(FROM, UPTO, STEP)` - Create a list of numbers FROM to UPTO in python 2.0. In python 3.0 it's an iterator.
+
+**Example:**
+```python
+# Python 2.0
+
+>>> range(0, 10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>>
+>>> range(0, 10, 2)
+[0, 2, 4, 6, 8]
+
+# Python 3.0
+
+>>> list(range(0, 10))
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>>
+>>> list(range(0, 10, 2))
+[0, 2, 4, 6, 8]
+```
+
+Range items can be negative numbers and can be in reverse order.
+
+```python
+>>> list(range(8, 0, -1))
+[8, 7, 6, 5, 4, 3, 2, 1]
+>>>
+>>> list(range(4, -4, -1))
+[4, 3, 2, 1, 0, -1, -2, -3]
+```
+
+Range can be used as a iterator in for loops.
+
+```python
+>>> X = "abcdefgh"
+>>> for i in range(0, len(X), 2):
+...     print(X[i], end = '')
+... else:
+...     print()
+... 
+aceg
+
+# Alternative good solution is with sclicing
+
+>>> X
+'abcdefgh'
+>>> for ch in X[::2]:
+...     print(ch, end = '')
+... else:
+...     print()
+... 
+aceg
+```
+
 ## Python Keywords and Symbols ##
 
 ### At a Glance ###
 
-`[]`    - Make a list.
-`{}`    - Make a dictionary.
-`()`    - Make a Touple.
-`if`    - if block
-`else`  - else block
-`while` - While loop
-`in`    - Membership check
-'not'   - Logical not
-'and'   - Logical and
-'or'    - Logical or
+* `[]`    - Make a list.
+* `{}`    - Make a dictionary.
+* `()`    - Make a Touple.
+* `if`    - if block
+* `else`  - else block
+* `while` - While loop
+* `in`    - Membership check
+* 'not'   - Logical not
+* 'and'   - Logical and
+* 'or'    - Logical or
 
 
 ## Tricks ##
