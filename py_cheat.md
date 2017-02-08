@@ -23,6 +23,9 @@
   4. [Python If Statement](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#pyhton-if-statement)
   5. [Python While And For Loops](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-while-and-for-loops)
 
+4. [Python Keywords and Symbols](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-keywords-and-symbols)
+  1. [At a Glance](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#at-a-glance)
+
 5. [Tricks](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#tricks)
   1. [List All Attributes of an Object](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#list-all-attributes-of-an-object)
 
@@ -1243,12 +1246,21 @@ Key: 3	Value: c
 3 c
 ```
 
-## Python Keywords and symbols ##
+## Python Keywords and Symbols ##
 
-### At a glance ###
+### At a Glance ###
 
-`[]` - Make a list.
-'{}' - Make a dictionary.
+`[]`    - Make a list.
+`{}`    - Make a dictionary.
+`()`    - Make a Touple.
+`if`    - if block
+`else`  - else block
+`while` - While loop
+`in`    - Membership check
+'not'   - Logical not
+'and'   - Logical and
+'or'    - Logical or
+
 
 ## Tricks ##
 
