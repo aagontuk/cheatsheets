@@ -1155,6 +1155,8 @@ else:
 A = Y if X else Z
 ```
 
+## Python While and For Loops ##
+
 ### Python While Loop ###
 
 #### While loop's general format ####
@@ -1246,7 +1248,7 @@ Key: 3	Value: c
 3 c
 ```
 
-#### Using Range ####
+### Range ###
 
 `range(FROM, UPTO, STEP)` - Create a list of numbers FROM to UPTO in python 2.0. In python 3.0 it's an iterator.
 
@@ -1300,6 +1302,113 @@ aceg
 ...     print()
 ... 
 aceg
+```
+
+### Zip ###
+
+`zip(seq1, seq2, ...)` takes one or more sequence as argument and creates a list of Tuples from them. zip creates an iterable object. Which can be converted to list or other sequence object.
+
+```python
+>>> l = [1, 2, 3]
+>>> m = [4, 5, 6]
+>>> n = [7, 8, 9]
+>>> list(zip(l, m, n))
+[(1, 4, 7), (2, 5, 8), (3, 6, 9)]
+```
+
+`zip()` truncates if the size of the sequences mismatches.
+
+```python
+>>> l = [1, 3, 5, 7]
+>>> m = [2, 4]
+>>> list(zip(l, m))
+[(1, 2), (3, 4)]		# Truncates
+```
+
+`zip()` can be used to iterate through multiple sequence in `for` loop.
+
+```python
+>>> for x, y, z in zip(l, m, n):
+...     print(x, y, z)
+... 
+1 4 7
+2 5 8
+3 6 9
+```
+
+`zip()` can be used to construct a dictionary from key and value lists.
+
+```python
+>>> key = ["spam", "ham", "egg"]
+>>> value = [1, 2, 3]
+>>> 
+>>> D = {}
+>>> for k, v in list(zip(key, value)):
+...     D[k] = v
+... 
+>>> D
+{'ham': 2, 'spam': 1, 'egg': 3}
+>>> 
+
+# Also dict constructor can be used
+
+>>> D = dict(zip(key, value))
+>>> D
+{'ham': 2, 'spam': 1, 'egg': 3}
+```
+
+### Map ###
+
+**Python 2.0**: In python 2.0 `map()` gives similar functionality like `zip()`.
+
+```python
+# Python 2.0
+
+>>> l = [1,2,3]
+>>> m = [4,5,6]
+>>> map(None, l, m)
+[(1, 4), (2, 5), (3, 6)]
+``` 
+
+**Python 3.0**: In python 3.0 map takes a function and one or more sequence arguments and collects the results of calling the function.
+
+```python
+>>> list(map(ord, "spam"))
+[115, 112, 97, 109]
+```
+
+### Enumerate ###
+
+`enumerate()` is used to find the index and value of a sequence. It creates a generator object which is iterable.
+
+```python
+# Normal Way
+
+>>> S = "hello"
+>>> index = 0
+>>> 
+>>> for value in S:
+...     print(index, value)
+...     index += 1
+... 
+0 h
+1 e
+2 l
+3 l
+4 o
+
+# enumerate way
+
+>>> S = "hello"
+>>> 
+>>> for index, value in enumerate(S):
+...     print(index, value)
+... 
+0 h
+1 e
+2 l
+3 l
+4 o
 ```
 
 ## Python Keywords and Symbols ##
