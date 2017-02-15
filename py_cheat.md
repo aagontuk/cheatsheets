@@ -1411,6 +1411,446 @@ aceg
 4 o
 ```
 
+## Iterator ##
+
+An object is called iterable if it's a sequence or an object that produce one result at a time.
+Any object that supports iteration has `__next__()` method. It raises StopIteration exception
+at the end of the series of results.
+
+### File Iterator ###
+
+```python
+# Manual method
+
+
+```
+
+
+### List Comprehension ###
+
+```python
+>>> L = [1, 2, 3]
+>>> L = [x ** 2 for x in L]
+>>> L
+[1, 4, 9]
+>>>
+>>>
+>>> lines = [line for line in open('text')]
+>>> lines
+['hello, world!\n', 'Imagine\n']
+>>>
+>>> lines = [line.rstrip() for line in open('text')]
+>>> lines
+['hello, world!', 'Imagine']
+>>>
+>>> L = [x for x in range(0, 11) if x % 2 == 0]
+>>> L
+[0, 2, 4, 6, 8, 10]
+>>> 
+>>> X = "hello"
+>>> Y = "world"
+>>> XY = [x + y for x in X for y in Y]
+>>> XY
+['hw', 'ho', 'hr', 'hl', 'hd', 'ew', 'eo', 'er', 'el', 'ed', 'lw', 'lo', 'lr', 'll', 'ld', 'lw', 'lo', 'lr', 'll', 'ld', 'ow', 'oo', 'or', 'ol', 'od']
+```
+
+### Dictionary and Set comprehension ###
+
+```python
+>>> {key: value for key, value in list(zip("abc", [1, 2, 3]))}
+{'c': 3, 'a': 1, 'b': 2}
+>>>
+>>> {x for x in "abccde"}
+{'c', 'e', 'a', 'd', 'b'}
+``` 
+
+## Documentation ##
+
+### `dir` Funtion ###
+
+### Docstrings ###
+
+### PyDoc and `help()` ###
+
+## Functions ##
+
+**Example**:
+
+```python
+>>> def sum(x, y):
+...     return x + y
+... 
+>>> sum(10, 5)
+15
+>>> sum(10, 10)
+20
+```
+
+### Function Attributes ###
+
+**Default Argumets:**
+
+```python
+>>> def func(a, b):
+...     print(a, b)
+... 
+>>> dir(func)
+['__annotations__', '__call__', '__class__', '__closure__', '__code__', '__defaults__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__get__', '__getattribute__', '__globals__', '__gt__', '__hash__', '__init__', '__kwdefaults__', '__le__', '__lt__', '__module__', '__name__', '__ne__', '__new__', '__qualname__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+>>> 
+>>> func.__name__
+'func'
+>>> 
+>>> dir(func.__code__)
+['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'co_argcount', 'co_cellvars', 'co_code', 'co_consts', 'co_filename', 'co_firstlineno', 'co_flags', 'co_freevars', 'co_kwonlyargcount', 'co_lnotab', 'co_name', 'co_names', 'co_nlocals', 'co_stacksize', 'co_varnames']
+>>> 
+>>> func.__code__.co_varnames
+('a', 'b')
+>>> func.__code__.co_argcount
+2
+```
+
+**Custom Argumets:**
+
+```python
+>>> func.cusarg = 1
+>>> print(func.cusarg)
+1
+>>> dir(func)
+['__annotations__', '__call__', '__class__', '__closure__', '__code__', '__defaults__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__get__', '__getattribute__', '__globals__', '__gt__', '__hash__', '__init__', '__kwdefaults__', '__le__', '__lt__', '__module__', '__name__', '__ne__', '__new__', '__qualname__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'cusarg']
+```
+
+### Function Annotations ###
+
+```python
+>>> def func(a: 'spam' = 0, b: (1, 10) = 1, c: float = 2) -> int:
+...     print(a + b + c)
+... 
+>>> func.__annotations__
+{'return': <class 'int'>, 'c': <class 'float'>, 'a': 'spam', 'b': (1, 10)}
+>>>
+>>> for arg in func.__annotations__:
+...     print(arg, " => ", func.__annotations__[arg])
+... 
+return  =>  <class 'int'>
+c  =>  <class 'float'>
+a  =>  spam
+b  =>  (1, 10)
+```
+
+## Scopes ##
+
+### `global` keyword ###
+
+### Cross File Changes ###
+
+### Enclosing Functions ###
+
+```python
+>>> x = 10
+>>> 
+>>> def func1():
+...     x = 20
+...     def func2():
+...             print(x)	# func2() knows about x
+							# as enclosing function
+...     func2()
+... 
+>>> 
+>>> func1()
+20							# 20 not 10 because LEGB rule
+
+# However this code doesn't work
+# in previous versions. As searches only local scope
+# before global scope. Work around:
+
+>>> x = 10
+>>> 
+>>> def func1():
+...     x = 20
+...     def func2(x = x):
+...             print(x)
+...     func2()
+... 
+>>> 
+>>> func1()
+20
+```
+
+```python
+# Supposed to make a list of functions
+# With different values of i.
+
+>>> def actionMaker():
+...     acts = []
+...     for i in range(0, 5):
+...             acts.append(lambda x: i ** x)
+...     return acts
+... 
+>>> 
+>>> f = actionMaker()
+>>> 
+>>> f[0](2)		# Should print 0
+16				# prints 16 instead
+>>>
+>>> f[1](2)		# Should print 1
+16				# prints 16 insead
+
+# This doesn't work because eclosing namespace is looked up when
+# the nested function is called. so i is looked up when
+# f[]() is called. But after actionMaker() call i is 4
+# Work around:
+ctionMaker():
+...     acts = []
+...     for i in range(0, 5):
+...             acts.append(lambda x, i = i: i ** x)
+...     return acts
+... 
+>>> 
+>>> f = actionMaker()
+>>> f[0](2)
+0
+>>> f[1](2)
+1
+>>> f[2](2)
+4
+```
+
+### Forward Reference ###
+
+```python
+>>> def func1():
+...     x = 10
+...     func2(x)	# OK as long as def for func2() is
+					# executed before func1() is called
+... 
+>>> def func2(x):
+...     print(x)
+... 
+>>> func1()
+10
+```
+
+### Factory Functions ###
+
+```python
+>>> def maker(x):
+...     def action(y):
+...             return x ** y
+...     return action
+... 
+>>> 
+>>> f = maker(2)
+>>> f
+<function maker.<locals>.action at 0x7f69aa6e99d8>
+>>> print(f(5))		# Nested function is remembering 2
+32
+>>> print(f(6))
+64
+>>>
+>>> g = maker(3)	# Changing state
+>>> 
+>>> print(g(5))		# Each function got its own state. g got its own state
+243
+```
+
+### `nonlocal` Statement ###
+
+```python
+>>> def tester(state):
+...     def nested(local):
+...             print(state, local)
+...     return nested
+... 
+>>> f = tester(0)
+>>> f('hello')
+0 hello
+>>> f('gello')
+0 gello
+>>>
+>>> def tester(state):
+...     def nested(local):
+...             print(state, local)
+				state += 1			# Can't do this. Raise error.
+									# Nested function can't change
+									# enclosing variable. Can only read.
+...     return nested
+
+# Use nonlocal to change enclosing variable in a nested function.
+
+>>> def tester(state):
+...     def nested(local):
+...             nonlocal state
+...             print(state, local)
+...             state += 1
+...     return nested
+... 
+>>> f = tester(0)
+>>> f('hello')
+0 hello
+>>> f('gello')
+1 gello
+>>> 
+```
+
+## Function Arguments ##
+
+### Avoiding Mutable Argument Changes ###
+
+```python
+>>> L = [1, 2]
+>>> 
+>>> def changer(x):
+...     x[0] = 10
+... 
+>>> changer(L)
+>>> L
+[10, 2]				# Function can change mutable objects
+>>> L = [1, 2]
+>>>
+>>> changer(L[:])	# Call by copying to prevent change
+>>> L
+[1, 2]
+>>> 
+>>> def changer(x):
+...     x = x[:]	# Make copy to prevent change.
+...     x[0] = 10
+... 
+>>> changer(L)
+>>> L
+[1, 2]
+>>>
+>>> changer(tuple(L))	# Really prevent change. Will raise error
+						# in attempting change
+```
+
+### Special Argument Matching Modes ###
+
+#### Different types of function call ####
+
+```python
+>>> def func(a, b, c, d):
+...     print(a, b, c, d)
+... 
+>>> func(1, 2, 3, 4)					# Normal Call
+1 2 3 4
+>>> 
+>>> func(1, *(2, 3), 4)					# Tuple unpacking
+1 2 3 4
+>>> 
+>>> func(1, **{'b': 2, 'c': 3, 'd': 4})	# Dictionary unpacking
+										# keyword should be matched
+										# with function argument
+1 2 3 4
+>>> 
+>>> func(1, *(2,), **{'c': 3, 'd': 4})	# Mixed
+1 2 3 4
+```
+
+#### Different way of function arguments ####
+
+```python
+######################################################################
+
+>>> def func(a, b):		# Normal Arguments
+...     print(a, b)
+... 
+>>> func(1, 2)
+1 2
+>>> 
+
+######################################################################
+
+>>> def func(a, b = 0, c = 1):	# Function with default arguments
+...     print(a, b, c)
+... 
+>>> func(1)
+1 0 1
+>>> func(1, 2)
+1 2 1
+>>> func(1, 2, 3)
+1 2 3
+>>>
+
+######################################################################
+
+>>> def func(*targs):	# Using Tuple. Can take variable number of argumets
+...     print(targs)
+... 
+>>> func(1, 2)
+(1, 2)
+>>> func(1, 2, 3)
+(1, 2, 3)
+>>>
+
+######################################################################
+
+>>> def func(**dargs):	# Dictionary based. Can take variable numer of arguments
+...     print(dargs)
+... 
+>>> func(a = 1, b = 2)			# But argumets have to be passed in key = value
+								# pair
+{'b': 2, 'a': 1}
+>>> func(a = 1, b = 2, c = 3)
+{'c': 3, 'b': 2, 'a': 1}
+
+######################################################################
+
+>>> def func(a, *targs, **dargs):	# Mixed
+...     print(a, targs, dargs)
+... 
+>>> func(1, 2, 3, d = 4, e = 5)
+1 (2, 3) {'e': 5, 'd': 4}
+
+#####################################################################
+
+# in function defination every argumet afte * are keyword only
+# argumets. They have to be passed using key = value format in the
+# function
+
+>>> def func(a, *b, c):		# c is keyword only argumet
+...     print(a, b, c)
+... 
+>>> func(1, 2, c = 3)		# c is passed using key = value format
+1 (2,) 3
+>>> func(1, 2, 3)			# Raise error as c is keyword only
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: func() missing 1 required keyword-only argument: 'c'
+>>> 
+>>> def func(a, *, c):		# without variable argumet, only two argumet
+...     print(a, c)
+... 
+>>> func(1, c = 3)
+1 3
+>>> func(1, 2, c = 3)		# Raise error as 3 argumet passed instead of two
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: func() takes 1 positional argument but 2 positional arguments (and 1 keyword-only argument) were given
+```
+
+**Argumet order:** func(normal, *tupple, keyword only, **dictionary)
+
+## Lambda Functions ##
+
+**General form:** `lambda arg1, arg2, ...: expression`
+
+```python
+>>> x = lambda a = 1, b = 2, c = 3: a + b + c 
+>>> x(10, 20, 30)
+60
+```
+
+lambda is an expression not a statement. So it can be used where def can't. Like inside a list or dictionary.
+
+```python
+>>> L = [lambda x: x ** 2, lambda x: x ** 3, lambda x: x ** 4]
+>>> L[0](5)
+25
+>>> 
+>>> {'to': lambda x: x ** 2, 'lo': lambda x: x ** 3, 'mo': lambda x: x ** 4}['to'](10)
+100
+```
+
 ## Python Keywords and Symbols ##
 
 ### At a Glance ###
