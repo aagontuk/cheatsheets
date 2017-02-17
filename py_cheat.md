@@ -1411,7 +1411,7 @@ aceg
 4 o
 ```
 
-## Iterator ##
+## Iterators & Comprehension ##
 
 An object is called iterable if it's a sequence or an object that produce one result at a time.
 Any object that supports iteration has `__next__()` method. It raises StopIteration exception
@@ -1428,13 +1428,22 @@ at the end of the series of results.
 
 ### List Comprehension ###
 
+**General Structure:** `[expression for target1 in iterable1 if condition1 for target2 in iterable 2 if condition2 ...]`
+
+**List Comprehension:**
+
 ```python
 >>> L = [1, 2, 3]
 >>> L = [x ** 2 for x in L]
 >>> L
 [1, 4, 9]
 >>>
->>>
+
+# Equavalent map
+
+>>> list(map((lambda x: x ** 2, ), [1, 2, 3]))
+[1, 4, 9]
+
 >>> lines = [line for line in open('text')]
 >>> lines
 ['hello, world!\n', 'Imagine\n']
@@ -1442,16 +1451,58 @@ at the end of the series of results.
 >>> lines = [line.rstrip() for line in open('text')]
 >>> lines
 ['hello, world!', 'Imagine']
->>>
+```
+
+**Filtering:**
+
+```python
 >>> L = [x for x in range(0, 11) if x % 2 == 0]
 >>> L
 [0, 2, 4, 6, 8, 10]
+
+# Equavalent using map using filter
+
+>>> list(filter((lambda x: x % 2 == 0), range(0, 11)))
+[0, 2, 4, 6, 8, 10]
+```
+
+**Evaluating and Filtering:**
+
+```python
+>>> [x ** 2 for x in range(0, 11) if x % 2 == 0]
+[0, 4, 16, 36, 64, 100]
+
+# Equavalent
+
+>>> list(map((lambda x: x ** 2), filter((lambda x: x % 2 == 0), range(0, 11))))
+[0, 4, 16, 36, 64, 100]
+```
+
+**Nested Loops:**
+
+```python
+>>> [x + y for x in [0, 1, 2] for y in [100, 99, 98]]
+[100, 99, 98, 101, 100, 99, 102, 101, 100]
+
+>>> [(x, y) for x in range(5) if x % 2 == 0 for y in range(5) if y % 2 == 1]
+[(0, 1), (0, 3), (2, 1), (2, 3), (4, 1), (4, 3)]
+``` 
+
+**Work with Matrices:**
+```python
+>>> M = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+>>> M
+[[0, 1, 2], [3, 4, 5], [6, 7, 8]]
 >>> 
->>> X = "hello"
->>> Y = "world"
->>> XY = [x + y for x in X for y in Y]
->>> XY
-['hw', 'ho', 'hr', 'hl', 'hd', 'ew', 'eo', 'er', 'el', 'ed', 'lw', 'lo', 'lr', 'll', 'ld', 'lw', 'lo', 'lr', 'll', 'ld', 'ow', 'oo', 'or', 'ol', 'od']
+>>> [M[row][0] for row in range(len(M))]
+[0, 3, 6]
+>>> 
+>>> N = [[9, 10, 11], [12, 13, 14], [15, 16, 17]]
+>>> 
+>>> [M[row][col] * N[row][col] for row in range(len(M)) for col in range(len(M))]
+[0, 10, 22, 36, 52, 70, 90, 112, 136]
+>>> [[M[row][col] * N[row][col] for col in range(len(M))] for row in range(len(M))] 
+[[0, 10, 22], [36, 52, 70], [90, 112, 136]]
 ```
 
 ### Dictionary and Set comprehension ###
@@ -1849,6 +1900,102 @@ lambda is an expression not a statement. So it can be used where def can't. Like
 >>> 
 >>> {'to': lambda x: x ** 2, 'lo': lambda x: x ** 3, 'mo': lambda x: x ** 4}['to'](10)
 100
+```
+
+## Generator Functions and Expressions ##
+
+```python
+>>> def genSeq(N):
+...     for i in range(N):
+...             yield i ** 2
+... 
+>>> 
+>>> I = iter(genSeq(3))
+>>> I.__next__()
+0
+>>> I.__next__()
+1
+>>> I.__next__()
+4
+>>> I.__next__()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+```
+
+**Send:**
+```python
+>>> def gen(n):
+...     for i in range(n):
+...             x = yield i
+...             print(x)
+... 
+>>> 
+>>> g = gen(10)
+>>> next(g)
+0
+>>> next(g)
+None
+1
+>>> next(g)
+None
+2
+>>> next(g)
+None
+3
+>>> g.send(80)
+80
+4
+```
+
+```python
+>>> G = (x ** 2 for x in range(10))
+>>> G.__next__()
+0
+>>> G.__next__()
+1
+>>> G.__next__()
+4
+```
+
+* Both generator function and expression are their own iterators. So they can have only one active iterator. I multiple iterator is assign, they all will point to same iteration point.
+
+```python
+>>> G = (x ** 2 for x in range(10))
+>>> G is iter(G)
+True
+>>> it1 = iter(G)
+>>> next(it1)
+0
+>>> next(it1)
+1
+>>> it2 = iter(G)
+>>> next(it2)
+4
+```
+
+## Module Files ##
+
+* Module files run only once in the first import
+
+###### mod1.py ######
+```pyhton
+print("hello")
+spam = 1
+```
+
+###### Interactive session ######
+```python
+>>> import mod1
+hello
+>>> mod1.spam
+1
+>>> mod1.spam = 2
+>>> mod1.spam
+2
+>>> import mod1
+>>> mod1.spam		# Didn't reinitialized as modules run only once
+2
 ```
 
 ## Python Keywords and Symbols ##
