@@ -22,6 +22,9 @@
   3. [Print Statement](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#print-statement)
   4. [Python If Statement](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#pyhton-if-statement)
   5. [Python While And For Loops](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-while-and-for-loops)
+    1. [Python While Loop](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-while-loop)
+    2. [Pythin For Loop](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-for-loop)
+      1. [Tupple Assignment / Sequence Unpacking in For Loop](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#tupple-assignment--sequence-unpacking-in-for-loop)
 
 4. [Python Keywords and Symbols](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-keywords-and-symbols)
   1. [At a Glance](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#at-a-glance)
@@ -1976,7 +1979,7 @@ True
 
 ## Module Files ##
 
-* Module files run only once in the first import
+* Module files run only once after the first import
 
 ###### mod1.py ######
 ```pyhton
@@ -1996,6 +1999,41 @@ hello
 >>> import mod1
 >>> mod1.spam		# Didn't reinitialized as modules run only once
 2
+```
+
+* If two module contains same name and both are imported via from. Then namespace will be resolved with the latest from.
+
+###### mod1.py ######
+```python
+def func():
+	print("mod1")
+```
+
+###### mod2.py ######
+```python
+def func():
+	print("mod2")
+```
+
+###### Interactive session ######
+```python
+>>> from mod1 import func
+>>> from mod2 import func
+>>> func()					
+mod2						# Resolved with the last from statement
+```
+
+* Import module mod which in ./dir1/dir2 location.
+
+###### ./dir1/dir2/mod.py ######
+```python
+print("./dir1/dir2/mod.py imported")
+```
+
+###### Interactive Session ######
+```python
+>>> import dir1.dir2.mod
+./dir1/dir2/mod.py imported
 ```
 
 ## Python Keywords and Symbols ##
