@@ -25,11 +25,53 @@
     1. [Python While Loop](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-while-loop)
     2. [Pythin For Loop](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-for-loop)
       1. [Tupple Assignment / Sequence Unpacking in For Loop](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#tupple-assignment--sequence-unpacking-in-for-loop)
+      2. [Some sequence unpacking example](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#some-sequence-unpacking-example)
+      3. [Using for loop for iterating through dictionary](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#using-for-loop-for-iterating-through-dictionary)
+    3. [Range](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#range)
+    4. [Zip](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#zip)
+    5. [Map](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#map)
+    6. [Enumerate](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#)
 
-4. [Python Keywords and Symbols](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-keywords-and-symbols)
+  6. [Iterators & Comprehension](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#iterators--comprehension)
+    
+    1. [File Iterator](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#file-iterator)
+    2. [List Comprehension](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#list-comprehension)
+    3. [Dictionary and Set Comprehension](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#dictionary-and-set-comprehension)
+
+  7. [Documentation](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#documentation)
+    1. [`dir` Function](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#dir-function)
+    2. [Docstrings](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#docstrings)
+    3. [`PyDoc` and `help()`](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#pydoc-and-help)
+
+4. [Functions](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#functions)
+  
+  1. [Function Attributes](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#function-attributes)
+  2. [Function Annotations](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#function-annotations)
+
+5. [Scopes](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#scopes)
+
+  1. [`global` Keyword](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#global-keyword)
+  2. [Cross File Changes](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#cross-file-changes)
+  3. [Enclosing Functions](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#enclosing-functions)
+  4. [Forward Reference](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#forward-reference)
+  5. [Factory Functions](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#factory-functions)
+  6. [`nonlocal` Statement](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#nonlocal-statement)
+
+6. [Function Arguments](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#function-arguments)
+
+    1. [Avoiding Mutable Argument Changes](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#avoiding-mutable-argument-changes)
+    2. [Special Argument Matching Modes](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#special-argument-matching-modes)
+      1. [Different types of function call](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#different-types-of-function-call)
+      2. [Different Way of Function Arguments](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#different-way-of-function-arguments)
+
+7. [Lambda Functions](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#lambda-functions)
+8. [Generator Functions and Expressions](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#generator-functions-and-expressions)
+9. [Module Files](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#module-files)
+
+10. [Python Keywords and Symbols](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-keywords-and-symbols)
   1. [At a Glance](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#at-a-glance)
 
-5. [Tricks](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#tricks)
+11. [Tricks](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#tricks)
   1. [List All Attributes of an Object](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#list-all-attributes-of-an-object)
 
 ## Python Object Types ##
