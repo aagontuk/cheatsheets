@@ -1,11 +1,11 @@
 ## Index ##
 1. [Python Object Types](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-object-types)
-  1. [Python Data Types](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-data-types)
-  2. [Strings](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#strings)
-  3. [Lists](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#lists) 
-  4. [Dictionary](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#dictionary)
-  5. [Tuples](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#tuples)
-  6. [Sets](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#sets)
+    1. [Python Data Types](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-data-types)
+    2. [Strings](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#strings)
+    3. [Lists](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#lists) 
+    4. [Dictionary](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#dictionary)
+    5. [Tuples](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#tuples)
+    6. [Sets](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#sets)
 
 2. [Python Data Types In Details](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#python-data-types-in-details)
   1. [Numbers](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#numbers)
