@@ -59,10 +59,10 @@
 
 6. [Function Arguments](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#function-arguments)
 
-    1. [Avoiding Mutable Argument Changes](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#avoiding-mutable-argument-changes)
-    2. [Special Argument Matching Modes](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#special-argument-matching-modes)
-      1. [Different types of function call](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#different-types-of-function-call)
-      2. [Different Way of Function Arguments](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#different-way-of-function-arguments)
+  1. [Avoiding Mutable Argument Changes](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#avoiding-mutable-argument-changes)
+  2. [Special Argument Matching Modes](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#special-argument-matching-modes)
+    1. [Different types of function call](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#different-types-of-function-call)
+    2. [Different Way of Function Arguments](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#different-way-of-function-arguments)
 
 7. [Lambda Functions](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#lambda-functions)
 8. [Generator Functions and Expressions](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#generator-functions-and-expressions)
