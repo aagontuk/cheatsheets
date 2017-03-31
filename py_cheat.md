@@ -2078,6 +2078,170 @@ print("./dir1/dir2/mod.py imported")
 ./dir1/dir2/mod.py imported
 ```
 
+## Python Object Oriented Programming ##
+
+### OOP Basics ###
+
+#### Basic Class Syntax ####
+
+
+```python
+#!/bin/python
+
+class Point:
+    def setX(self, x):
+        self.x = x
+
+    def setY(self, y):
+        self.y = y
+
+    def setPoint(self, x, y):
+        self.x = x
+        self.y = y
+
+    def getPoint(self):
+        return self.x, self.y
+
+p = Point()
+p.setX(5)
+p.setY(5)
+print(p.getPoint())
+```
+
+#### Constructor ####
+
+In class a special method `__init__()` works as a constructor.
+
+```python
+#!/bin/python
+
+class Point:
+    # Constructor
+    def __init__(self, x, y):
+        print("Executing constructor!")
+        self.x = x
+        self.y = y
+
+    def getPoint(self):
+        return self.x, self.y
+
+p = Point(2, 3)
+print(p.getPoint())
+```
+
+#### Inheritance Syntax and Example ####
+
+```python
+class C1:
+	# C1 class methods
+
+class C2:
+	# C2 class methods
+
+# class C3 inherited class C1 and C2
+class C3(C1, C2):
+	# C3 class mathods
+```
+
+**Example:**
+
+```python
+#!/bin/python
+
+class Mammal:
+    def species(self, species):
+        self.species = species
+
+    def info(self):
+        print("\"%s\" is a mammal. They are breast feed at baby stage." % (self.species))
+
+class Dog(Mammal):
+    def info(self):
+        Mammal.info(self)
+        print("Its a species of dog.")
+
+x = Mammal()
+x.species("Homo Sapiens")
+x.info()
+
+print("\n*****\n")
+
+y = Dog()
+y.species("German Shepherd")
+y.info()
+```
+
+#### Using class like C/C++ Structure ####
+
+```python
+#!/bin/python
+
+class Rec: pass
+
+Rec.name = "Name"
+Rec.age = 0
+Rec.sex = "Sex"
+
+# Instance of the class
+x = Rec()
+
+# Automatically inherites class attributes
+print("%s | %d | %s" % (x.name, x.age, x.sex))
+
+# Can assign its own value
+x.name = "Bob"
+x.age = 43
+x.sex = "Male"
+
+# Can defaine its own attributes
+x.married = True
+
+# Another instance of the class
+y = Rec()
+
+y.name = "Alice"
+y.age = 19
+y.sex = "Female"
+y.married = False
+
+print("%s | %d | %s | Married? %d" %(x.name, x.age, x.sex, x.married))
+print("%s | %d | %s | Married? %d" %(y.name, y.age, y.sex, y.married))
+```
+
+**Output:**
+```shell
+Name | 0 | Sex
+Bob | 43 | Male | Married? 1
+Alice | 19 | Female | Married? 0
+```
+
+#### Operator Overloading ####
+
+```python
+#!/bin/python
+
+class Person:
+    def __init__(self, name, job = None, pay = 0):
+        self.name = name
+        self.job = job
+        self.pay = pay
+
+    # Operator Overloading
+    # Automaticaly called when object is in print statement
+    def __str__(self):
+        return '[Person: %s, %s, %s]' % (self.name, self.job, self.pay)
+
+# Execute when run as a script
+if __name__ == '__main__':
+    bob = Person("Bob Smith", "Kernel Developer", "10000")
+    print(bob)
+```
+
+**Output:**
+```shell
+[Person: Bob Smith, Kernel Developer, 10000]
+```
+
 ## Python Keywords and Symbols ##
 
 ### At a Glance ###
