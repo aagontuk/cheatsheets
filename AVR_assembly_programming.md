@@ -76,7 +76,7 @@ Internal SRAM is used for storing data. Each loacation of the SRAM can be access
 
 #### Difference between SRAM and EEPROM ####
 
-EEPROM stores data permanently. data stays if power is off. SRAM loses data if poweris off.				
+EEPROM stores data permanently. data stays if power is off. SRAM loses data if power is off.				
 
 ## Some Instructions ##
 
