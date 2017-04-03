@@ -1,11 +1,11 @@
 # Index #
 
 1. [Data Memory Space](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#data-memory-space)
-  1. [Registers](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#registers)
-  2. [GPRs](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#gprs)
-  3. [I/O Registers](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#io-registers)
-  4. [Internal SRAM](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#internal-sram)
-  5. [Difference between SRAM and EEPROM](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#difference-between-sram-eeprom)
+    1. [Registers](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#registers)
+    2. [GPRs](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#gprs)
+    3. [I/O Registers](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#io-registers)
+    4. [Internal SRAM](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#internal-sram)
+    5. [Difference between SRAM and EEPROM](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#difference-between-sram-eeprom)
 
 2. [Some Instructions](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#some-instructions)
 3. [Directives](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#directives)
@@ -20,10 +20,10 @@
 12. [Address Mode](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#address-mode)
 13. [Accessing Flash ROM](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#accessing-flash-rom)
 14. [AVR Bit Addressability](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#avr-bit-addressability)
-  1. [Manipulating the Bits of GPRs](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#manipulating-the-bits-of-gprs)
-  2. [Manipulating the Bits of I/O Registers](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#manipulating-the-bits-of-io-registers)
-  3. [Status Register's Bit Addressability](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#status-registers-bit-addressability)
-  4. [Bit Addressability of Internal RAM](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#bit-addressability-of-internal-ram)
+    1. [Manipulating the Bits of GPRs](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#manipulating-the-bits-of-gprs)
+    2. [Manipulating the Bits of I/O Registers](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#manipulating-the-bits-of-io-registers)
+    3. [Status Register's Bit Addressability](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#status-registers-bit-addressability)
+    4. [Bit Addressability of Internal RAM](https://github.com/rashfaqur/cheatsheets/blob/master/AVR_assembly_programming.md#bit-addressability-of-internal-ram)
 
 ### Data Memory Space ###
 
