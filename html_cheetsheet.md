@@ -1,19 +1,16 @@
-#### HTML Heading ####
-
-**h1 to h6**: 
-
-### AT A GLANCE ###
-
-#### `<html>` ####
+### `<html>` ###
+---
 
 **Attributes:**
 * `lang="language"` - Specifies language used in the document. Example lang="en-US".
 
-#### `<head>` ####
+### `<head>` ###
+---
 
 Contains title, style, script, meta informations of a page.
 
-#### `<meta>` ####
+### `<meta>` ###
+---
 
 This tag can go inside `<head>` tag. It contains meta data of an HTML page.
 
@@ -50,7 +47,8 @@ This tag can go inside `<head>` tag. It contains meta data of an HTML page.
 <meta name="viewport" content="width=device-width, initial-scale="1.0"">
 ```
 
-#### `<body>` ####
+### `<body>` ###
+---
 
 **Attributes:**
 * `alink="color"` - color of a link when it is clicked.
@@ -60,11 +58,13 @@ This tag can go inside `<head>` tag. It contains meta data of an HTML page.
 * `bgcolor="color"` - background color of a page if background image not set.
 * `text="color"` - color of the texts in the page.
 
-#### `<h1> to <h6>` ####
+### `<h1> to <h6>` ###
+---
 
 Creates headlines in html document.
 
-#### `<hr>` ####
+### `<hr>` ###
+---
 
 Creates a horizontal line. Used for styling the document.
 
@@ -74,15 +74,18 @@ Creates a horizontal line. Used for styling the document.
 * `width="x%"` - Specifies width in %. Eg. width="50%"
 * noshed - Line will be of a solid color.
 
-#### `<p>` ####
+### `<p>` ###
+---
 
 Creates a paragraph. Omit any line breaks(extra space, tab etc).
 
-#### `<pre>` ####
+### `<pre>` ###
+---
 
 Use fixed width font. Preserve line breaks.
 
-#### Formatting Tags ####
+### Formatting Tags ###
+---
 
 * `<b>` - Bold Text.
 * `<i>` - Italic Text.
@@ -96,13 +99,14 @@ Use fixed width font. Preserve line breaks.
 * `<del>` - Deleted Text. Striked.
 * `<ins>` - Inserted Text. Underlined.
 
-#### Quotations ####
+### Quotations ###
+---
 
-##### Quoting with quotation mark #####
+#### Quoting with quotation mark ####
 
 Texts under `<q>` tag are placed under quotation mark.
 
-##### Quoting using `<blockquote>` #####
+#### Quoting using `<blockquote>` ####
 
 `<blockquote>` is used to quote text from another source.
 Text under `<blockquote>` are indented.
@@ -112,11 +116,3 @@ Text under `<blockquote>` are indented.
 Themis is an ancient Greek Titaness. She is described as "[the Lady] of good counsel", and is the personification of divine order, fairness, law, natural law and custom. Her symbols are the Scales of Justice, tools used to remain balanced and pragmatic.
 </blockquote>
 ```
-
-
-#### `<p>` ####
-#### `<p>` ####
-#### `<p>` ####
-#### `<p>` ####
-#### `<p>` ####
-#### `<p>` ####
