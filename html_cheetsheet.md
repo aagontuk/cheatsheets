@@ -113,6 +113,52 @@ Text under `<blockquote>` are indented.
 ```html
 <p>Here is some information about Themis:</p>
 <blockquote cite="https://en.wikipedia.org/wiki/Themis">
-Themis is an ancient Greek Titaness. She is described as "[the Lady] of good counsel", and is the personification of divine order, fairness, law, natural law and custom. Her symbols are the Scales of Justice, tools used to remain balanced and pragmatic.
+Themis is an ancient Greek Titaness. She is described as
+"[the Lady] of good counsel", and is the personification of
+divine order, fairness, law, natural law and custom.
+Her symbols are the Scales of Justice, tools used to remain balanced and pragmatic.
 </blockquote>
+```
+
+#### `<abbr>` for Abbreviation ####
+
+`<abbr>` is used for abbreviation. Show full form under cursor.
+```html
+<p>
+	Richard M. Stallman is the creator of the <abbr title="GNU is not Unix">GNU</abbr> system.
+</p>
+```
+
+#### `<address>` for Contact Information ####
+
+```html
+<address>
+Luke Skywalker</br>
+Naboo System</br>
+</address>
+```
+
+#### `<cite>` ####
+
+`<cite>` is used for mentioning the title of someone's work.
+```html
+<p><cite>Star Wars</cite> directed by George Lucas</p>
+```
+
+### HTML Color ###
+
+Color can be specified in three way.
+
+1. Using color name.
+```html
+<p style="color: red">This is a red text</p>
+```
+[List of standard color names](https://www.w3schools.com/colors/colors_names.asp)
+2. Using RGB value.
+```html
+<p style="color: rgb(0, 255, 0)">This is a green text</p>
+```
+3. Using hexadecimal value.
+```html
+<p style="color: #808080">This text is Ass</p>
 ```
