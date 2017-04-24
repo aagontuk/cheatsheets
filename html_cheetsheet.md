@@ -149,11 +149,10 @@ Naboo System</br>
 
 Color can be specified in three way.
 
-1. Using color name.
+1. Using color name. [List of standard color names](https://www.w3schools.com/colors/colors_names.asp)
 ```html
 <p style="color: red">This is a red text</p>
 ```
-[List of standard color names](https://www.w3schools.com/colors/colors_names.asp)
 2. Using RGB value.
 ```html
 <p style="color: rgb(0, 255, 0)">This is a green text</p>
