@@ -146,6 +146,7 @@ Naboo System</br>
 ```
 
 ### HTML Color ###
+---
 
 Color can be specified in three way.
 
@@ -160,4 +161,125 @@ Color can be specified in three way.
 3. Using hexadecimal value.
 ```html
 <p style="color: #808080">This text is Ass</p>
+```
+
+### CSS And HTML ###
+
+CSS is used for decoration. Three ways to use CSS in HTML.
+
+#### Inline CSS ####
+
+Inline CSS is used to decorate each tag individualy using the `style` attribute.
+```html
+<p style="font-family: garamond; color: red;">We want freedom in the web</p>
+```
+
+#### Internal CSS ####
+
+Internal CSS is used to decorate the whole HTML document. `<style>` tag in used
+inside `<head>` to decribe CSS properties.
+```html
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>HTML Document</title>
+
+		<style>
+			h3 {
+				font-size: 50px;
+				text-align: center;
+			}
+
+			p {
+				font-family: garamond;
+				color: blue;	
+			}
+		</style>
+	</head>
+
+	<body>
+		<h3> Internal CSS Example </h3>
+		<p> Internal CSS is decribed using <q>style<q> tag </p>
+	</body>
+</html>
+```
+
+To identify each tag separately **id** and **class** can be used.
+
+##### HTML id Example #####
+```html
+<!DOCTYPE html>
+
+<html>
+	<head>
+    	<title>Internal CSS</title>
+        
+        <style>
+        	h3 {
+            	font-size: 30px;
+                font-family: garamond;
+            }
+            
+            #p01 {
+            	color: red;
+                font-size: 14px;
+            }
+            
+            #p02 {
+            	color: green;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    
+    <body>
+    	<h3> Internal CSS Example using id </h3>
+    	<p id="p01"> This is first paragraph </p>
+        <p id="p02"> This is second paragraph </p>
+    </body>
+</html>
+```
+
+##### HTML class Example #####
+```html
+<!DOCTYPE html>
+
+<html>
+	<head>
+    	<title>Internal CSS</title>
+        
+        <style>
+        	h3 {
+            	font-size: 30px;
+                font-family: garamond;
+            }
+            
+            p.redText {
+            	color: red;
+                font-size: 14px;
+            }
+            
+            p.greenText {
+            	color: green;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    
+    <body>
+    	<h3> Internal CSS Example using class </h3>
+    	<p class="redText"> This text should be red </p>
+        <p class="greenText"> This text should be green </p>
+    </body>
+</html>
+```
+
+#### Extarnal CSS ####
+
+Separate CSS file is used. `<link>` tag is used to use the file in the document.
+```html
+<head>
+	<link rel="stylesheet" href="style.css">
+</head>
 ```
