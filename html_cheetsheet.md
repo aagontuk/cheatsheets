@@ -327,13 +327,14 @@ Froms are created using `<form></form>` tag. Forms normaly contains:
 * `<select>` - For creating a drop down list.
 * `<textarea>` - For creating a large text field.
 * `<label>` - For creating label for various inputes.
-* `<fieldset>` - For specifying different input group.
+* `<fieldset>` - For specifying different input group. `<legend>` tag is used for labeling `<fieldset>`.
 
 **Important Attributes:**
 
 * `action="process_file_address"` - Specifies the sever side sript which will process the submitted data.
 * `method="get/post"` - `get` for plain text submit. `post` for encrypted submit.
 * `name="form_name"` - Specifies the name of the form.
+* `id=""` - ID of the form.
 * `autocomplete="on/off"` - Turn on/off browser autocomplete feature.
 * `enctype=""` - Specifies how the data will be encrypted when send to the server.
 * `accept="file_type"` - Specifies comma separated file types that will be allowed for upload.
@@ -351,5 +352,89 @@ It can be:
 * `type="file"` - For uploading file.
 * `type="button"` - Creating a button. When the button is clicked it works based on `onclick="scrpit_to_execute"` attribute.
 * `type="submit"` - Creates a submit button for the form. When the submit button is clicked action is taken based on the `action` attribute of the form.
-* `type=""`
-* `type=""`
+* `type="reset"` - Creates a button for resetting the form.
+* `type="image"` - Defines an image as a submit button.
+* `type="range"` - Creates a range slider.
+* `type="number"` - Creates a number picker.
+* `type="color"` - Creates a color picker.
+* `type="date"` - Creates a date picker.
+* `type="tel"` - Telephone number form.
+
+**Important Attributes:**
+
+* `name=""` - Specifies the name of an `<input/>` element.
+* `value=""` - Specifies the value of an `<input>` element. This can be used for setting default value.
+* `placeholder=""` - This text is shown faded in the text fields.
+* `size=""` - Maximum character input size for an input field.
+* `max=""` - Maximum accepted value for number, range, date type.
+* `min=""` - Minimum accepted value for number, range, date type.
+* `step=""` - Step size for slider or number picker.
+* `pattern=""` - Specifies a regular expression against which input is validated.
+* `title=""` - Text that is show when input dont pass regex validation.
+* `autocomplete="on/off"` - on/off browser autocomplete feature.
+* `autofocus="on/off"` - Will autofocus to this input field when the page loads.
+* `checked` - Make a checkbox / radio button as checked.
+* `disabled` - To disable an input field.
+* `multiple` - User can enter multiple values in an input element.
+* `readonly` - Specifies a input field as readonly. It can't be changed.
+* `required` - Specifies a field as required.
+* `accept="file_type1, file_type2"` - Accepted file types. Comma separated for multiple file type acceptence.
+* `formaction=""` - Specifies the script that will process this input field when the form submitted.
+* `formmethod="get/post"` - Which method to follow for form submission.
+* `formenctype=""` - Submitted data encryption type.
+* `formtarget=""` - Specifies where the response will be placed for this input(New tab, own page etc).
+
+#### Example of an HTML form with all the tags and attributes ####
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<body>
+		<h2 class="header"> Create an Account in Hell NOW! </h2>
+
+		<form action="process.php" method="post" autocomplete="on">
+			<fieldset>
+				<legend>Basic Information</legend>
+				Your Name:&nbsp;
+				<input type="text" name="name" value="name" placeholder="Name" size="40" autofocus="on"/><br/>
+				Your Gender:<br/>
+				<input type="radio" name="gender" value="male"/>Male<br/>
+				<input type="radio" name="gender" value="female"/>Female<br/>
+				<input type="radio" name="gender" value="other" checked="checked"/>Other<br/>
+				Married?<br/>
+				<input type="checkbox" name="married" value="no" checked="checked"/>No<br/>
+				<input type="checkbox" name="married" value="yes"/>Yes</br>
+			</fieldset>
+
+			<fieldset>
+				<legend>Insanity Check</legend>
+				Pick <span class="color">Red</span> color:&nbsp;
+				<input type="color" name="color" value="blue"><br/>
+				What is the value of &Pi;:&nbsp;
+				<input type="number" name="pi" value="3" min="1" max="9" step="2"/><br/>
+				Can you slide for no reason?&nbsp;
+				<input type="range" name="slide" value="50" min="0" max="100" step="2"/>
+			</fieldset>
+
+			<fieldset>
+				<legend>Create Username</legend>
+				Username:&nbsp;
+				<input type="text" name="uname" placeholder="username" pattern="[A-Za-z]{6}" label="Only letters and upto six characters" required/><br/>
+				Password:&nbsp;
+				<input type="password" name="pass" pattern="[A-Za-z0-9]{6}" label="Only letters and numbers upto 6 characters" required/><br/>
+				Upload Image:<br/>
+				<input type="file" name="image"/>
+			</fieldset>
+
+			Want to meet god?<br/>
+			<label name="meetYes">Yes</label>
+			<input type="radio" name="god" value="yes" id="meetYes" disabled="disabled"/><br/>
+			<label name="meetNo">No</label>
+			<input type="radio" name="god" value="no" id="meetNo" disabled="disabled"/><br/>
+			<input type="submit" value="Register!"/>
+			<input type="reset"/>
+		</form>
+	</body>
+</html>
+```
