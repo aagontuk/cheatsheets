@@ -12,7 +12,8 @@ Contains title, style, script, meta informations of a page.
 ### `<meta>` ###
 ---
 
-This tag can go inside `<head>` tag. It contains meta data of an HTML page.
+This tag can only go inside `<head>` tag. It contains meta data of an HTML page.
+`<meta>` tag has no ending tag.
 
 **Attributes:**
 * `charset="charset"` - Describe the character encoding used in the document. Eg. UTF-8.
@@ -164,6 +165,7 @@ Color can be specified in three way.
 ```
 
 ### CSS And HTML ###
+---
 
 CSS is used for decoration. Three ways to use CSS in HTML.
 
@@ -283,3 +285,71 @@ Separate CSS file is used. `<link>` tag is used to use the file in the document.
 	<link rel="stylesheet" href="style.css">
 </head>
 ```
+
+### `<a>` for Links ###
+
+See W3Schools.
+
+### `<img>` for Images ###
+
+See W3Schools. Some interesting features:
+* **Floating property**
+* `<map>` tag.
+
+### `<table>` for Tables ###
+
+See W3Schools. Example:
+```html
+<table style="width:100%">
+	<tr>
+    	<th>Title 1</th>
+		<th>Title 2</th>
+	</tr>
+	<tr>
+		<td> Cell 1</td>
+		<td> Cell 2</td>
+</table>
+```
+
+### HTML Lists ###
+
+See W3Schools. Interesting:
+
+* Description List.
+* Creating a Menu using list and CSS.
+
+### HTML Form ###
+
+For creating HTML forms for getting data from user.
+Froms are created using `<form></form>` tag. Forms normaly contains:
+
+* `<input>` - Creating various types of inputs. Text, button, radio button, checbox etc.
+* `<select>` - For creating a drop down list.
+* `<textarea>` - For creating a large text field.
+* `<label>` - For creating label for various inputes.
+* `<fieldset>` - For specifying different input group.
+
+**Important Attributes:**
+
+* `action="process_file_address"` - Specifies the sever side sript which will process the submitted data.
+* `method="get/post"` - `get` for plain text submit. `post` for encrypted submit.
+* `name="form_name"` - Specifies the name of the form.
+* `autocomplete="on/off"` - Turn on/off browser autocomplete feature.
+* `enctype=""` - Specifies how the data will be encrypted when send to the server.
+* `accept="file_type"` - Specifies comma separated file types that will be allowed for upload.
+* `target=""` - Specifies where submit response will be shown(New tab, own page etc).
+
+#### `<input>` for various types of input area ####
+
+In `type` attribute input types are specified.
+It can be:
+
+* `type="text"` - For simple text area.
+* `type="password"` - For taking passwords.
+* `type="radio"` - For radio buttons.
+* `type="checkbox"` - For checkbox.
+* `type="file"` - For uploading file.
+* `type="button"` - Creating a button. When the button is clicked it works based on `onclick="scrpit_to_execute"` attribute.
+* `type="submit"` - Creates a submit button for the form. When the submit button is clicked action is taken based on the `action` attribute of the form.
+* `type=""`
+* `type=""`
