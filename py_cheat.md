@@ -854,6 +854,18 @@ I am bar.
 ['hello, world!\n', 'I am foo.\n', 'I am bar.']
 ```
 
+* `file.truncate(bytes)` - File will be truncated to specified bytes. All previous data will be lost. Specified byte space will be zero filled.
+
+#### Some important file operations ####
+
+* Check if a file/path exists
+
+```python
+from os.path import exists
+
+print(exists("/home/username/myfile.txt"))
+```
+
 #### Python Pickles ####
 
 Tool to store python object in a file directly with no to-or-from string conversion.
@@ -1065,6 +1077,17 @@ classes
 
 ### Print Statement ###
 
+#### Printing to stdout ####
+
+see: [Python String data type in details](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md#strings-1)
+
+A fun `\r`(carriage return trick):
+```python
+while True:
+	for ch in ["\\", "-", "|", "/"]:
+		print("%s\r" % ch, end = "")
+```
+
 #### Printing To A File ####
 
 Using `file` argument of the print() function:
@@ -1085,6 +1108,34 @@ Using `sys.stdout`:
 >>> sys.stdout = tmp
 >>> open("hello.txt").read()
 'hello, world!\n'
+```
+
+### Taking Inputs ###
+
+#### Taking inputs from stdin ####
+
+Pyhton takes inputs as a string from stdin. In python 3 `input("prompt")` function is used to take input. In python 2.x `raw_input("prompt")` is used.
+
+```python
+name = input("Enter your name: ")
+
+# Inputs are taken as Strings. To convert to int.
+age = int(input("Enter your age: "))
+
+print("Hello, %s! Your age is %d" % (name, age))
+```
+
+#### Commandline Arguments ####
+
+```python
+from sys inport argv
+
+script, arg0, arg1, arg2 = argv
+
+print("Script name: %s" % script)
+print("First argument: %s" % arg0)
+print("Second argument: %s" % arg1)
+print("Third argument: %s" % arg2)
 ```
 
 ### Pyhton If Statement ###
