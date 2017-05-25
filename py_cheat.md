@@ -1146,7 +1146,7 @@ print("Second argument: %s" % arg1)
 print("Third argument: %s" % arg2)
 ```
 
-### Pyhton If Statement ###
+### Python If Statement ###
 
 Structure:
 ```
@@ -1172,21 +1172,6 @@ else:
 ...     print("Bad Choice!")
 ... 
 2$
-```
-
-Example:
-```python
->>> if 1:
-...     print("One!")
-... 
-One!
->>> 
->>> if not 1:
-...     print("One!")
-... else:
-...     print("None!")
-... 
-None!
 ```
 
 Dictionary based work around (Less typing!):
@@ -1244,6 +1229,20 @@ if not X:			# Invert logic
 
 Return value: Returns True or False
 
+**Range:**
+
+if 0 <= x <= 10:
+	DO SOMETHING
+
+```python
+>>> rn = 1500
+>>> if 2100 < rn < 4000:
+...     print("Transitional")
+... else:
+...     print("Different flow pattern")
+Different flow pattern
+```
+
 #### if/else Ternary Expression ###
 
 Consider following code:
@@ -1254,9 +1253,15 @@ else:
 	A = Z
 ```
 
-**Ternary alternative:**
+**Ternary Expression:**
 ```python
 A = Y if X else Z
+```
+
+```python
+>>> count = 5
+>>> "five" if count == 5 else "not five"
+'five'
 ```
 
 ## Python While and For Loops ##
