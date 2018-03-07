@@ -8,6 +8,7 @@
 4. [Python Programming](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md)
 5. [Ncurses Programming in C](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md)
 6. [QT Programming](https://github.com/aagontuk/cheatsheets/blob/master/qt-cheatsheet.md)
+7. [MySQL Queries](https://github.com/aagontuk/cheatsheets/blob/master/mysqlcheat.md)
 
 ##### Reading Lists #####
 
