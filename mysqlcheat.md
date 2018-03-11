@@ -1,5 +1,29 @@
 ### MySQL Queries ###
 
+* Create a user in the database
+
+Syntax:
+```
+CREATE USER '<username>'@'<ip address>' IDENTiFIED BY '<password>'
+```
+
+Example:
+```sql
+CREATE USER 'root'@'192.168.1.10' IDENTIFIED BY 'mysecretpass'
+```
+
+* Setting permission to a user
+
+Give all access
+```sql
+GRANT ALL PRIVILEGES ON *.* TO '<username>'@'<ip>' IDENNTIFIED BY '<password>'
+``` 
+
+Give access to specific DB
+```sql
+GRANT ALL PRIVILEGES ON <dbname>.* TO '<username>'@'<ip>' IDENTIFIED BY '<password>'
+```
+
 * To show all the databases
 ```sql
 SHOW DATABASES;
