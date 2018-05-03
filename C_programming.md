@@ -1,13 +1,13 @@
 ## INDEX ##
 
 1. [File I/O](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#file-io)
-  * [High Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#high-level-access)
-  * [Error Handling](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#error-handling)
-  * [Low Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#low-level-access)
+  1. [High Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#high-level-access)
+  2. [Error Handling](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#error-handling)
+  3. [Low Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#low-level-access)
 2. [User Defined Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#user-defined-types)
-  * [Structure](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#structure)
-  * [Enumerated Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#enumerated-types)
-  * [Bit Fields](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#bit-fields)
+  1. [Structure](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#structure)
+  2. [Enumerated Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#enumerated-types)
+  3. [Bit Fields](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#bit-fields)
 
 ### FILE I/O ###
 
@@ -226,4 +226,18 @@ struct flags{
 	unsigned int is_open:1	// 1 bit length
 	unsigned int status:4	// 4 bit length
 };
+```
+
+#### Typedefs ####
+
+Typedefs are used to give an alias for a type.Structure:
+
+```
+typedef TYPE ALIAS
+```
+
+Example:
+
+```c
+typedef double dist_t; // dist_t can be used instead of double
 ```
