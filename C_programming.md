@@ -1,13 +1,13 @@
 ## INDEX ##
 
 1. [File I/O](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#file-io)
-  1. [High Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#high-level-access)
-  2. [Error Handling](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#error-handling)
-  3. [Low Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#low-level-access)
+    1. [High Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#high-level-access)
+    2. [Error Handling](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#error-handling)
+    3. [Low Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#low-level-access)
 2. [User Defined Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#user-defined-types)
-  1. [Structure](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#structure)
-  2. [Enumerated Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#enumerated-types)
-  3. [Bit Fields](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#bit-fields)
+    1. [Structure](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#structure)
+    2. [Enumerated Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#enumerated-types)
+    3. [Bit Fields](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#bit-fields)
 
 ### FILE I/O ###
 
