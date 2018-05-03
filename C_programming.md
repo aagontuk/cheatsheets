@@ -8,6 +8,7 @@
     1. [Structure](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#structure)
     2. [Enumerated Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#enumerated-types)
     3. [Bit Fields](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#bit-fields)
+    4. [Typedefs](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#typedefs)
 
 ### FILE I/O ###
 
