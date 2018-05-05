@@ -286,6 +286,8 @@ int main(){
 ```
 ### Generating Random Numbers ###
 
+#### Generating Random Numbers ####
+
 ```c++
 #include <iostream>
 #include <ctime>
@@ -299,3 +301,50 @@ int main(){
 	return 0;
 }
 ```
+
+#### Function for generating Random Numbers Between A Range ####
+
+**Using modulus:**
+
+```c++
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
+int getRandom(int min, int max){
+	return min + (rand() % (max - min + 1));
+}
+
+int main(){
+	/* For generating different seed each time the program runs */
+	srand(static_cast<unsigned int>(time(0)));
+	std::cout << getRandom(1, 6);
+
+	return 0;
+}
+```
+
+But this method is biased to low numbers. Following method has less bias to
+low numbers.
+
+```c++
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
+int getRandom(int min, int max){
+	static const double fraction = 1.0 / RAND_MAX;
+
+	return min + ((max - min + 1) * (rand() * fraction));
+}
+
+int main(){
+	/* For generating different seed each time the program runs */
+	srand(static_cast<unsigned int>(time(0)));
+	std::cout << getRandom(1, 6);
+
+	return 0;
+}
+```
+
+For details: http://www.learncpp.com/cpp-tutorial/59-random-number-generation/
