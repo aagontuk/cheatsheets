@@ -250,10 +250,36 @@ int main(){
 	std::cin >> select;
 
 	std::cout << "Enter name: ";
-	std::cin >> name;		// will not work
+	std::getline(std::cin, name);		// will not work
  
 	std::cout << "Your name is: " << name << "! You have selected: "
 		  << select;
+
+	return 0;
+}
+```
+
+To solve this problem `std::cin.ignore(n, ch)` can be used where n is the
+number of character to ignore from the input stream before ch character is
+found.
+
+```c++
+#include <iostream>
+#include <string>
+
+int main(){
+	int select;
+	std::string name;
+	
+	std::cout << "Select: ";
+	std::cin >> select;
+
+	std::cin.ignore(32767, '\n');
+
+	std::cout << "Enter name: ";
+	std::getline(std::cin, name);
+
+	std::cout << "Hi " << name << "! You have selected " << select << std::endl;
 
 	return 0;
 }
