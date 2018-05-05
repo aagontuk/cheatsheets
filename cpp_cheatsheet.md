@@ -259,8 +259,8 @@ int main(){
 }
 ```
 
-To solve this problem `std::cin.ignore(n, ch)` can be used where n is the
-number of character to ignore from the input stream before ch character is
+To solve this problem `std::cin.ignore(n, ch)` can be used where **n** is the
+number of character to ignore from the input stream before **ch** character is
 found.
 
 ```c++
@@ -280,6 +280,21 @@ int main(){
 	std::getline(std::cin, name);
 
 	std::cout << "Hi " << name << "! You have selected " << select << std::endl;
+
+	return 0;
+}
+```
+### Generating Random Numbers ###
+
+```c++
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
+int main(){
+	/* For generating different seed each time the program runs */
+	srand(static_cast<unsigned int>(time(0)));
+	std::cout << rand();
 
 	return 0;
 }
