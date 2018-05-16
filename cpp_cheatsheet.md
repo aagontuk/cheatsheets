@@ -206,6 +206,8 @@ by default external. static keyword can be used to make them internal.
 
 ## Console Input/Output ##
 
+### Console I/O Methods ###
+
 * `std::cin` is used for console input. `std::cin` takes inputs untill first
 whitespace.
 ```c++
@@ -237,7 +239,9 @@ int main(){
 }
 ```
 
-* `std::cin` takes upto newline from the input stream. So it will be a problem if any other input function is used after taking numeric input from std::cin.
+### Error Handling in Console Input ###
+
+`std::cin` takes upto newline from the input stream. So it will be a problem if any other input function is used after taking numeric input from std::cin.
 ```c++
 #include <iostream>
 #include <string>
@@ -284,9 +288,15 @@ int main(){
 	return 0;
 }
 ```
-### Generating Random Numbers ###
 
-#### Generating Random Numbers ####
+### A Program Handling All the Error Case in Input ###
+
+```c++
+
+```
+## Generating Random Numbers ##
+
+### Generating Random Numbers ###
 
 ```c++
 #include <iostream>
@@ -302,7 +312,7 @@ int main(){
 }
 ```
 
-#### Function for generating Random Numbers Between A Range ####
+### Function for generating Random Numbers Between A Range ###
 
 **Using modulus:**
 
