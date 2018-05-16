@@ -292,7 +292,77 @@ int main(){
 ### A Program Handling All the Error Case in Input ###
 
 ```c++
+#include <iostream>
 
+double getDouble(){
+	double d;
+
+	while(true){
+		std::cout << "Enter: ";
+		std::cin >> d;
+		std::cin.ignore(32767, '\n');	/* clear '\n' from input stream */
+
+		/* 
+		 * if input fails, cin will set fail flag and stop extracting
+		 * characters from input stream.
+		 */
+		if(std::cin.fail()){
+			std::cout << "Please enter a floating number" << std::endl;
+			std::cin.clear();				/* Clear fail flag */
+			std::cin.ignore(32767, '\n');	/* Clear input stream */
+		}
+		else{
+			return d;
+		}
+	}
+}
+
+char getOperator(){
+	char op;
+
+	while(true){
+		std::cout << "Enter (+, -, * or /): ";
+		std::cin >> op;
+		std::cin.ignore(32767, '\n');
+		
+		if(op == '+' || op == '-' || op == '*' || op == '/'){
+			return op;
+		}
+		else{
+			std::cout << "Bad operator. Input again." << std::endl;
+		}
+	}
+}
+
+void printResult(double d1, char op, double d2){
+	if(op == '+'){
+		std::cout << d1 << " + " << d2 << " = " <<  d1 + d2 << std::endl;
+	}
+	else if(op == '-'){
+		std::cout << d1 << " - " << d2 << " = " <<  d1 - d2 << std::endl;
+	}
+	else if(op == '*'){
+		std::cout << d1 << " * " << d2 << " = " <<  d1 * d2 << std::endl;
+	}
+	else{
+		if(d2 != 0){
+			std::cout << d1 << " / " << d2 << " = " <<  d1 / d2 << std::endl;
+		}
+		else{
+			std::cout << "Can't devide by zero!";
+		}
+	}
+}
+
+int main(){
+	double d1 = getDouble();
+	char op = getOperator();
+	double d2 = getDouble();
+
+	printResult(d1, op, d2);
+
+	return 0;
+}
 ```
 ## Generating Random Numbers ##
 
