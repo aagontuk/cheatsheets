@@ -302,7 +302,8 @@ double getDouble(){
 		std::cin >> d;
 		std::cin.ignore(32767, '\n');	/* clear '\n' from input stream */
 
-		/* 
+		/*
+		 * Input will fail if a valid number isn't typed. 
 		 * if input fails, cin will set fail flag and stop extracting
 		 * characters from input stream.
 		 */
@@ -428,3 +429,25 @@ int main(){
 ```
 
 For details: http://www.learncpp.com/cpp-tutorial/59-random-number-generation/
+
+## Advanced Data Types ##
+
+### Array ###
+
+Array index must be a compile time constant.
+
+```c++
+#include <iostream>
+
+int main(){
+	int array[5]; // ok
+
+	#define ARR_SIZE 5
+	int array[ARR_SIZE];	// ok
+
+	int const arr_size = 5;
+	int array[arr_size];	// ok
+
+	int arr_size = 5;
+}
+```
