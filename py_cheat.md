@@ -2428,29 +2428,31 @@ class C3(C1, C2):
 **Example:**
 
 ```python
-#!/bin/python
+#!/usr/bin/env python3
 
-class Mammal:
-    def species(self, species):
-        self.species = species
+class Robot:
+    """ Robot class """
+    def __init__(self, name, dimension):
+        self.name = name
+        self.dimension = dimension
 
-    def info(self):
-        print("\"%s\" is a mammal. They are breast feed at baby stage." % (self.species))
+    def __str__(self):
+        return "Name: " + self.name + "\n" + "Dimension: " + str(self.dimension)
 
-class Dog(Mammal):
-    def info(self):
-        Mammal.info(self)
-        print("Its a species of dog.")
+class LazyRobot(Robot):
+    def __init__(self, name, dimension, speciality):
+        super().__init__(name, dimension)
+        self.speciality = speciality
 
-x = Mammal()
-x.species("Homo Sapiens")
-x.info()
+    def __str__(self):
+        return super().__str__() + "\n" + "Speciality: " + self.speciality
 
-print("\n*****\n")
+if __name__ == "__main__":
+    ceaser = Robot("ceaser", 5)
+    print(ceaser)
 
-y = Dog()
-y.species("German Shepherd")
-y.info()
+    walle = LazyRobot("walle", 2, "waiting")
+    print(walle)
 ```
 
 #### Using class like C/C++ Structure ####
