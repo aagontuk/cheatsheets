@@ -2263,10 +2263,10 @@ Removing (2.000000, 3.000000)
 
 #### Enscapulation ####
 
-`var` - Public variable. Can be accessed from outside of the class.
-`_var` - Protected variable. Can be accessed from outside of the class
+* `var` - Public variable. Can be accessed from outside of the class.
+* `_var` - Protected variable. Can be accessed from outside of the class
 	 but it should be accessed only from the sub class.
-`__var` - Private variable. Can be accessed only within the class.
+* `__var` - Private variable. Can be accessed only within the class.
 
 #### Getter and Setter Using Property ####
 
