@@ -1635,11 +1635,28 @@ at the end of the series of results.
 
 ## Documentation ##
 
-### `dir` Funtion ###
+### `dir()` Funtion ###
+
+Python `dir()` lists all the methods of an object.
+
+```python
+>>> dir(list)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__delslice__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getslice__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__setslice__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+```
 
 ### Docstrings ###
 
+Docstrings are used for documenting python module, class, class methods,
+functions etc. Docstrings are placed as the first statement of the
+module, class, methods, functions.
+
+From [PEP 257](https://www.python.org/dev/peps/pep-0257/)
+> A docstring is a string literal that occurs as the first statement in a module, function, class, or method definition. Such a docstring becomes the __doc__ special attribute of that object.
+
 ### PyDoc and `help()` ###
+
+Python `help()` function gives the documentation of an object that are
+created by docstrings
 
 ## Functions ##
 
@@ -2202,6 +2219,41 @@ p = Point(2, 3)
 print(p.getPoint())
 ```
 
+#### Destructor ####
+
+A special method `__del__` works as a destructor.
+
+```python
+class Point:
+	def __init__(self, x = 0, y = 0):
+		self.x = x
+		self.y = y
+		print("Created (%f, %f)" % (self.x, self.y))
+
+	def __del__(self):
+		print("Removing (%f, %f)" % (self.x, self.y))
+
+if __name__ == "__main__":
+	p = Point(2, 3)
+	del(p)
+```
+
+Output:
+
+```
+Created (2.000000, 3.000000)
+Removing (2.000000, 3.000000)
+```
+
+#### Enscapulation ####
+
+`var` - Public variable. Can be accessed from outside of the class.
+`_var` - Protected variable. Can be accessed from outside of the class
+	 but it should be accessed only from the sub class.
+`__var` - Private variable. Can be accessed only within the class.
+
+#### Getter and Setter Using Property ####
+
 #### Inheritance Syntax and Example ####
 
 ```python
@@ -2314,6 +2366,8 @@ if __name__ == '__main__':
 ```shell
 [Person: Bob Smith, Kernel Developer, 10000]
 ```
+
+#### A Class Example ####
 
 ## Python Keywords and Symbols ##
 
