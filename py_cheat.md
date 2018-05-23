@@ -2270,6 +2270,147 @@ Removing (2.000000, 3.000000)
 
 #### Getter and Setter Using Property ####
 
+```python
+#!/usr/bin/env python3
+
+class Point:
+    """ Point class - Creates a point in 2D space """
+
+    def __init__(self, x = 0, y = 0):
+        """ Initiate a point object with x and y
+
+        Args:
+            x : x coordinate
+            y : y coordinate
+        Returns:
+            None
+        """
+        self.x = x
+        self.y = y
+
+	# Getter for x
+    @property
+    def x(self):
+        """ Returns value of x coordinate"""
+        return self.__x
+
+	# Setter for x
+    @x.setter
+    def x(self, x):
+        """ Set the value of x coordinate"""
+        self.__x = x
+
+	# Getter for y
+    @property
+    def y(self):
+        """Returns value of y coordinate"""
+        return self.__y
+
+	# Setter for y
+    @y.setter
+    def y(self, y):
+        """ Set the value of y coordinate """
+        self.__y = y
+
+if __name__ == "__main__":
+    p = Point(2, 4)
+
+    print(p.x)  # calling getter
+    print(p.y)  # calling getter
+
+    p.x = 5     # calling setter
+    p.y = 3     # calling setter
+    
+    print(p.x)  # calling getter
+    print(p.y)  # calling getter
+```
+
+#### Static Methods ####
+
+Static methods can be called by both the class
+and an instance of the class.
+
+Problem with normal method:
+```python
+#!/usr/bin/env python3
+
+class Skynet(object):
+    __id = 0
+
+    def __init__(self):		# can be called only by an instance
+        type(self).__id += 1
+
+    def get_id(self):
+        return Skynet.__id
+
+if __name__ == "__main__":
+    moly = Skynet()
+    print(moly.get_id())    # This is ok
+    print(Skynet.get_id())  # This will generate an error
+```
+
+And in this case:
+```python
+#!/usr/bin/env python3
+
+class Skynet(object):
+    __id = 0
+
+    def __init__(self):
+        type(self).__id += 1
+
+    def get_id():		# Can be called only by class itself
+        return Skynet.__id
+
+if __name__ == "__main__":
+    moly = Skynet()
+    print(moly.get_id())    # will generate error
+    print(Skynet.get_id())  # ok
+```
+
+To solve this problem static method can be used:
+```python
+#!/usr/bin/env python3
+
+class Skynet(object):
+    __id = 0
+
+    def __init__(self):
+        type(self).__id += 1
+
+    @staticmethod		# can be called both by class
+    def get_id():		# and class instance
+        return Skynet.__id
+
+if __name__ == "__main__":
+    moly = Skynet()
+    print(moly.get_id())    # calling using an instance
+    print(Skynet.get_id())  # calling using the class
+```
+
+#### Class Methods ####
+
+Like static methods class methods are not bound to specific instance.
+But take a class as the first argument.
+```python
+#!/usr/bin/env python3
+
+class Skynet(object):
+    __id = 0
+
+    def __init__(self):
+        type(self).__id += 1
+
+    @classmethod
+    def get_id(cls):
+        return cls.__id
+
+if __name__ == "__main__":
+    moly = Skynet()
+    print(moly.get_id())    # calling using an instance
+    print(Skynet.get_id())  # calling using the class
+```
+
 #### Inheritance Syntax and Example ####
 
 ```python
