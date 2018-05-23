@@ -1657,7 +1657,16 @@ From [PEP 257](https://www.python.org/dev/peps/pep-0257/)
 
 Example:
 ```
+def add(x, y):
+    """Add two numbers
 
+    Args:
+        x : first number
+        y : second number
+    Returns:
+        addition of the two number
+    """
+    return x + y
 ```
 
 ### PyDoc and `help()` ###
