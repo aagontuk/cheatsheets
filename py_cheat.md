@@ -1651,7 +1651,14 @@ functions etc. Docstrings are placed as the first statement of the
 module, class, methods, functions.
 
 From [PEP 257](https://www.python.org/dev/peps/pep-0257/)
-> A docstring is a string literal that occurs as the first statement in a module, function, class, or method definition. Such a docstring becomes the __doc__ special attribute of that object.
+> A docstring is a string literal that occurs as the first statement in a module, function, class, or method definition. Such a docstring becomes the `__doc__` special attribute of that object.
+
+> All modules should normally have docstrings, and all functions and classes exported by a module should also have docstrings. Public methods (including the `__init__` constructor) should also have docstrings. A package may be documented in the module docstring of the `__init__.py` file in the package directory.
+
+Example:
+```
+
+```
 
 ### PyDoc and `help()` ###
 
