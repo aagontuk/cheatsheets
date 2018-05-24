@@ -2261,7 +2261,7 @@ Created (2.000000, 3.000000)
 Removing (2.000000, 3.000000)
 ```
 
-#### Enscapulation ####
+#### Encapsulation ####
 
 `var` - Public variable. Can be accessed from outside of the class.
 `_var` - Protected variable. Can be accessed from outside of the class
@@ -2499,7 +2499,13 @@ Bob | 43 | Male | Married? 1
 Alice | 19 | Female | Married? 0
 ```
 
-#### Operator Overloading ####
+#### Operator Overloading and Magic Methods ####
+
+There are special methods in python with double underscore
+at the begining and end like `__add__` which can be used
+for operator overloading. Following example shows
+overloading `__str__` method, which will be called when
+printing the object or `str(object)`:
 
 ```python
 #!/bin/python
@@ -2526,6 +2532,142 @@ if __name__ == '__main__':
 [Person: Bob Smith, Kernel Developer, 10000]
 ```
 
+Here is another example overloading `__add__()` method
+and `__str__()` method:
+```python
+#!/usr/bin/env python3
+
+class Money(object):
+    """ This class represents money """
+    def __init__(self, value, unit = "USD", rate = 1):
+        """ Initialize Money object
+            
+            Args:
+                value   : Money value
+                unit    : Unit of the money. e.g: USD, BDT
+                rate    : Exchange rate in USD
+            Returns:
+                None
+        """
+        self.value = value
+        self.unit = unit
+        self.rate = rate
+
+    def __str__(self):
+        return str(self.value) + " " + self.unit
+
+class BDT(Money):
+    """ This class represents Bangladesh Taka """
+    def __init__(self, value, rate = 0.012):
+        super().__init__(value, "BDT", rate)
+
+    def __add__(self, other):
+        """ 
+        overloaded __add__ method for BDT
+        convert into dollar then add them
+        returns the result in BDT
+        """
+
+        return BDT((self.rate * self.value \
+                + other.rate * other.value) \
+                / self.rate)
+
+class EURO(Money):
+    "This class represents Euro"
+    def __init__(self, value, rate = 1.17):
+        super().__init__(value, "EURO", rate)
+    
+    def __add__(self, other):
+        """ 
+        overloaded __add__ method for EURO
+        convert into dollar then add them
+        returns the result in EURO
+        """
+
+        return EURO((self.rate * self.value \
+                + other.rate * other.value) \
+                / self.rate)
+
+if __name__ == "__main__":
+    print(BDT(5) + EURO(1) + BDT(2))
+```
+
+A list of python magic methods can be found
+[here](https://www.python-course.eu/python3_magic_methods.php)
+
+For each binary overloading methods, there is a
+reverse method. Like for `__add__()` method there
+is a `__radd__()` method to handle situation like:
+
+```python
+#!/usr/bin/env python3
+
+class BDT:
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return str(self.value) + " " + "BDT"
+
+    def __add__(self, other):
+        if type(other) == int or type(other) == float:
+            return BDT(self.value + other)
+        else:
+            return BDT(self.value + other.value)
+
+if __name__ == "__main__":
+    print(BDT(50) + BDT(5))
+    print(BDT(10) + 2)
+    print(3 + BDT(13))
+```
+
+Output:
+```
+55 BDT
+12 BDT
+Traceback (most recent call last):
+  File "./radd.py", line 19, in <module>
+    print(3 + BDT(13))
+TypeError: unsupported operand type(s) for +: 'int' and 'BDT'
+```
+
+This problem can be solved using reverse method. Python first
+search the overloaded method within the class, then the
+corresponding reverse method in the class. Then search the
+method in the parent class.
+
+```python
+#!/usr/bin/env python3
+
+class BDT:
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return str(self.value) + " " + "BDT"
+
+    def __add__(self, other):
+        if type(other) == int or type(other) == float:
+            return BDT(self.value + other)
+        else:
+            return BDT(self.value + other.value)
+
+    def __radd__(self, value):
+        return self.__add__(value)
+
+if __name__ == "__main__":
+    print(BDT(50) + BDT(5))
+    print(BDT(10) + 2)
+    print(3 + BDT(13))
+```
+
+Output:
+
+```
+55 BDT
+12 BDT
+16 BDT
+```
 #### A Class Example ####
 
 ## Python Keywords and Symbols ##
