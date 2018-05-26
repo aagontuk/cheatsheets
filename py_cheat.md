@@ -2668,6 +2668,56 @@ Output:
 12 BDT
 16 BDT
 ```
+
+#### Slots ####
+
+Normally we can create class attributes dynamically outside of the class.
+
+```python
+#!/usr/bin/env python3
+
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+if __name__ == "__main__":
+    p = Point(2, 3)
+
+    p.z = 4     # Dynamically adding attribute
+    print(p.z)
+```
+
+Slots are used to prevent this dynamic attribute creation.
+
+```python
+#!/usr/bin/env python3
+
+class Point:
+    __slots__ = ['x', 'y']
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+if __name__ == "__main__":
+    p = Point(2, 3)
+
+    # Will generate error as we have added slots in the class.
+    # Now the number of class attributes are fixed.
+    p.z = 4
+    print(p.z)
+```
+
+Output:
+
+```python
+Traceback (most recent call last):
+  File "./slots.py", line 15, in <module>
+    p.z = 4
+AttributeError: 'Point' object has no attribute 'z'
+```
+
 #### A Class Example ####
 
 ## Python Keywords and Symbols ##
