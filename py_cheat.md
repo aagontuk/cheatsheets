@@ -2125,6 +2125,103 @@ True
 4
 ```
 
+## Decorators ##
+
+Decorators are used to change any callable objects behaviour like
+function or class etc. There are two type of decorators. Function decorator
+and class decorator. One is work for function and another is work for
+classes. But both work in same way.
+
+Consider this senario where a function `func_decorator` is changing other
+functions behaviour. This function takes other functions as argument and
+change is behaviour using a wrapper function. Then this wrapper function is
+assigned to the original function to change original functions behaviour.
+
+```python
+#!/usr/bin/env python3
+
+def func_decorator(func):
+    def func_wrapper(x):
+        print("Function " + func.__name__ + " does:")
+        func(x)
+        print("I have changed its behaviour")
+
+    return func_wrapper
+
+def foo(x):
+    print("hello, " + x)
+
+def bar(x):
+    print("gello, " + x)
+
+print("Befor using func_decorator:\n")
+
+foo("tux")
+bar("tux")
+
+foo = func_decorator(foo)
+bar = func_decorator(bar)
+
+print("\nAfter using func_decorator:\n")
+
+foo("tux")
+bar("tux")
+```
+
+Output:
+
+```python
+Befor using func_decorator:
+
+hello, tux
+gello, tux
+
+After using func_decorator:
+
+Function foo does:
+hello, tux
+I have changed its behaviour
+Function bar does:
+gello, tux
+I have changed its behaviour
+```
+
+We can find the same behaviour by using python decorator:
+
+```python
+#!/usr/bin/env python3
+
+def func_decorator(func):
+    def func_wrapper(x):
+        print("Function " + func.__name__ + " does:")
+        func(x)
+        print("I have changed its behaviour")
+
+    return func_wrapper
+
+@func_decorator
+def foo(x):
+    print("hello, " + x)
+
+@func_decorator
+def bar(x):
+    print("gello, " + x)
+
+foo("tux")
+bar("tux")
+```
+
+Output:
+
+```
+Function foo does:
+hello, tux
+I have changed its behaviour
+Function bar does:
+gello, tux
+I have changed its behaviour
+```
+
 ## Module Files ##
 
 * Module files run only once after the first import
