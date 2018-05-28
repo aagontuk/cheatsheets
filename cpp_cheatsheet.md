@@ -434,6 +434,8 @@ For details: http://www.learncpp.com/cpp-tutorial/59-random-number-generation/
 
 ### Array ###
 
+#### Array Indexes ####
+
 Array index must be a compile time constant.
 
 ```c++
@@ -449,5 +451,158 @@ int main(){
 	int array[arr_size];	// ok
 
 	int arr_size = 5;
+}
+```
+
+#### Representing Array Indexes with Enumerators ####
+
+Array index can be represented with enumerators. In this way it makes
+arrays well documented:
+
+```
+#include <iostream>
+
+namespace Store{
+	enum Store{
+		LM7805,
+		MAX485,
+		LM311,
+		ATMEGA64,
+		LED,
+		MAX_ELEMENT
+	};
+}
+
+int main(){
+	int inStore[Store::MAX_ELEMENT];
+
+	inStore[Store::LM7805] = 50;
+
+	std::cout << "There are " << inStore[Store::LM7805] \
+			  << " LM7805 in store" << std::endl;
+
+	return 0;
+}
+```
+
+#### Relation Between Array and Pointer ####
+
+Arrays are actually pointers. It points to the first element of the array.
+
+```c++
+#include <iostream>
+
+int main(){
+	int arr[2] = {1, 2};
+
+	/* Following two address will be same*/
+	std::cout << arr << std::endl;
+	std::cout << &arr[0] << std::endl;
+
+	return 0;	
+}
+```
+
+#### Difference Between Array and Pointer to Array ####
+
+The type of the array is `int (*)[n]` if it is an integer array 
+but the type of the pointer to that array is `int *`. Array type contains
+the size information of the array. When array is dereferenced or assigned
+to a pointer it implicitly converts itself into `type *` from
+`type (*)[n]` so size information is lost. Here is an example of this
+behaviour:
+
+```c++
+#include <iostream>
+
+int main(){
+	int arr[5] = {1, 2, 3, 4, 5};
+	int *arrPtr = arr;	// arr is converted from int (*)[2] to int *
+
+	/* Will print the size of the array which is 5 * 8 bytes */
+	std::cout << sizeof(arr) << std::endl;
+
+	/* Will print the size of the pointer which is 8 bytes */
+	std::cout << sizeof(arrPtr) << std::endl;
+
+	return 0;	
+}
+```
+
+#### String Constants Using Fixed Sized Array and Pointer ####
+
+```c++
+#include <iostream>
+
+int main(){
+	/*
+	 * keep the string constant in memory with r/w access
+	 * and return the pointer to it.
+	 * So string constant can be changed any time later
+	 */
+	char arr[] = "hello, world";
+
+	/*
+	 * Keep the string constant in read-only section of memory
+	 * so it can't be changed
+	 */
+	char *text = "GNU is not Unix";
+
+	/* As it is a constant so its better to initialize following way */
+	const char *text = "GNU is not Unix";
+
+	arr[0] = 'g';			// This OK
+
+	/* 
+	 * In this case as string constant is kept in read-only
+	 * memory, doing this will generate segmentation
+	 * fault
+	 */
+	*(text + 2) = 'O'; 
+
+	std::cout << arr << std::endl;
+	std::cout << text << std::endl;
+
+	return 0;	
+}
+```
+
+### Pointers ###
+
+#### Definig NULL Pointer C++ Way ####
+
+From C++11 `nullptr` keyword can be used to define a NULL pointer.
+
+```c++
+#include <iostream>
+
+int main(){
+	int *ptr = nullptr;
+
+	if(ptr){
+		std::cout << "Not null" << std::endl;
+	}
+	else{
+		std::cout << "Null" << std::endl;
+	}
+		
+	return 0;	
+}
+```
+
+#### Converting A Pointer Address to Integer ####
+
+Using `reinterpret_cast<>`:
+
+```c++
+#include <iostream>
+
+int main(){
+	int x = 17;
+	unsigned int addressX = reinterpret_cast<int>(&x);
+
+	std::cout << addressX << std::endl;
+
+	return 0;
 }
 ```
