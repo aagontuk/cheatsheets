@@ -606,3 +606,108 @@ int main(){
 	return 0;
 }
 ```
+
+## Dynamic Memory Allocation ##
+
+There are three basic type of memory allocation:
+
+* **Static memory allocation**: Static and global variables. Allocated
+when program runs. Persist throught the program life. Memory is taken from the stack.
+
+* **Atomatic memory allocation**: Function parameter and local variables. Allocated when enter into relevent block and deallocated when exited the block. Memory is taken from the stack.
+
+* **Dynamic memory allocation**: Memory allocated and deallocated dynamically. Memory is taken from the heap.
+
+### Allocating Memory dynamically ###
+
+Dynamically memory is allocated using the `new` keyword.
+
+```c++
+#include <iostream>
+
+int main(){
+	int *ptr = new int;	// dynamically an integer is allocated.
+
+	*ptr = 5;
+
+	return 0;
+}
+```
+
+### Deallocating memory ###
+
+Memory is deallocated using the `delete` keyword.
+
+```c++
+#include <iostream>
+
+int main(){
+	int *ptr = new int(5); // memory is allocated to the pointer
+
+	/* memory is deallocated.
+	 * memory is realesed by os.
+	 */
+
+	delete ptr; 
+
+	/* still the pointer is holding the memory address
+	 * so its better to make it null
+	 */
+	ptr = 0;
+	ptr = nullptr;	// c++11
+
+	return 0;
+}
+```
+
+### Memory leak ###
+
+memory leak happens when allocated memory can't be deallocated.
+
+```c++
+#include <iostream>
+
+void doSomthing(){
+
+	/* Memory is allocated but not deallocated
+	 * so memory leak happens when the variable
+	 * goes out of scope as there is no way
+	 * to deallocate in that case
+	 */
+
+	int *ptr = new int;
+}
+
+int main(){
+	doSomthing();
+	return 0;	
+}
+```
+
+```c++
+#include <iostream>
+
+int main(){
+	int *ptr = int new;
+
+	int val;
+
+	// assigning to a address with out deallocating
+	ptr = &val;	// memory leak
+
+	return 0;
+}
+```
+
+```c++
+#include <iostream>
+
+int main(){
+	int *ptr = new int(5);
+
+	// allocating new memory without deallocating previous one
+	int *ptr = new int(10);
+
+	return 0;
+}
+```
