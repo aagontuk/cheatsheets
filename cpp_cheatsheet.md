@@ -736,3 +736,24 @@ int main(){
 	return 0;
 }
 ```
+
+## For Each Loop ##
+
+* Only works from c++11 above
+* Can't be used in case of decayed arrays and dynamically allocated arrays.
+
+```c++
+#include <iostream>
+
+int main(){
+	int fibseq[] = {1, 1, 2, 3, 5, 8, 13, 21};
+
+	std::cout << "Fibonacci Sequence: ";
+	for(const auto &elem: fibseq){
+		std::cout << elem << " ";
+	}
+	std::cout << std::endl;
+
+	return 0;
+}
+```
