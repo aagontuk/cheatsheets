@@ -711,3 +711,28 @@ int main(){
 	return 0;
 }
 ```
+
+## Reference Variables ##
+
+Create alias for a variable. Basically share same memory address. Must be
+initialized with an addressable object. Can be used in function to pass
+parameter by reference.
+
+```c++
+#include <iostream>
+
+int main(){
+	int x(10);
+	int &y = x; // reference variable
+
+	/*
+	 * will output:
+	 * 10
+	 * 10
+	 */
+	std::cout << x << std::endl
+	std::cout << y << std::endl
+
+	return 0;
+}
+```
