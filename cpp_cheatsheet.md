@@ -590,6 +590,32 @@ int main(){
 }
 ```
 
+#### Void Pointers ####
+
+* Can point to any data type
+* Have to cast manually to a data type before dereferencing.
+* Pointer arithmetic can't be done using void pointers as size of the
+obect isn't known
+
+```c++
+#include <iostream>
+
+int main(){
+	int x(5);
+	void *ptr = &x;	// pointing to an integer
+
+	std::cout << *static_cast<int*>(ptr) << std::endl;
+
+	char ch = 'P';	// pointing to a char
+	ptr = &ch;
+	
+	std::cout << static_cast<char*>(ptr) << std::endl;
+
+	return 0;
+}
+
+```
+
 #### Converting A Pointer Address to Integer ####
 
 Using `reinterpret_cast<>`:
@@ -757,3 +783,25 @@ int main(){
 	return 0;
 }
 ```
+
+## Functions ##
+
+### Function Pointers ###
+
+```c++
+#include <iostream>
+
+int foo(int x){
+	return x*x;
+}
+
+int main(){
+	int (*square)(int) = foo;
+
+	std::cout << square(10) << std::endl;
+
+	return 0;
+}
+```
+
+* Can't be used for function's with default arguments
