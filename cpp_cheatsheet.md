@@ -922,3 +922,195 @@ int main(){
 	return 0;
 }
 ```
+
+In c++11 its possible to give default value in class memeber variable
+declaration.
+
+```c++
+#include <iostream>
+
+class Point{
+
+	private:
+		double m_x = 0; // default value of x
+		double m_y = 0;	// default value of y
+
+	public:
+		// member variable will be initialized with default value
+		// if called
+		Point(){
+			//empty
+		}
+
+		double getX(){
+			return m_x;
+		}
+
+		void setX(double x){
+			m_x = x;
+		}
+
+		double getY(){
+			return m_y;
+		}
+
+		void setY(double y){
+			m_y = y;
+		}
+
+		void printPoint(){
+			std::cout << "(" << m_x << ", " << m_y << ")" << std::endl;
+		}
+};
+
+int main(){
+	Point p;	// will call default constructor
+	
+	p.printPoint();
+
+	return 0;
+}
+```
+
+### Destructors ###
+
+```c++
+#include <iostream>
+#include <cassert>
+
+class Point{
+
+	private:
+		double m_x;
+		double m_y;
+
+	public:
+		Point(double x = 0, double y = 0): m_x(x), m_y(y){
+			//empty
+		}
+
+		double getX(){
+			return m_x;
+		}
+
+		void setX(double x){
+			m_x = x;
+		}
+
+		double getY(){
+			return m_y;
+		}
+
+		void setY(double y){
+			m_y = y;
+		}
+
+		void printPoint(){
+			std::cout << "(" << m_x << ", " << m_y << ")" << std::endl;
+		}
+};
+
+class PointArray{
+
+	private:
+		Point *m_points;
+		int m_length;
+
+	public:
+		PointArray(int length){
+			m_points = new Point[length];
+			m_length = length;
+		}
+
+		// Destructor
+		~PointArray(){
+			delete[] m_points;
+		}
+
+		void insert(Point &p, int index){
+			assert(index >= 0 && index < m_length);
+
+			m_points[index] = p;
+		}
+
+		Point& get(int index){
+			assert(index >= 0 && index < m_length);
+
+			return m_points[index];
+		}
+};
+
+int main(){
+	PointArray parr(5);
+	
+	Point p(2, 3);
+	Point q;
+
+	parr.insert(p, 0);
+	
+	q = parr.get(0);
+	q.printPoint();
+
+	return 0;
+}
+```
+
+### Static Member Variables ###
+
+* Will shared by all object.
+* Not bound to any object. Bound to the whole class. So it is possible
+to use this variable without any object.
+
+```c++
+#include <iostream>
+
+class Static{
+	public:
+		static int id;
+};
+
+/* Have to initialize first otherwise linker error will generate */
+int Static::id = 1;
+
+int main(){
+	Static s;
+	Static t;
+
+	/* Shared by both object */
+	s.id = 5;
+	std::cout << s.id << "\t" << t.id << std::endl;
+
+	/* Bound to whole class */
+	Static::id = 10;
+	std::cout << s.id << "\t" << t.id << std::endl;
+
+	return 0;
+}
+```
+
+### Static Member Functions ###
+
+* Not bound to any object.
+
+```c++
+#include <iostream>
+
+class ID{
+	private:
+		static int m_id;
+
+	public:
+		static int getID(){
+			return m_id;
+		}
+};
+
+/* Have to initialize first otherwise linker error will generate */
+int ID::m_id = 1;
+
+int main(){
+	std::cout << ID::getID << std::endl;
+
+	return 0;
+}
+```
