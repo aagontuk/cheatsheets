@@ -805,3 +805,31 @@ int main(){
 ```
 
 * Can't be used for function's with default arguments
+
+### Function Ellipsis ###
+
+Ellipsis can be used to pass variable length argument in a function.
+
+```c++
+#include <iostream>
+#include <cstdarg>	// to use ellipsis
+
+void printNum(int count, ...){
+	va_list list;
+	va_start(list, count);
+
+	for(int arg = 0; arg < count; arg++){
+		std::cout << va_arg(list, int) << std::endl;
+	}
+
+	va_end(list);
+}
+
+int main(){
+	printNum(5, 1, 2, 3, 4, 5);
+
+	return 0;
+}
+```
+
+* Ellipsis are dangerous. Try to avoid them. For more - http://www.learncpp.com/cpp-tutorial/714-ellipsis-and-why-to-avoid-them/
