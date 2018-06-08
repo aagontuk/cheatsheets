@@ -833,3 +833,92 @@ int main(){
 ```
 
 * Ellipsis are dangerous. Try to avoid them. For more - http://www.learncpp.com/cpp-tutorial/714-ellipsis-and-why-to-avoid-them/
+
+## Object Oriented Programming ##
+
+### Basic Class Example ###
+
+```c++
+#include <iostream>
+
+class Point{
+
+	private:
+		double m_x;
+		double m_y;
+
+	public:
+		double getX(){
+			return m_x;
+		}
+
+		void setX(double x){
+			m_x = x;
+		}
+
+		double getY(){
+			return m_y;
+		}
+
+		void setY(double y){
+			m_y = y;
+		}
+};
+
+int main(){
+	Point p;
+	
+	p.setX(-2.5);
+	p.setY(2.5);
+
+	std::cout << "(" << p.getX() << ", " << p.getY() << ")" << std::endl;
+
+	return 0;
+}
+```
+
+### Constructors ###
+
+```c++
+#include <iostream>
+
+class Point{
+
+	private:
+		double m_x;
+		double m_y;
+
+	public:
+		Point(double x = 0, double y = 0): m_x(x), m_y(y){
+				// empty
+		}
+
+		double getX(){
+			return m_x;
+		}
+
+		void setX(double x){
+			m_x = x;
+		}
+
+		double getY(){
+			return m_y;
+		}
+
+		void setY(double y){
+			m_y = y;
+		}
+
+		void printPoint(){
+			std::cout << "(" << m_x << ", " << m_y << ")" << std::endl;
+		}
+};
+
+int main(){
+	Point p(0.5, 0.5);
+	
+	p.printPoint();
+
+	return 0;
+}
+```
