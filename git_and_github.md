@@ -132,3 +132,23 @@ Branch master set up to track remote branch master from origin.
 ```
 
 Next time after commiting changes I can only issue `git push` to push all the changes into remote repository.
+
+## Branches ##
+---
+
+### Creating a new branch ###
+
+* Show current branches
+```sh
+me@mypc:~/cheatsheets$ git branch
+```
+
+* Create a new branch with name feature
+```sh
+me@mypc:~/cheatsheets$ git branch feature
+```
+
+* Active / Checkout new branch
+```sh
+me@mypc:~/cheatsheets$ git checkout feature
+```
