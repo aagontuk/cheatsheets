@@ -1,6 +1,6 @@
-### Frequently Used Git Commands ###
+## Frequently Used Git Commands ##
 
-#### git config ####
+### git config ###
 
 To create and modify system/user/repo git configuration file.
 
