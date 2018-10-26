@@ -28,3 +28,7 @@ git config user.name	# will show value of user.name
 ### git init ###
 
 To initialize a project as git repository.
+
+### git clone ###
+
+For cloning a remote repository into local system.
