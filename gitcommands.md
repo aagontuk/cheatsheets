@@ -67,3 +67,13 @@ Show changes of a file
 git diff		# Shows changes between last staged and unstaged
 git diff --staged	# Shows changes between the last commit and staged
 ```
+
+### git commit ###
+
+For commiting changes that are staged
+
+```
+git commit			# To commit changes that are staged.
+git commit -m "COMMIT_MSG"	# Commit with inline commit message.
+git commit -a			# stage all modified files and commit.
+```
