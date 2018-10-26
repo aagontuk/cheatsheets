@@ -77,3 +77,22 @@ git commit			# To commit changes that are staged.
 git commit -m "COMMIT_MSG"	# Commit with inline commit message.
 git commit -a			# stage all modified files and commit.
 ```
+
+### git rm ###
+
+To remove files.
+
+Following command will remove a file from tracking and also remove from system(HDD).
+```
+git rm project_file
+```
+
+If the file is already modified or staged, then to remove -f have to be used.
+```
+git rm -f project_file
+```
+
+To remove only from git but not from the system(HDD).
+```
+git rm --cached project_file
+```
