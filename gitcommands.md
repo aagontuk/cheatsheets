@@ -29,6 +29,23 @@ git config user.name	# will show value of user.name
 
 To initialize a project as git repository.
 
+```
+git init
+```
+
 ### git clone ###
 
 For cloning a remote repository into local system.
+
+```
+git clone https://github.com/aagontuk/cheatsheets mycheatsheets
+```
+
+### git status ###
+
+To see status of the project files. Untracked/tracked/modified/staged.
+
+```
+git status	# Show details status
+git status -s	# Show brief status
+```
