@@ -24,3 +24,7 @@ git config --global user.email 'aagontuk@mail.com'
 git config --global core.editor vim
 git config user.name	# will show value of user.name
 ```
+
+### git init ###
+
+To initialize a project as git repository.
