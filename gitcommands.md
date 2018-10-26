@@ -58,3 +58,12 @@ If a directory is added, its contents will be added recursively.
 ```
 git add README.md
 ```
+
+### git diff ###
+
+Show changes of a file
+
+```
+git diff		# Shows changes between last staged and unstaged
+git diff --staged	# Shows changes between the last commit and staged
+```
