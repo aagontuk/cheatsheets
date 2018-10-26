@@ -49,3 +49,12 @@ To see status of the project files. Untracked/tracked/modified/staged.
 git status	# Show details status
 git status -s	# Show brief status
 ```
+
+### git add ###
+
+To add untracked/modified files to staging area and prepare for commit.
+If a directory is added, its contents will be added recursively.
+
+```
+git add README.md
+```
