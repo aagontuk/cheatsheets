@@ -96,3 +96,11 @@ To remove only from git but not from the system(HDD).
 ```
 git rm --cached project_file
 ```
+
+### git mv ###
+
+To rename files/folders
+
+```
+git mv project_file my_project_file
+```
