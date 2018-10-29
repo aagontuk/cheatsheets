@@ -1,8 +1,8 @@
 ## Frequently Used Git Commands ##
 
-### git config ###
+### Configuring Git ###
 
-To create and modify system/user/repo git configuration file.
+`git config` is used to create and modify system/user/repo git configuration file.
 
 **Options:**
 * *--system* - will set the config system wide. for all user's
@@ -25,15 +25,15 @@ git config --global core.editor vim
 git config user.name	# will show value of user.name
 ```
 
-### git init ###
+### Initializing a project ###
 
-To initialize a project as git repository.
+`git init` is used to initialize a project as git repository.
 
 ```
 git init
 ```
 
-### git clone ###
+### Cloning a repository from remote ###
 
 For cloning a remote repository into local system.
 
@@ -41,7 +41,7 @@ For cloning a remote repository into local system.
 git clone https://github.com/aagontuk/cheatsheets mycheatsheets
 ```
 
-### git status ###
+### Showing status of the project ###
 
 To see status of the project files. Untracked/tracked/modified/staged.
 
@@ -50,7 +50,7 @@ git status	# Show details status
 git status -s	# Show brief status
 ```
 
-### git add ###
+### Adding files to staging area ###
 
 To add untracked/modified files to staging area and prepare for commit.
 If a directory is added, its contents will be added recursively.
@@ -59,7 +59,7 @@ If a directory is added, its contents will be added recursively.
 git add README.md
 ```
 
-### git diff ###
+### Inspect changes of a file ###
 
 Show changes of a file
 
@@ -68,7 +68,7 @@ git diff		# Shows changes between last staged and unstaged
 git diff --staged	# Shows changes between the last commit and staged
 ```
 
-### git commit ###
+### Commiting ###
 
 For commiting changes that are staged
 
@@ -79,7 +79,7 @@ git commit -a			# stage all modified files and commit.
 git commit -v			# will add diff of changes in the commit message.
 ```
 
-### git rm ###
+### Removing files ###
 
 To remove files.
 
@@ -99,7 +99,7 @@ the file.
 git rm --cached project_file
 ```
 
-### git mv ###
+### Moving/Renaming files ###
 
 To rename files/folders
 
@@ -107,7 +107,7 @@ To rename files/folders
 git mv project_file my_project_file
 ```
 
-### git log ###
+### View logs ###
 
 To view commit logs/history
 
