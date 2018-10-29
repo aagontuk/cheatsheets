@@ -93,7 +93,8 @@ If the file is already modified or staged, then to remove -f have to be used.
 git rm -f project_file
 ```
 
-To remove only from git but not from the system(HDD).
+To remove only from git but not from the system(HDD). So that git no longer track
+the file.
 ```
 git rm --cached project_file
 ```
@@ -104,4 +105,26 @@ To rename files/folders
 
 ```
 git mv project_file my_project_file
+```
+
+### git log ###
+
+To view commit logs/history
+
+```
+git log					# Show entire commit log of the repo
+git log -n				# Show last n commit logs
+git log -p -n				# Show last n commit log including change/patch/diff in those commits
+git log --stat				# Commit log witch list of modified files and stat of the changes in those files
+git log --pretty=oneline		# show each commit log in one line with only full SHA and subject
+git log --pretty=short			# Log with SHA, author and subject
+git log --pretty=full			# Log with SHA, author, commiter, subject, message body
+git log --pretty=fuller			# Log with SHA, author, commiter, subject, message body, write and commit dates
+git log --oneline			# Show first 7 characters of SHA value, Heading
+git log --format="%h - %an, %ad: %s"	# Custom log output format
+git log --graph				# Will show a ascii graph of commit history
+git log --relative-date			# Will show relative date(days, weeks etc) rather than exact date
+git log --since=2.weeks			# Show all commits since a specific date or relative date
+git log --until=2.weeks			# Show all commit before a specific date or relative date
+got log --author=AUTHOR			# Show the logs of a specific author
 ```
