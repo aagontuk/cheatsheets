@@ -1,3 +1,23 @@
+# INDEX #
+
+1. [Frequently used git commands](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#frequently-used-git-commands)
+    1. [Configuring git](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#configuring-git)
+    2. [Initializing a project](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#initializing-a-project)
+    3. [Cloning a repository from remote](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#cloning-a-repository-from-remote)
+    4. [Showing status of the project](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#showing-status-of-the-project)
+    5. [Adding files to staging area](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#adding-files-to-staging-area)
+    6. [Inspect changes of a file](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#inspect-changes-of-a-file)
+    7. [Commiting](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#commiting)
+    8. [Removing files](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#removing-files)
+    9. [Moving/Renaming files](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#movingrenaming-files)
+    10. [Viewing logs](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#view-logs)
+    11. [Modifying last commit](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#modifying-last-commit)
+    12. [Removing from staging area](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#removing-files-from-staging-area)
+    13. [Unmodifying a modified file](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#unmodifying-a-modified-file)
+    14. [Managing remote](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#managing-remote)
+    15. [Tagging](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#tagging)
+    16. [Aliasing](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#aliasing)
+
 ## Frequently Used Git Commands ##
 
 ### Configuring Git ###
