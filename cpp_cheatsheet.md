@@ -1,3 +1,57 @@
+# INDEX #
+1. [Variable and fundamental data types](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#variable-and-fundamental-data-types)
+    1. [Initializing a variable](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#initializing-a-variable)
+    2. [Intergers](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#integers)
+    3. [Floating point numbers](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#floating-point-numbers)
+    4. [Boolean Numbers](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#boolean-numbers)
+    5. [Type casting](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#type-casting)
+    6. [Literal](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#literal)
+    7. [Constants](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#constants)
+    8. [Variable Scopes and duration](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#variable-scopes-and-duration)
+        1. [Shadowing](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#shadowing)
+        2. [Global scope operator](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#global-scope-operator)
+
+2. [Console Input/Output](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#console-inputoutput)
+    1. [Console I/O Methods](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#console-io-methods)
+    2. [Error Handling in Console Input](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#error-handling-in-console-input)
+    3. [A Program Handling All the Error Case in Input](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#a-program-handling-all-the-error-case-in-input)
+
+3. [Generating Random Numbers](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#generating-random-numbers)
+    1. [Generating Random Numbers](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#generating-random-numbers-1)
+    2. [Function for generating Random Numbers Between A Range](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#function-for-generating-random-numbers-between-a-range)
+
+4. [Advanced Data Types](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#advanced-data-types)
+    1. [Array](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#array)
+        1. [Array Indexes](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#array-indexes)
+        2. [Representing Array Indexes with Enumerators](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#representing-array-indexes-with-enumerators)
+        3. [Relation Between Array and Pointer](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#relation-between-array-and-pointer)
+        4. [Difference Between Array and Pointer to Array](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#difference-between-array-and-pointer-to-array)
+        5. [String Constants Using Fixed Sized Array and Pointer](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#string-constants-using-fixed-sized-array-and-pointer)
+
+    2. [Pointers](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#pointers)
+        1. [Definig NULL Pointer C++ Way](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#definig-null-pointer-c-way)
+        2. [Void Pointers](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#void-pointers)
+        3. [Converting A Pointer Address to Integer](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#converting-a-pointer-address-to-integer)
+
+5. [Dynamic Memory Allocation](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#dynamic-memory-allocation)
+    1. [Allocating Memory dynamically](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#allocating-memory-dynamically)
+    2. [Deallocating memory](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#deallocating-memory)
+    3. [Memory leak](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#memory-leak)
+
+6. [Reference Variables](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#reference-variables)
+7. [For Each Loop](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#for-each-loop)
+8. [Functions](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#functions)
+    1. [Function Pointers](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#function-pointers)
+    2. [Function Ellipsis](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#function-ellipsis)
+
+10. [Object Oriented Programming](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#object-oriented-programming)
+    1. [Basic Class Example](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#basic-class-example)
+    2. [Constructors](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#constructors)
+    3. [Destructors](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#destructors)
+    4. [Static Member Variables](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#static-member-variables)
+    5. [Static Member Functions](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#static-member-functions)
+    
+
 ## Variable and fundamental data types ##
 
 ### Initializing a variable ###
