@@ -4,7 +4,7 @@
 3. [\<meta\>](https://github.com/aagontuk/cheatsheets/blob/master/html_cheetsheet.md#meta)
 4. [\<body\>](https://github.com/aagontuk/cheatsheets/blob/master/html_cheetsheet.md#body)
 5. [\<h1\> - \<h6\> for heading](https://github.com/aagontuk/cheatsheets/blob/master/html_cheetsheet.md#h1-to-h6)
-6. [\<hr\ for horizontal line>](https://github.com/aagontuk/cheatsheets/blob/master/html_cheetsheet.md#hr)
+6. [\<hr\> for horizontal line](https://github.com/aagontuk/cheatsheets/blob/master/html_cheetsheet.md#hr)
 7. [\<p\> for paragraph](https://github.com/aagontuk/cheatsheets/blob/master/html_cheetsheet.md#p)
 8. [\<pre\> to preserve line breaks](https://github.com/aagontuk/cheatsheets/blob/master/html_cheetsheet.md#pre)
 9. [Formatting Tags](https://github.com/aagontuk/cheatsheets/blob/master/html_cheetsheet.md#formatting-tags)
