@@ -1,0 +1,126 @@
+\documentclass[11pt]{article}
+
+\title{\LaTeX\ Cheatsheet}
+\author{Ashfaqur Rahman}
+\date{May 12, 2018}
+
+\begin{document}
+
+\maketitle
+
+A latex cheatsheet.
+
+\section{Characters}
+
+
+\subsection{Latex command characters}
+
+\$ \% \& \# \_ \{ \} \verb=\ ~ ^= are command characters and has specia meaning to latex.
+
+\section{Writing}
+
+\subsection{Modes in \LaTeX}
+
+\begin{description}
+	\item[Paragraph mode] Normal mode
+	\item[Math Mode] For mathematical equation. Text inside \verb=\(...\)= or \verb=$...$= or \verb=$$...$$= or \verb=\begin{equation}...\end{equation}= or \verb=\begin{displaymath}...\end{displaymath}=
+	\item[Left to right mode] Text are displayed from left to right without line breaks. text inside \verb=\mbox{}=
+\end{description}
+
+\subsection{Creating a New Paragraph}
+
+A blank line creates a new paragraph.
+
+\subsection{Spaces}
+
+\subsubsection{Inserting Spaces}
+
+\verb=\,= is used for inserting a space.
+
+\subsubsection{Space after a period}
+
+Latex assumes end of sentence if it found period after small case later. In that case it puts extra space after period. But for the cases like ``etc.'' a space followed by \verb=\= should be used after period like \verb=etc.\ =. A space followed by \verb=\=  means inter word space.
+
+If ending of a sentence contains a uppercase letter to end the sentence use \verb=\@= before period.
+
+\subsubsection{Space after a latex command}
+
+All spaces are ignored after a latext command like \verb=\LaTeX= command. To make a space after \LaTeX\ a space followed by \verb=\= should be used like \verb=\LaTe= 
+
+\subsection{Dashes}
+
+\begin{itemize}
+		\item\verb=-= A intra-word dash or hyphene. Example: X-ray.
+		\item\verb=--= A number range dash. Example: 1--10
+		\item\verb=---= A punctuation dash. Example: ---
+\end{itemize}
+
+\subsection{Quotations}
+
+\verb=`= is used for single quotation start (`).\\
+\verb='= is used for single quotation end (').\\
+\verb=``= is used for double quotation start (``).\\
+\verb="= is used for double quotation end (").
+
+\subsubsection{Putting Quotation in a Quotation}
+
+\verb=``\,`Ah!`\,`` She said= produces ``\,\,`Ah!'\,\,'' She said
+
+\subsection{Commenting}
+
+\verb=%= is used for commenting. Latex ignore all character after \verb=%= to the end of the line. Also ignores space in the beginig of the next line.
+
+\section{\LaTeX Commands List}
+
+\begin{itemize}
+		\item\verb=\documentclass[]{}= --- To specify document type. Arguments can be book, article, report etc. Options\footnote{Options are specified inside the square brackets} are:
+
+		\begin{enumerate}
+			\item 11pt --- 10\% larger than 10pt.
+			\item 12pt --- 20\% larger than 10pt.
+			\item twoside --- to print in both sides.
+			\item twocolumn --- two column in a single page.
+		\end{enumerate}
+
+		\item\verb=\usepackage{}= --- To use external packages.
+		\item\verb=\title{}= --- To specify document title.
+		\item\verb=\author{}= --- To specify documnet author. Multiple authors cab be specified using \verb=\and= command.
+		\item\verb=\begin{}= --- To begin any block. like \verb=\begin{document}= to begin any document, \verb=\begin{quote}= begins a long quotation, \verb=\begin{math}=begins a math block etc.
+		\item\verb=\end{}= --- ends any block that begins with \verb=\begin{}=
+				\item Argument of \verb=\begin= and \verb=\end= are called environments. They create different display environments. Every declaration or command can be environment like \verb=\emph= can also be written as environment like \verb=\begin{emph}= ... \verb=\end{emph}= Here is a list of different environments:
+
+			\begin{description}
+				\item[document] Document environment.
+				\item[quote] Shor quotation environment.
+				\item[quotation] Long quotation environment.
+				\item[itemize] Unordered list environment.
+				\item[enumerate] Ordered list environment.
+				\item[description] Description list environment like this one.
+				\item[displaymath] Display math equations in separate line but without equation number.
+				\item[equation] Displayequation in separate line with equation number for further referance.
+			\end{description}
+
+		\item\verb=\maketitle= --- To create title. It must be inside \verb=\begin{document}=.
+		\item\verb=\part= --- Create parts of a document. Doesn't effect documnet numbering.
+		\item\verb=\chapter= ---- Create chapters. No applicable for article document class.
+		\item\verb=\section= --- Specify a section.
+		\item\verb=\subsection= --- Specify a sub-section of a section.
+		\item\verb=\subsubsection= --- Specify a sub-section of a sub-section.
+		\item\verb=\appendix= --- Specify an appendix.
+		\item\verb={}= --- Curly braces can be used for defining scope. Example --- Input: \verb=Hello, {\em aagontuk}= Output: Hello, {\em aagontuk}
+		\item\verb=\today= --- Current date \today
+		\item\verb=\TeX= --- Shows \TeX
+		\item\verb=\LaTeX= --- Shows \LaTeX
+		\item\verb=\ldots= --- Produces  \ldots
+		\item\verb=\emph{}= --- To emphasize text. Example: I will \emph{emphasize} it.
+		\item\verb=\mbox{TEXT}= --- Never breaks TEXT.\ 
+		\item\verb=\footnote{footnote}= --- To create a footnote. Example: Footnote\footnote{Please find the foornote here}
+		\item\verb=\\= --- New line.
+		\item\verb=\\*= --- New line but prevents a new page.
+		\item\verb=\newline= --- New line.
+		\item\verb=\hfill \break= --- New line.
+		\item\verb=\newpage= --- New Page.
+		\item\verb=\hspace{xmm}= --- x mm horizontal space.
+		\item\verb=\vspace{xmm}= --- x mm vertical space.
+\end{itemize}
+\end{document}
