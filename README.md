@@ -1,6 +1,6 @@
-#### My Long Cheatsheets And Reading Lists ####
+# My Long Cheatsheets And Reading Lists #
 
-##### Cheatsheets #####
+## Cheatsheets ##
 
 1. [Git & GitHub](https://github.com/rashfaqur/cheatsheets/blob/master/git_and_github.md)
 2. [Git Commands](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md)
@@ -9,11 +9,14 @@
 4. [C++ Programming](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md)
 4. [Ncurses Programming in C](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md)
 5. [Python Programming](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md)
+6. Latex
+    1. [Original Latex Format](https://github.com/aagontuk/cheatsheets/blob/master/latext_cheat.tex)
+    2. [Converted PDF Format](https://github.com/aagontuk/cheatsheets/blob/master/latext_cheat.pdf)
 6. [HTML Tags](https://github.com/aagontuk/cheatsheets/blob/master/html_cheetsheet.md)
 6. [MySQL Queries](https://github.com/aagontuk/cheatsheets/blob/master/mysqlcheat.md)
 7. [QT Programming](https://github.com/aagontuk/cheatsheets/blob/master/qt-cheatsheet.md)
 
-##### Reading Lists #####
+## Reading Lists ##
 
 1. [Electronics](https://github.com/rashfaqur/cheatsheets/blob/master/electronics-reading-list.md)
 2. [Programming](https://github.com/rashfaqur/cheatsheets/blob/master/programming-reading-list.md)
