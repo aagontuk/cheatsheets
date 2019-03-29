@@ -9,6 +9,7 @@
 4. [C++ Programming](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md)
 4. [Ncurses Programming in C](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md)
 5. [Python Programming](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md)
+5. [Shell Programming](https://github.com/aagontuk/cheatsheets/blob/master/bash.md)
 6. Latex
     1. [Original Latex Format](https://github.com/aagontuk/cheatsheets/blob/master/latext_cheat.tex)
     2. [Converted PDF Format](https://github.com/aagontuk/cheatsheets/blob/master/latext_cheat.pdf)
