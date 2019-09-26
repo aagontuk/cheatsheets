@@ -6,6 +6,7 @@
     1. [For Loop](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#for-loop)
     2. [While Loop](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#while-loop)
     3. [Until](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#until)
+    4. [break and continue statements](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#break-and-continue)
 5. [Exit Staus](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#exit-status)
 
 ## Command Line Arguments ##
@@ -102,6 +103,10 @@ until [ $number -gt 10 ]; do
 		number=$((number + 1))
 done
 ```
+
+### break and continue ###
+Like any other programming languages `break` and `continue`
+statement can be applied in a loop
 
 ## Exit Status ##
 ```sh
