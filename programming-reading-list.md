@@ -1,9 +1,11 @@
-### INDEX ###
+## INDEX ##
 
 1. [GNU Make](https://github.com/aagontuk/cheatsheets/blob/master/programming-reading-list.md#gnu-make)
 2. [Serial Programming](https://github.com/aagontuk/cheatsheets/blob/master/programming-reading-list.md#serial-programming)
 3. [C Programming](https://github.com/aagontuk/cheatsheets/blob/master/programming-reading-list.md#c-programming)
 4. [x 86 Assembly Programming](https://github.com/aagontuk/cheatsheets/blob/master/programming-reading-list.md#x86-assembly-programming)
+
+---
 
 #### GNU Make ####
 
