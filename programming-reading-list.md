@@ -3,10 +3,12 @@
 1. [GNU Make](https://github.com/aagontuk/cheatsheets/blob/master/programming-reading-list.md#gnu-make)
 2. [Serial Programming](https://github.com/aagontuk/cheatsheets/blob/master/programming-reading-list.md#serial-programming)
 3. [C Programming](https://github.com/aagontuk/cheatsheets/blob/master/programming-reading-list.md#c-programming)
+4. [x 86 Assembly Programming](https://github.com/aagontuk/cheatsheets/blob/master/programming-reading-list.md#x86-assembly-programming)
 
 #### GNU Make ####
 
 1. [Writing Make Files - Short HowTo](https://www.cs.bu.edu/teaching/cpp/writing-makefiles/)
+2. [What is a Makefile and how does it work?](https://opensource.com/article/18/8/what-how-makefile)
 
 #### Serial Programming ####
 
@@ -20,3 +22,8 @@
 #### C Programming ####
 
 1. [Multithreading in C, POSIX style](http://softpixel.com/~cwright/programming/threads/threads.c.php)
+
+#### x86 Assembly Programming ####
+
+1. [A Tiny Guide to Programming in 32-bit x86 Assembly Language](https://www.cs.dartmouth.edu/~sergey/cs258/tiny-guide-to-x86-assembly.pdf)
+2. [x86 Assembly Guide](http://www.cs.virginia.edu/~evans/cs216/guides/x86.html)
