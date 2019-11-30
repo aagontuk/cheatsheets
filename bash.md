@@ -10,6 +10,7 @@
 5. [Exit Staus](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#exit-status)
 
 ## Command Line Arguments ##
+sample code:
 ```sh
 #!/bin/bash
 
@@ -27,6 +28,7 @@ Program name: './cmd.sh'
 Argument 1: 'hello'
 Argument 2: 'world'
 ```
+sample code:
 ```sh
 echo "Number of arguments given: $#"
 
