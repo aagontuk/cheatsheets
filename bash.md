@@ -11,14 +11,37 @@
 
 ## Command Line Arguments ##
 ```sh
+#!/bin/bash
+
+echo "Number of arguments: '$#'"
+echo "All arguments(space seperated): '$@'"
+echo "Program name: '$0'"
+echo "Argument 1: '$1'"
+echo "Argument 2: '$2'"
+```
+sample output:
+```
+Number of arguments: '2'
+All arguments(space seperated): 'hello world'
+Program name: './cmd.sh'
+Argument 1: 'hello'
+Argument 2: 'world'
+```
+```sh
 echo "Number of arguments given: $#"
 
 number=1
 while [ "$1" != "" ]; do
     echo "Argument $number: $1"
-    number=$((number + 1))
+    number=$((number + 1))      # number+=1
     shift
 done
+```
+sample output:
+```
+Number of arguments given: '2'
+Argument 1: hello
+Argument 2: world
 ```
 
 ## Conditional Statement ##
