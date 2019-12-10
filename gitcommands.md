@@ -90,13 +90,13 @@ git diff --staged	# Shows changes between the last commit and staged
 
 ### Commiting ###
 
-`git commi` is used for commiting changes that are staged
+`git commit` is used for commiting changes that are staged
 
 ```
-git commit			# To commit changes that are staged.
+git commit			        # To commit changes that are staged.
 git commit -m "COMMIT_MSG"	# Commit with inline commit message.
-git commit -a			# stage all modified files and commit.
-git commit -v			# will add diff of changes in the commit message.
+git commit -a			    # stage all tracked modified files and commit.
+git commit -v			    # will add diff of changes in the commit message.
 ```
 
 ### Removing files ###
