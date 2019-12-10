@@ -86,6 +86,7 @@ git add README.md
 ```
 git diff		# Shows changes between last staged and unstaged
 git diff --staged	# Shows changes between the last commit and staged
+git diff COMMIT_HASH~ COMMIT_HASH   # Show diff between last commit and its ancestor
 ```
 
 ### Commiting ###
@@ -121,7 +122,7 @@ git rm --cached project_file
 
 ### Moving/Renaming files ###
 
-`git mv` is udef to rename files/folders
+`git mv` is used to rename files/folders
 
 ```
 git mv project_file my_project_file
