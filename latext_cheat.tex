@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 
 \usepackage{upquote}
+\usepackage{pygmentex}
 
 \title{\LaTeX\ Cheatsheet}
 \author{Ashfaqur Rahman}
@@ -135,4 +136,24 @@ to use empty \{\} after a command like \verb=\LaTeX{}=.
 		\item\verb=\hspace{xmm}= --- x mm horizontal space.
 		\item\verb=\vspace{xmm}= --- x mm vertical space.
 \end{itemize}
+
+\section{Useful Tricks}
+
+\subsection{Centered section header without number}
+
+In latex usually section are left aligned and numbered.
+If a starred version of the section command is used
+it doesn't generate number. To make the section header
+center aligned `sectsty' package can be used.
+
+\begin{pygmented}[lang=tex]
+\documentclass[11pt]{article}
+\usepackage{sectsty}
+\sectionfont{\centering}
+
+\begin{document}
+\section*{Statement of Purpose}
+\end{document}
+\end{pygmented}
+
 \end{document}
