@@ -1,5 +1,7 @@
 \documentclass[11pt]{article}
 
+\usepackage{upquote}
+
 \title{\LaTeX\ Cheatsheet}
 \author{Ashfaqur Rahman}
 \date{May 12, 2018}
@@ -7,15 +9,24 @@
 \begin{document}
 
 \maketitle
+\tableofcontents
+\newpage
 
 A latex cheatsheet.
 
-\section{Characters}
+\section{Characters and Commands}
 
+\subsection{Latex special characters}
 
-\subsection{Latex command characters}
+\$ \% \& \# \_ \{ \} \verb=\ ~ ^= are special characters and has special meaning to latex.
+You can use a leading \textbackslash\ to use them. To print \$, write \textbackslash\$
 
-\$ \% \& \# \_ \{ \} \verb=\ ~ ^= are command characters and has specia meaning to latex.
+\subsection{Latex commands}
+
+Each latex command starts with a \textbackslash and contains only letters.
+Example: \verb=\maketitle=, \verb=\tableofcontents= etc.\ Parameters to
+a command are specified inside \{\} and optional parameters are specified
+inside [ ]. For example \verb=\documentclass[10pt]{article}=.
 
 \section{Writing}
 
@@ -45,7 +56,8 @@ If ending of a sentence contains a uppercase letter to end the sentence use \ver
 
 \subsubsection{Space after a latex command}
 
-All spaces are ignored after a latext command like \verb=\LaTeX= command. To make a space after \LaTeX\ a space followed by \verb=\= should be used like \verb=\LaTe= 
+All spaces are ignored after a latext command like \verb=\LaTeX= command. To make a space after \LaTeX\ a space followed by \verb=\= should be used like \verb=\LaTeX\ =. Another way to do this is
+to use empty \{\} after a command like \verb=\LaTeX{}=.
 
 \subsection{Dashes}
 
