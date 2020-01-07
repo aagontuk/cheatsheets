@@ -33,27 +33,27 @@ Data memory space in AVR is devided into 3 parts. General Purpose Registers(GPRs
 					  Data Memory Space
 
 				------------------------------
-				|			R0				 |	Address In Hex: $0000
+				|		R0    	     |	Address In Hex: $0000
 				------------------------------
-	GPRs		|			...				 | .....
+	GPRs		        |		...          | .....
 				------------------------------
-				|			R31				 | $001F
+				|		R31	     | $001F
 				------------------------------
-				|			I/O				 | $0020
+				|		I/O	     | $0020
 				------------------------------
-I/O	Registers	|			...				 | .....
+I/O	Registers		|		...	     | .....
 				------------------------------
-				|			I/O				 | $005F
+				|		I/O	     | $005F
 				------------------------------
-				|		SRAM	Location	 | .....
+				|	SRAM	Location     | .....
 				------------------------------
-				|		SRAM	Location	 | .....
+				|	SRAM	Location     | .....
 				------------------------------
-	SRAM		|		SRAM 	Location	 | $0300
+	SRAM			|	SRAM 	Location     | $0300
 				------------------------------
-				|		SRAM	Location	 | $0301
+				|	SRAM	Location     | $0301
 				------------------------------
-				|		SRAM	Location	 | .....
+				|	SRAM	Location     | .....
 				------------------------------
 
 ```
