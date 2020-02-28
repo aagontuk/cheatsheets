@@ -888,6 +888,8 @@ int main(){
 
 * Ellipsis are dangerous. Try to avoid them. For more - http://www.learncpp.com/cpp-tutorial/714-ellipsis-and-why-to-avoid-them/
 
+### Lambda Functions ###
+
 ## Object Oriented Programming ##
 
 ### Basic Class Example ###
@@ -1168,3 +1170,40 @@ int main(){
 	return 0;
 }
 ```
+
+### Member Types ###
+
+In C++ classes can have memeber types or nested types. They make the class
+easy to maintain. For example in the following example it will be easy
+to change the type from int to double. It need to change in only one line.
+
+```
+#include <iostream>
+
+class Point{
+public:
+    using point_t = int; // Member type
+
+    Point(point_t x, point_t y): m_x(x), m_y(y){}
+
+    void print(void){
+        std::cout << "(" << m_x << ", " << m_y << ")";
+    }
+
+private:
+    point_t m_x;
+    point_t m_y;
+};
+
+int main(int argc, char *argv[]){
+    Point p(10, 20);
+    p.print();
+    return 0;
+}
+```
+
+## Standard Template Library ##
+
+## Appendix A: Some Usefull Functions ##
+
+* `decltype(s)` - Query the type of s
