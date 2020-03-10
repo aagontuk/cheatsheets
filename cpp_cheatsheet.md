@@ -50,6 +50,7 @@
     3. [Destructors](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#destructors)
     4. [Static Member Variables](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#static-member-variables)
     5. [Static Member Functions](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#static-member-functions)
+    6. [Member Type or Nested Type](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#member-types)
     
 
 ## Variable and fundamental data types ##
@@ -1177,7 +1178,7 @@ In C++ classes can have memeber types or nested types. They make the class
 easy to maintain. For example in the following example it will be easy
 to change the type from int to double. It need to change in only one line.
 
-```
+```c++
 #include <iostream>
 
 class Point{
@@ -1198,6 +1199,469 @@ private:
 int main(int argc, char *argv[]){
     Point p(10, 20);
     p.print();
+    return 0;
+}
+```
+
+### Access Specifiers ###
+
+**public:**
+**private:**
+**protected:**
+
+### Chaining member functions ###
+
+```c++
+#include <iostream>
+
+class Point{
+public:
+    using point_t = int;
+
+    Point(point_t x, point_t y): m_x(x), m_y(y){}
+
+    Point& add(point_t x, point_t y){
+        this->m_x += x; 
+        this->m_y += y;
+        return *this;
+    }
+
+    Point& mul(point_t x, point_t y){
+        this->m_x *= x; 
+        this->m_y *= y;
+        return *this;
+    }
+
+    void print(void){
+        std::cout << "(" << m_x << ", " << m_y << ")";
+    }
+
+private:
+    point_t m_x;
+    point_t m_y;
+};
+
+int main(int argc, char *argv[]){
+    Point p(10, 20);
+    p.add(3, 5).mul(7, 8).add(2, 3);
+    p.print();
+    return 0;
+}
+```
+
+### Difference between structs and classes in C++ ###
+
+C++ structs and classes are same. Only difference is that all members in structs are public.
+
+### Friend function and friend class ###
+
+Friend functions and classes can access the private members of a class. In the following example `printWeather()` is friend of both `Humidity` and `Temperature` class. So it can access
+private members of both classes.
+
+```c++
+#include <iostream>
+ 
+class Humidity;
+ 
+class Temperature
+{
+private:
+    int m_temp;
+public:
+    Temperature(int temp=0) { m_temp = temp; }
+ 
+    friend void printWeather(const Temperature &temperature, const Humidity &humidity);
+};
+ 
+class Humidity
+{
+private:
+    int m_humidity;
+public:
+    Humidity(int humidity=0) { m_humidity = humidity; }
+ 
+    friend void printWeather(const Temperature &temperature, const Humidity &humidity);
+};
+ 
+void printWeather(const Temperature &temperature, const Humidity &humidity)
+{
+    std::cout << "The temperature is " << temperature.m_temp <<
+       " and the humidity is " << humidity.m_humidity << '\n';
+}
+ 
+int main()
+{
+    Humidity hum(10);
+    Temperature temp(12);
+ 
+    printWeather(temp, hum);
+ 
+    return 0;
+}
+```
+
+Classes can also be friend of another class. In following example `Display` class if a friend
+of `Storage` class so it can access the private members.
+
+```c++
+#include <iostream>
+ 
+class Storage
+{
+private:
+    int m_nValue;
+    double m_dValue;
+public:
+    Storage(int nValue, double dValue)
+    {
+        m_nValue = nValue;
+        m_dValue = dValue;
+    }
+ 
+    // Make the Display class a friend of Storage
+    friend class Display;
+};
+ 
+class Display
+{
+private:
+    bool m_displayIntFirst;
+ 
+public:
+    Display(bool displayIntFirst) { m_displayIntFirst = displayIntFirst; }
+ 
+    void displayItem(const Storage &storage)
+    {
+        if (m_displayIntFirst)
+            std::cout << storage.m_nValue << " " << storage.m_dValue << '\n';
+        else // display double first
+            std::cout << storage.m_dValue << " " << storage.m_nValue << '\n';
+    }
+};
+ 
+int main()
+{
+    Storage storage(5, 6.7);
+    Display display(false);
+ 
+    display.displayItem(storage);
+ 
+    return 0;
+}
+```
+
+## Operator Overloading ##
+
+In C++ each operator is actually a function. For example the operator `+` is acturally
+`operator+()` function.
+
+* At least one of the operand will have to be a custom type
+
+### Using Friend Function  ###
+
+```c++
+#include <iostream>
+
+class Point{
+private:
+    using point_t = int;
+    point_t m_x;
+    point_t m_y;
+
+public:
+    Point(): m_x(0), m_y(0){}
+    Point(point_t x, point_t y): m_x(x), m_y(y){}
+
+    // constant memeber function
+    void print(void) const {
+        std::cout << "(" << m_x << ", " << m_y << ")" << "\n";
+    }
+
+    // This is not a member function only a friend function
+    // This could defined outside of the function too
+    friend Point operator+(cost Point &p, const int n){
+        return Point(p.m_x + n, p.m_y + n); 
+    }
+
+    friend Point operator+(const int n, const Point &p){
+        return p + n;
+    }
+
+    friend Point operator+(const Point &p1, const Point &p2){
+        return Point(p1.m_x + p2.m_x, p1.m_y + p2.m_y);
+    }
+};
+
+int main(int argc, char *argv[]){
+    Point p1(10, 20);
+    Point p2(4, 5);
+    Point p3 = p1 + p2 + 5;
+
+    p3.print();
+
+    return 0;
+}
+```
+
+### Using Normal Function ###
+
+If there is no need to access private class data, operator overloading can be done as normal
+function.
+
+```c++
+#include <iostream>
+
+class Point{
+private:
+    using point_t = int;
+    point_t m_x;
+    point_t m_y;
+
+public:
+    Point(): m_x(0), m_y(0){}
+    Point(point_t x, point_t y): m_x(x), m_y(y){}
+
+    point_t getX(void) const {
+        return m_x; 
+    }
+    
+    point_t getY(void) const {
+        return m_y; 
+    }
+
+    // constant memeber function
+    void print(void) const {
+        std::cout << "(" << m_x << ", " << m_y << ")" << "\n";
+    }
+};
+
+Point operator+(const Point &p, const int n){
+    return Point(p.getX() + n, p.getY() + n); 
+}
+
+Point operator+(int n, const Point &p){
+    return p + n;
+}
+
+Point operator+(const Point &p1, const Point &p2){
+    return Point(p1.getX() + p2.getX(), p1.getY() + p2.getY());
+}
+
+int main(int argc, char *argv[]){
+    Point p1(10, 20);
+    Point p2(4, 5);
+    Point p3 = p1 + p2 + 5;
+
+    p3.print();
+
+    return 0;
+}
+```
+
+### Using Member Function ###
+
+The assignment (=), subscript ([]), function call (()), and member selection (->) operators must be overloaded as member functions.
+IO operators(<< and >>) can't be overloaded as memeber functions.
+
+```c++
+#include <iostream>
+
+class Point{
+private:
+    using point_t = int;
+    point_t m_x;
+    point_t m_y;
+
+public:
+    Point(): m_x(0), m_y(0){}
+    Point(point_t x, point_t y): m_x(x), m_y(y){}
+
+    // No need to pass the class explicitly as it will be passed as hidden this pointer
+    Point operator+ (int n){
+        return Point(m_x + n, m_y +n);
+    }
+};
+
+int main(int argc, char *argv[]){
+    Point p1(10, 20);
+    Point p2 = p1 + 5;
+    return 0;
+}
+```
+### Overloading IO operators ###
+
+```c++
+#include <iostream>
+
+class Point{
+private:
+    using point_t = int;
+    point_t m_x;
+    point_t m_y;
+
+public:
+    Point(): m_x(0), m_y(0){}
+    Point(point_t x, point_t y): m_x(x), m_y(y){}
+
+    point_t getX(void){
+        return m_x; 
+    }
+    
+    point_t getY(void){
+        return m_y; 
+    }
+
+    friend std::ostream& operator<< (std::ostream &out, const Point &p);
+    friend std::istream& operator>> (std::istream &in, Point &p);
+};
+
+// Overloading as friend function
+// Returning std::ostream so that it can be chained like std::cout << p1 << p2
+std::ostream& operator<< (std::ostream &out, const Point &p){
+    out << "(" << p.m_x << ", " << p.m_y << ")";
+    return out;
+}
+
+std::istream& operator>> (std::istream &in, Point &p){
+    in >> p.m_x >> p.m_y;
+    return in;
+}
+
+// Overloading as normal function
+Point operator+ (Point p, int n){
+    return Point(p.getX() + n, p.getY() + n); 
+}
+
+Point operator+ (int n, Point p){
+    return p + n;
+}
+
+Point operator+ (Point p1, Point p2){
+    return Point(p1.getX() + p2.getX(), p1.getY() + p2.getY());
+}
+
+int main(int argc, char *argv[]){
+    Point p1(10, 20);
+    Point p2;
+
+    std::cout << "Enter a point:\n";
+    std::cin >> p2;
+    std::cout << p1 << " + " << p2 << " = " << p1 + p2 << "\n"; 
+
+    return 0;
+}
+```
+
+### Functors ###
+
+When classes acts like function calls they are called functors. This can be done by
+overloading () operator.
+
+```c++
+#include <iostream>
+
+class Point{
+private:
+    using point_t = int;
+    point_t m_x;
+    point_t m_y;
+
+public:
+    Point(): m_x(0), m_y(0){}
+    Point(point_t x, point_t y): m_x(x), m_y(y){}
+
+    point_t getX(void){
+        return m_x; 
+    }
+    
+    point_t getY(void){
+        return m_y; 
+    }
+
+    // () can only be overloaded as member function
+    Point operator() (int n){
+        return Point(m_x + n, m_y + n);
+    }
+
+    friend std::ostream& operator<< (std::ostream &out, const Point &p);
+};
+
+// Overloading as friend function
+// Returning std::ostream so that it can be chained like std::cout << p1 << p2
+std::ostream& operator<< (std::ostream &out, const Point &p){
+    out << "(" << p.m_x << ", " << p.m_y << ")";
+    return out;
+}
+
+int main(int argc, char *argv[]){
+    Point pnt(10, 20);
+
+    // Will add 5 to pnt.m_x, pnt.m_y and create new Point object.
+    // Notce class object is called like function.
+    std::cout << pnt(5) << "\n";
+
+    return 0;
+}
+```
+
+### Overloading Typecast ###
+
+Typecast overloading can be done to convert between types.
+
+```c++
+#include <iostream>
+#include <cmath>
+
+class Polar{
+private:
+    double m_r;
+    double m_theta;
+
+public:
+    Polar(double r, double theta): m_r(r), m_theta(theta){}
+    friend std::ostream& operator<< (std::ostream &out, const Polar &p);
+};
+
+// Overloading as friend function
+// Returning std::ostream so that it can be chained like std::cout << p1 << p2
+std::ostream& operator<< (std::ostream &out, const Polar &p){
+    out << "(" << p.m_r << ", " << p.m_theta << ")";
+    return out;
+}
+
+class Cartesian{
+private:
+    using point_t = int;
+    point_t m_x;
+    point_t m_y;
+
+public:
+    Cartesian(): m_x(0), m_y(0){}
+    Cartesian(point_t x, point_t y): m_x(x), m_y(y){}
+
+    friend std::ostream& operator<< (std::ostream &out, const Cartesian &c);
+
+    // Typecast overloading
+    operator Polar() const {
+        double r = sqrt(pow(m_x, 2) + pow(m_y, 2)); 
+        double theta = atan(static_cast<double>(m_y) / static_cast<double>(m_x));
+        theta = (theta * 180) / M_PI;
+
+        return Polar(r, theta);
+    }
+};
+
+std::ostream& operator<< (std::ostream &out, const Cartesian &c){
+    out << "(" << c.m_x << ", " << c.m_y << ")";
+    return out;
+}
+
+int main(int argc, char *argv[]){
+    Cartesian cart(10, 20);
+    Polar pol(cart);
+
+    std::cout << "Cartesian: " << cart << "\tPolar: " << pol << "\n";
+
     return 0;
 }
 ```
