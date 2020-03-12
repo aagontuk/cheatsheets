@@ -1666,6 +1666,323 @@ int main(int argc, char *argv[]){
 }
 ```
 
+### Copy Constructors ###
+
+When copy initialization is used a copy constructor is used. By default
+compiler uses memberwise initialization if no copy constructor is
+provided. For example:
+
+```c++
+class Xyz {
+private:
+    int m_var;
+public:
+    Xyz(int x): m_var(x){}
+};
+
+int main(void){
+    Xyz xy(10);     // uses default initialization 
+    
+    Xyz yz(xy);     // Copy initialization
+                    // As there is no copy constructor provided, compiler will do a memberwise initialization
+}
+```
+
+Member functions of a class can access the private members ot
+the same class type. Here is an example with copy constructor:
+
+```c++
+class Xyz {
+private:
+    int m_var;
+public:
+    Xyz(int x): m_var(x){}
+
+    // Copy constructor
+    Xyz(const Xyz &xyz): m_var(xyz.m_var){}
+};
+
+int main(void){
+    Xyz xy(10);     // uses default initialization 
+    
+    Xyz yz(xy);     // uses copy constructor
+}
+```
+
+#### Elision ####
+
+Copy initialization should be avoided as it can be elided
+for optimization.
+
+```c++
+#include <iostream>
+#include <string>
+
+class Hello{
+    private:
+        std::string m_s;
+
+    public:
+        Hello(std::string s): m_s(s){}
+
+        Hello(const Hello &h): m_s(h.m_s){
+            std::cout << "Copy constructor called\n";
+        }
+
+        std::string get(void){return m_s;}
+};
+
+int main(int argc, char *argv[]){
+    Hello h("hello");
+    Hello g(h);                 // Copy constructor will be used
+    Hello i = Hello("gello");   // Copy constructor won't be used
+    Hello k(Hello("gello"));    // Copy constructor won't be used
+
+    std::cout << h.get() << g.get() << i.get() << k.get() << "\n";
+}
+```
+
+If a class is passed by value in a function and return by value from a function
+copy constructor will be called. For example:
+
+```c++
+Hello changeHello(Hello h){ // Copy constructor will be called 
+    h.change("new hello");
+    return h;               // Copy constructor will be called
+}
+```
+
+#### Implicit conversion, explicit and delete keyword ####
+
+* explicit keyword can be used to prevent implicit conversion.
+* delete keyword can be used to prevent both implicit and explicit conversion.
+* [For details](https://www.learncpp.com/cpp-tutorial/9-13-converting-constructors-explicit-and-delete/)
+
+### Overloading assignment operator ###
+
+* Can only be oveloaded as memeber function.
+* Watch out for self assignment.
+* If no overloaded assignment operator is provided, compiler will do memberwise copy.
+
+```c++
+#include <iostream>
+#include <string>
+
+class Hello{
+    private:
+        std::string m_s;
+
+    public:
+        Hello(std::string s): m_s(s){}
+
+        Hello(const Hello &h): m_s(h.m_s){
+            std::cout << "Copy constructor called\n";
+        }
+
+        std::string get(void){return m_s;}
+
+        Hello& operator= (const Hello &h){
+            // If self copying
+            if(this == &h) 
+                return *this;   // for chainig
+
+            m_s = h.m_s;
+
+            return *this;   // for chaining
+        }
+};
+
+int main(int argc, char *argv[]){
+    Hello h("hello");
+    Hello i("iello");
+    Hello j("jello");
+    Hello k(h);         // Copy constructor is called
+
+    j = i = h;          // Overloaded function is called
+
+    std::cout << h.get() << i.get() << j.get() << k.get() << "\n";
+}
+```
+
+### Shallow copy VS Deep copy ###
+
+* Shallow copy means memberwise copying by the compiler if no copy constructor or overloaded assingment operator is provided.
+* The default copy constructor and default assignment operators do shallow copies, which is fine for classes that contain no dynamically allocated variables.
+* Classes with dynamically allocated variables need to have a copy constructor and assignment operator that do a deep copy.
+
+## Object Relationship ##
+
+### Composition and Aggregation ###
+
+In both cases relationship between parent and child is 'has a'.
+
+#### Composition ####
+
+* The part (member) is part of the object (class)
+* The part (member) can only belong to one object (class) at a time
+* The part (member) has its existence managed by the object (class)
+* The part (member) does not know about the existence of the object (class)
+
+* Typically use normal member variables
+* Can use pointer members if the class handles object allocation/deallocation itself
+* Responsible for creation/destruction of parts
+
+#### Aggregation ####
+
+* The part (member) is part of the object (class)
+* The part (member) can belong to more than one object (class) at a time
+* The part (member) does not have its existence managed by the object (class)
+* The part (member) does not know about the existence of the object (class)
+
+* Typically use pointer or reference members that point to or reference objects that live outside the scope of the aggregate class
+* Not responsible for creating/destroying parts
+
+### Association ###
+
+* The associated object (member) is otherwise unrelated to the object (class)
+* The associated object (member) can belong to more than one object (class) at a time
+* The associated object (member) does not have its existence managed by the object (class)
+* The associated object (member) may or may not know about the existence of the object (class)
+
+### Dependencies ###
+
+A dependency occurs when one object invokes another object’s functionality in order to accomplish some specific task.
+This is a weaker relationship than an association, but still,
+any change to object being depended upon may break functionality in the (dependent) caller.
+A dependency is always a unidirectional relationship.
+
+### Container Classes ###
+
+Hold and organize multiple instance of another type(class or fundamental type).
+
+### std::initializer_list ###
+
+Used in container class's constructor for list initialization.
+
+## Inheritance ##
+
+### Order of construction ###
+
+Most base class constructed first and most derived class constructed last.
+
+```c++
+#include <iostream>
+
+class Parent{
+public:
+    Parent(){
+        std::cout << "A" << "\n";
+    }
+};
+
+class Child: public Parent{
+public:
+    Child(){
+        std::cout << "B" << "\n";
+    }
+};
+
+int main(int argc, char *argv[]){
+    Child c;
+    return 0;
+}
+
+/*
+ * Will print:
+ * A
+ * B
+ */
+```
+
+When a derived class is instanciated following things happen in order:
+
+* Memory for derived is set aside (enough for both the Base and Derived portions)
+* The appropriate Derived constructor is called
+* The Base object is constructed first using the appropriate Base constructor. If no base constructor is specified, the default constructor will be used.
+* The initialization list initializes variables
+* The body of the constructor executes
+* Control is returned to the caller
+
+### Constructors and initialization of derived classes ### 
+
+```c++
+#include <iostream>
+
+class Parent{
+public:
+    int m_x;
+    
+    Parent(int x=0): m_x(x){
+        std::cout << "A" << "\n";
+    }
+};
+
+class Child: public Parent{
+public:
+    int m_y;
+    
+    // Parent will be initialized with defautl vlaue
+    Child(int y=0): m_y(y){
+        std::cout << "B" << "\n";
+    }
+
+    // Parent will be initialized with given value
+    Child(int x, int y): Parent(x), m_y(y){
+        std::cout << "B" << "\n";
+    }
+};
+
+int main(int argc, char *argv[]){
+    // Parent's default constructor will be called
+    Child c(10);
+
+    // Parent will be initialized with given value
+    Child d(20, 10);
+
+    // Will print
+    // Parent 0
+    // Child 10
+    std::cout << "Parent " << c.m_x << "\nChild " << c.m_y << "\n";
+    
+    // Will print
+    // Parent 20
+    // Child 10
+    std::cout << "Parent " << d.m_x << "\nChild " << d.m_y << "\n";
+
+    return 0;
+}
+```
+
+When `Child d(10, 20)` is called following things happended:
+
+* Memory for Child is allocated.
+* The Child(int, int) constructor is called, where x = 10, and y = 20
+* The compiler looks to see if we’ve asked for a particular Base class constructor. We have! So it calls Parent(int) with x = 10.
+* The base class constructor initialization list sets m_x to 10
+* The base class constructor body executes, which prints A
+* The base class constructor returns
+* The derived class constructor initialization list sets m_y to 20
+* The derived class constructor body executes, which prints B
+* The derived class constructor returns 
+
+### Order of Destruction ###
+
+Destructors are called in reverse order of construction.
+
+### Inheritance and Access Specifiers ###
+
+* **public**: Can be accessed by anybody.
+* **protected**: Can be accessed by class member functions, friend functions and derived classes.
+* **private**: Can be accessed by only class member functions and friend functions.
+
+A summary of the behavious when inherited publicly, protectedly or privately:
+
+| Access Specifier in Base Class | Inherited Publicly | Inherited Protectedly | Inherited Privately |
+| ------------------------------ | ------------------ | --------------------- | ------------------- |
+| public                         | public             | protected             | private             |
+| protected                      | protected          | protected             | private             |
+| private                        | inaccessible       | inaccessible          | inaccessible        |
+
 ## Standard Template Library ##
 
 ## Appendix A: Some Usefull Functions ##
