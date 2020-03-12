@@ -1983,6 +1983,657 @@ A summary of the behavious when inherited publicly, protectedly or privately:
 | protected                      | protected          | protected             | private             |
 | private                        | inaccessible       | inaccessible          | inaccessible        |
 
+### Overriding Behavior ###
+
+#### Redefining ####
+
+```c++
+#include <iostream>
+
+class Base{
+public:
+    Base(){}
+
+    void identify(void){
+        std::cout << "I am base\n";
+    }
+};
+
+class Derived: public Base{
+public:
+    Derived(){}
+
+    void identify(void){
+        std::cout << "I am derived\n";
+    }
+};
+
+int main(int argc, char *argv[]){
+    Derived d;
+
+    // Will print I am derived
+    d.identify();
+
+    return 0;
+}
+```
+
+* Redefined functions doesn't inherite access specification from parent.
+
+#### Expanding Existing Functionality ####
+
+```c++
+#include <iostream>
+
+class Base{
+public:
+    Base(){}
+
+    void identify(void){
+        std::cout << "I am base\n";
+    }
+};
+
+class Derived: public Base{
+public:
+    Derived(){}
+
+    void identify(void){
+        // if scope isn't used Derived::identify() will be called
+        Base::identify();
+        std::cout << "I am derived\n";
+    }
+};
+
+int main(int argc, char *argv[]){
+    Derived d;
+
+    // Will print
+    // I am base
+    // I am derived
+    d.identify();
+
+    return 0;
+}
+```
+
+#### Changing an Inherited Member's Access Specification ####
+
+```c++
+#include <iostream>
+
+class Base{
+public:
+    Base(){}
+
+protected:
+    // Only membes, friends and derived class can call
+    void identify(void){
+        std::cout << "I am base\n";
+    }
+};
+
+class Derived: public Base{
+public:
+    Derived(){}
+
+    // Base::identify() is now public
+    using Base::identify;
+};
+
+int main(int argc, char *argv[]){
+    Base b;
+    Derived d;
+
+    // Error: can't call from here
+    b.identify();
+
+    // OK: as it is public in Derived class
+    d.identify();
+
+    return 0;
+}
+```
+
+Functionality can be hidden by making it private in derived class.
+
+```c++
+#include <iostream>
+
+class Base{
+public:
+    Base(){}
+
+    void identify(void){
+        std::cout << "I am base\n";
+    }
+};
+
+class Derived: public Base{
+public:
+    Derived(){}
+
+private:
+    // Base::identify() is now private
+    using Base::identify;
+};
+
+int main(int argc, char *argv[]){
+    Base b;
+    Derived d;
+
+    // OK: as it is public in Base class.
+    b.identify();
+
+    // OK: as it is public in Derived class
+    d.identify();
+
+    return 0;
+}
+```
+
+### Multiple Inheritance ###
+
+* Ambiguity can arise.
+
+```c++
+#include <iostream>
+ 
+class USBDevice
+{
+private:
+    long m_id;
+ 
+public:
+    USBDevice(long id)
+        : m_id(id)
+    {
+    }
+ 
+    long getID() { return m_id; }
+};
+ 
+class NetworkDevice
+{
+private:
+    long m_id;
+ 
+public:
+    NetworkDevice(long id)
+        : m_id(id)
+    {
+    }
+ 
+    long getID() { return m_id; }
+};
+ 
+class WirelessAdapter: public USBDevice, public NetworkDevice
+{
+public:
+    WirelessAdapter(long usbId, long networkId)
+        : USBDevice(usbId), NetworkDevice(networkId)
+    {
+    }
+};
+ 
+int main()
+{
+    WirelessAdapter c54G(5442, 181742);
+    std::cout << c54G.getID(); // Which getID() do we call?
+
+    // Can be solved using scope
+    std::cout << c54G.USBDevice::getID();
+ 
+    return 0;
+}
+```
+
+* Diamond problem
+
+## Virtual Functions ##
+
+### Pointers to the Base Class of Derived Object ###
+
+It is possible to create pointers to the base class of derived object.
+But the pointers won't be able to call member functions from the derived
+class.
+
+```c++
+#include <iostream>
+
+class Base{
+public:
+    Base(){}
+
+    void identify(void){
+        std::cout << "I am base\n";
+    }
+};
+
+class Derived: public Base{
+public:
+    Derived(){}
+
+    void identify(void){
+        std::cout << "I am derived\n";
+    }
+};
+
+int main(int argc, char *argv[]){
+    Derived *pd = new Derived();
+    // Pointer to base of derived object
+    Base *pb{pd};
+
+    // Will call Derived::indentify()
+    pd->identify();
+
+    // Will call Base::identify()
+    pb->identify();
+    
+    return 0;
+}
+```
+
+Use case for this could be in functions which takes derived class as parameter.
+For each derived class a different functions have to be created. For example:
+
+```c++
+void report(Derived &d){
+    d.identify();
+}
+
+void report(AnotherDerived &ad){
+    ad.identify();
+}
+```
+
+This problem can be solved using pointer/reference to base:
+
+```c++
+void report(Base &b){
+    b.identify();
+}
+
+int main(int argc, char *argv[]){
+    Derived d;
+    AnotherDerived ad;
+
+    report(d);
+    report(ad);
+}
+```
+
+But the problem is in both cases Base::identify() will be called.
+As pointer to base only can see memebers from base. This problem
+can be solved using virtual functions.
+
+### Polymorphism ###
+
+A virtual function is a special type of function that, when called,
+resolves to the most-derived version of the function that exists between the base and derived class.
+This capability is known as polymorphism. A derived function is considered a match if it has the same signature
+(name, parameter types, and whether it is const) and return type as the base version of the function.
+Such functions are called overrides.
+
+```c++
+#include <iostream>
+
+class Base{
+public:
+    Base(){}
+
+    virtual void identify(void){
+        std::cout << "I am base\n";
+    }
+};
+
+class Derived: public Base{
+public:
+    Derived(){}
+
+    void identify(void){
+        std::cout << "I am derived\n";
+    }
+};
+
+class AnotherDerived: public Derived{
+public:
+    AnotherDerived(){}
+
+    void identify(void){
+        std::cout << "I am another derived\n";
+    }
+};
+
+int main(int argc, char *argv[]){
+    AnotherDerived ad;
+    Base *bp = &ad;
+
+    // Both resolve to AnotherDerived::identify()
+    ad.identify();
+    bp->identify();
+
+    Derived d;
+    bp = &d;
+    
+    // Resolve to Derived::identity() as it is the most derived class in this case
+    bp->identify();
+        
+    return 0;
+}
+```
+
+Another example:
+
+```c++
+#include <iostream>
+#include <string>
+
+class Base{
+public:
+    Base(){}
+
+    virtual std::string getName(void) const {return "Base";}
+};
+
+class Derived: public Base{
+public:
+    Derived(){}
+    
+    virtual std::string getName(void) const {return "Derived";}
+};
+
+class AnotherDerived: public Derived{
+public:
+    AnotherDerived(){}
+    
+    virtual std::string getName(void) const {return "AnotherDerived";}
+};
+
+void report(Base &b){
+    std::cout << "I am " << b.getName() << "\n";
+}
+
+int main(int argc, char *argv[]){
+    Derived d;
+    AnotherDerived ad;
+            
+    report(d);
+    report(ad);
+    
+    return 0;
+}
+```
+
+If you want to call functions from base class in virtual function just use
+scope operator:
+
+```
+Derived d;
+Base *bp = &d;
+
+std::cout << bp->Base::getName() << "\n";
+```
+
+* Never use virtual function in constructors and destructors
+
+### override and final Specifiers ###
+
+`override` specifier enforces virtualization of a function.
+
+### Covariant Return Type ###
+
+### Abstract Class, Pure Virtual Functions and Interface Class ###
+
+Abstract class is a class wich is only used by the derived class. It can't be
+instantiated anywhere else.
+
+A pure virtual function has no body at all. It is meant to be redefined in derived classes.
+A class with pure virtual functions is an abstract class means it can't be intantiated.
+A pure virtual function may or may not have a body.
+
+```c++
+virtual void doSomething() = 0
+```
+
+In interface class has no member variables. All the functions are pure virtual.
+
+### Virtual Base Class ###
+
+* Single Base class is shared by the derived classes.
+* Solves diamond problem.
+* Most derived class is responsible for constructing the virtual base class.
+
+### Object Slicing ###
+
+```c++
+Derived d;
+Base b(d); // b will get the Base part from d. It is called object slicing
+
+// Will call Base::doSomething() even if it is a virtual function
+b.doSomething()
+
+Base &b(d);
+
+// Will call Derived::doSomething if it is a virtual function as b in reference to d
+bp->doSomething()
+```
+
+* In general avoid slicing
+
+#### std::reference_wrapper ####
+
+### Dynamic Casting ###
+
+Dynamic casing is used for downcasting.
+
+### Workaround for Friend Functions ###
+
+Only member functions can be virtualized. So friend functions
+can't be virtualized. For example:
+
+```c++
+#include <iostream>
+class Base
+{
+public:
+    Base() {}
+ 
+    // Here's our overloaded operator<<
+    friend std::ostream& operator<<(std::ostream &out, const Base &b)
+    {
+        // Delegate printing responsibility for printing to member function print()
+        return b.print(out);
+    }
+ 
+    // We'll rely on member function print() to do the actual printing
+    // Because print is a normal member function, it can be virtualized
+    virtual std::ostream& print(std::ostream& out) const
+    {
+        out << "Base";
+        return out;
+    }
+};
+ 
+class Derived : public Base
+{
+public:
+    Derived() {}
+ 
+    // Here's our override print function to handle the Derived case
+    virtual std::ostream& print(std::ostream& out) const override
+    {
+        out << "Derived";
+        return out;
+    }
+};
+ 
+int main()
+{
+    Base b;
+    std::cout << b << '\n';
+ 
+    Derived d;
+    std::cout << d << '\n'; // note that this works even with no operator<< that explicitly handles Derived objects
+ 
+    Base &bref = d;
+    std::cout << bref << '\n';
+ 
+    return 0;
+}
+```
+
+## Templates ##
+
+### Function Template ###
+
+```c++
+#include <iostream>
+
+template <typename T>
+T add(T x, T y){
+    return x + y;
+}
+
+int main(int argc, char *argv[]){
+    std::cout << add(1, 2) << "\n";
+    std::cout << add(1.5, 2.1) << "\n";
+
+    return 0;
+}
+```
+
+For more than one type:
+
+```c++
+template <typename T1, typename T2>
+void doSomething(T1 x, T1 y){
+
+}
+```
+
+### Class Template ###
+
+```c++
+#include <iostream>
+#include <string>
+
+template <class T>
+class Value{
+private:
+    T m_x;
+
+public:
+    Value(T x): m_x(x){}
+
+    T get(void){return m_x;}
+};
+
+int main(int argc, char *argv[]){
+    Value<int> ival(10);
+    Value<double> dval(10.25);
+    Value<std::string> sval("hello");
+
+    std::cout << "ival: " << ival.get() << " dval: " << dval.get() << " sval: " << sval.get()
+        << "\n";
+    return 0;
+}
+```
+
+If template class definition and implementation are splitted into seperate files
+linker error can be generated. To solve this following can be done:
+
+* Definition and implementation in one file.
+* Implementation in `*.inl` file and `#include` in `*.h` file.
+
+For more [details](https://www.learncpp.com/cpp-tutorial/133-template-classes/)
+
+### Template Non-Type parameters ###
+
+```c++
+#include <iostream>
+ 
+template <class T, int size> // size is the non-type parameter
+class StaticArray
+{
+private:
+    // The non-type parameter controls the size of the array
+    T m_array[size];
+ 
+public:
+    T* getArray();
+    
+    T& operator[](int index)
+    {
+        return m_array[index];
+    }
+};
+ 
+// Showing how a function for a class with a non-type parameter is defined outside of the class
+template <class T, int size>
+T* StaticArray<T, size>::getArray()
+{
+    return m_array;
+}
+ 
+int main()
+{
+    // declare an integer array with room for 12 integers
+    StaticArray<int, 12> intArray;
+ 
+    // Fill it up in order, then print it backwards
+    for (int count=0; count < 12; ++count)
+        intArray[count] = count;
+ 
+    for (int count=11; count >= 0; --count)
+        std::cout << intArray[count] << " ";
+    std::cout << '\n';
+ 
+    // declare a double buffer with room for 4 doubles
+    StaticArray<double, 4> doubleArray;
+ 
+    for (int count=0; count < 4; ++count)
+        doubleArray[count] = 4.4 + 0.1*count;
+ 
+    for (int count=0; count < 4; ++count)
+        std::cout << doubleArray[count] << ' ';
+ 
+    return 0;
+}
+```
+
+### Template Specialization ###
+
+If an exception is needed to make for an specific type.
+
+```c++
+#include <iostream>
+#include <string>
+#include <cstring>
+
+char str[100];
+
+template <class T>
+T add(T x, T y){
+    return x + y;
+}
+
+// If it is an const char*
+template<>
+const char *add(const char *s1, const char *s2){
+    strcat(str, s1);
+    strcat(str, s2);
+    return str;
+}
+
+int main(int argc, char *argv[]){
+    std::cout << add(1, 2) << "\n";
+    std::cout << add(1.5, 2.2) << "\n";
+    std::cout << add("hello", "world") << "\n";
+    return 0;
+}
+```
+
 ## Standard Template Library ##
 
 ## Appendix A: Some Usefull Functions ##
