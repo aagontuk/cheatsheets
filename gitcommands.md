@@ -75,8 +75,16 @@ git status -s	# Show brief status
 `git add` is used to add untracked/modified files to staging area and prepare for commit.
 If a directory is added, its contents will be added recursively.
 
+* Adding whole file:
+
 ```
 git add README.md
+```
+
+* Adding portion of a file:
+
+```
+git add -p README.md    # This will bring an interactive prompt
 ```
 
 ### Inspect changes of a file ###
