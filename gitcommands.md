@@ -241,6 +241,13 @@ git push origin master
 git remote rename back backports
 ```
 
+* Changing URL of a remote
+
+```
+git remote set-url <remote_name> <new_url>
+git remote set-url origin https://github.com/aagontuk/cheatsheets.git
+```
+
 * Removing a remote
 
 ```
