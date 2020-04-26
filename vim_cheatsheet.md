@@ -1,13 +1,11 @@
 ## INDEX ##
 
-1. [Setting/Unsetting values]
-2. [Saving session]
-3. [Auto complete]
-4. [File Explorer]
-5. [Repeating commands]
-6. [Bookmarks]
-7. [Managing Windows]
-8. [Managing Tabs]
+1. [Setting/Unsetting values](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#settingunsetting-values)
+2. [Saving session](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#saving-session)
+3. [Auto complete](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#auto-complete)
+4. [File Explorer](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#file-explorer)
+5. [Repeating commands](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#repeating-commands)
+6. [Bookmarks](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#bookmarks)
 
 ### Setting/Unsetting Values ###
 
