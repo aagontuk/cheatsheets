@@ -43,6 +43,7 @@
 8. [Functions](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#functions)
     1. [Function Pointers](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#function-pointers)
     2. [Function Ellipsis](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#function-ellipsis)
+    3. [Lambda Functios](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#lambda-functions)
 
 10. [Object Oriented Programming](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#object-oriented-programming)
     1. [Basic Class Example](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md#basic-class-example)
@@ -944,6 +945,33 @@ int main(){
 * Ellipsis are dangerous. Try to avoid them. For more - http://www.learncpp.com/cpp-tutorial/714-ellipsis-and-why-to-avoid-them/
 
 ### Lambda Functions ###
+
+To create anonymous functions. Simple example:
+
+```c++
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+int main(int argc, char *argv[]) {
+    std::vector<bool> bitvect{1, 0, 0, 1};
+
+    /* lambda function example: used to make ~bitvect */
+    std::transform(bitvect.begin(), bitvect.end(), bitvect.begin(),
+            [](bool b){ return b == 1 ? 0 : 1; });
+    
+    return 0;
+}
+```
+
+Syntaxt:
+
+`[&](){}`: Capture all outside variable by reference.
+`[=](){}`: Capture all outside variable by value.
+`[&x](){}`: Capture only outside variable `x` by reference.
+`[x](){}`: Capture only outside variable `x` by value.
+`[&, x](){}`: Capture all outside variable by reference but `x` by value.
+`[]() -> Type {}`: To specify return type.
 
 ## Object Oriented Programming ##
 
