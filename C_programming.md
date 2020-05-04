@@ -6,6 +6,7 @@
     3. [Low Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#low-level-access)
 2. [User Defined Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#user-defined-types)
     1. [Structure](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#structure)
+    2. [Union](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#union)
     2. [Enumerated Types](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#enumerated-types)
     3. [Bit Fields](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#bit-fields)
     4. [Typedefs](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#typedefs)
@@ -224,7 +225,9 @@ void show_bytes(byte_ptr bytes, int size) {
 Output(Bytes are reversed as this is tested in little endian machine):
 
 >> 12 ef cd ab
+
 >> 12 ef
+
 >> 12
 
 ### Enumerated Types ###
