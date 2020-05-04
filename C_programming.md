@@ -1,4 +1,4 @@
-## INDEX ##
+# INDEX #
 
 1. [File I/O](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#file-io)
     1. [High Level Access](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#high-level-access)
@@ -10,9 +10,9 @@
     3. [Bit Fields](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#bit-fields)
     4. [Typedefs](https://github.com/aagontuk/cheatsheets/blob/master/C_programming.md#typedefs)
 
-### FILE I/O ###
+## FILE I/O ##
 
-#### High Level Access ####
+### High Level Access ###
 
 ```c
 #include <stdio.h>	/* Header files for the bellow functions */
@@ -81,7 +81,7 @@ int fclose(FILE *filePointer);
 
 Closes a file.
 
-#### Error Handling ####
+### Error Handling ###
 
 ```c
 int ferror(FILE *filePointer);	/* Returns non zero if an error occurs */
@@ -93,7 +93,7 @@ void perror(FILE *filePointer, chars *s);
 
 Prints interactive error message to filePointer if no argument specified Or s.
 
-#### Low Level Access ####
+### Low Level Access ###
 
 ```c
 #include <fcntl.h>	/* Header file for the bellow functions */
@@ -160,9 +160,9 @@ Closes a file.
 
 ---
 
-### User Defined Types ###
+## User Defined Types ##
 
-#### Structure ####
+### Structure ###
 
 **Creating a structure:**
 ```c
@@ -185,7 +185,49 @@ p = (struct packet *)malloc(sizeof(struct packet));
 p->size = 100;
 ```
 
-#### Enumerated Types ####
+### Union ###
+
+Same as structure but the fields share memory. Example:
+
+```
+#include <stdio.h>
+#include <string.h>
+#include <inttypes.h>
+
+typedef const unsigned char *byte_ptr;
+
+void show_bytes(byte_ptr bytes, int size);
+
+int main(int argc, char *argv[]) {
+    union S {
+        uint32_t w;    
+        uint16_t hw;
+        uint8_t b;
+    };
+
+    union S data = {0xABCDEF12};
+    show_bytes((unsigned char *)&data.w, sizeof(uint32_t));
+    show_bytes((unsigned char *)&data.hw, sizeof(uint16_t));
+    show_bytes((unsigned char *)&data.b, sizeof(uint8_t));
+    return 0;
+}
+
+void show_bytes(byte_ptr bytes, int size) {
+    for(int i = 0; i < size; i++) {
+        printf(" %.2x", bytes[i]); 
+    }
+
+    printf("\n");
+}
+```
+
+Output(Bytes are reversed as this is tested in little endian machine):
+
+>> 12 ef cd ab
+>> 12 ef
+>> 12
+
+### Enumerated Types ###
 
 ```c
 enum Type{
@@ -216,7 +258,7 @@ int main(){
 }
 ```
 
-#### Bit Fields ####
+### Bit Fields ###
 
 Bit field is used to pack several variables into a machine word. Bit fields are declared just like regular structures. But variable type have to be **unsigned int** and bit length of each variable is specified using **:** operator.
 
@@ -229,7 +271,7 @@ struct flags{
 };
 ```
 
-#### Typedefs ####
+### Typedefs ###
 
 Typedefs are used to give an alias for a type.Structure:
 
