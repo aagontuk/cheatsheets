@@ -402,6 +402,7 @@ int main(){
 ### A Program Handling All the Error Case in Input ###
 
 <details>
+<summary>Expand to see code</summary>
 
 ```c++
 #include <iostream>
