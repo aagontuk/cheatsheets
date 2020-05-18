@@ -401,6 +401,8 @@ int main(){
 
 ### A Program Handling All the Error Case in Input ###
 
+<details>
+
 ```c++
 #include <iostream>
 
@@ -475,6 +477,9 @@ int main(){
 	return 0;
 }
 ```
+
+</details>
+
 ## Generating Random Numbers ##
 
 ### Generating Random Numbers ###
