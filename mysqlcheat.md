@@ -1,6 +1,6 @@
 ### MySQL Queries ###
 
-* Create a user in the database
+#### User Administration ####
 
 Syntax:
 ```
@@ -12,56 +12,58 @@ Example:
 CREATE USER 'root'@'192.168.1.10' IDENTIFIED BY 'mysecretpass'
 ```
 
-* Setting permission to a user
-
-Give all access
+Give all access:
 ```sql
 GRANT ALL PRIVILEGES ON *.* TO '<username>'@'<ip>' IDENNTIFIED BY '<password>'
 ``` 
 
-Give access to specific DB
+Give access to specific DB:
 ```sql
 GRANT ALL PRIVILEGES ON <dbname>.* TO '<username>'@'<ip>' IDENTIFIED BY '<password>'
 ```
 
-* To show all the databases
+#### Database Queries #####
+
+To show all the databases:
 ```sql
 SHOW DATABASES;
 ```
 
-* Creating a database
+Creating a database:
 ```sql
 CREATE DATABASE database_name;
 ```
 
-* Delete database
+Delete database:
 ```sql
 DROP DATABASE db_name;
 ```
 
-* Selecting the database
+Selecting the database:
 ```sql
 USE database_name;
 ```
 
-* List all the table in a DB
+List all the table in a DB:
 ```sql
 SHOW TABLES;
 ```
 
-* Show all the information of a table
+#### Table Queries ####
+
+Show all the information of a table:
 ```sql
 DESCRIBE tb_name;
 ```
 
-* Creating a table
+Creating a table:
 
-**Syntax:**
+*Syntax:*
 ```sql
 CREATE TABLE tb_name(column1_name column1_type, column2_name column2_type, ...);
 ```
 
-**Types:**
+*Types:*
 * CHAR(size) - Character column | Holds 255 chars.
 * VARCHAR(size) - String | Holds 255 chars.
 * TEXT - String | Larger than 255.
@@ -78,40 +80,47 @@ CREATE TABLE tb_name(column1_name column1_type, column2_name column2_type, ...);
 CREATE TABLE movies(id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50), rating FLOAT(5), cast VARCHAR(255), story TEXT, TIMESTAMP);
 ```
 
-* Delete table
+Inserting records in a table:
 ```sql
-DROP TABLE tb_name;
+INSERT INTO tb_name(column1, column2, ...) VALUES(val1, val2, ...);
 ```
 
-* Delete all the table data but not the table
+Changing existing record of a table:
 ```sql
-TRUNCATE TABLE tb_name;
+UPDATE tb_name SET column1 = value1, column2 = value2 WHERE condition;
 ```
 
-* Altering the table data(adding new column, deleting column, changing data type of a column)
+Count number of rows/records in a table:
+```sql
+SELECT COUNT(*) FROM table_name;
+```
+
+Delete records from table:
+```sql
+DELETE FROM tb_name WHERE condition;
+DELETE FROM tb_name;	--Will delete all records
+```
+
+Altering the table data(adding new column, deleting column, changing data type of a column):
 ```sql
 ALTER TABLE tb_name ADD column_name data_type;
 ALTER TABLE tb_name DROP column_name;
 ALTER TABLE tb_name MODIFY column_name new_data_tyep;
 ```
 
-* Inserting records in a table
+Delete all the table data but not the table:
 ```sql
-INSERT INTO tb_name(column1, column2, ...) VALUES(val1, val2, ...);
+TRUNCATE TABLE tb_name;
 ```
 
-* Changing existing record of a table
+Delete table:
 ```sql
-UPDATE tb_name SET column1 = value1, column2 = value2 WHERE condition;
+DROP TABLE tb_name;
 ```
 
-* Delete records from table
-```sql
-DELETE FROM tb_name WHERE condition;
-DELETE FROM tb_name;	--Will delete all records
-```
+#### Fetching Data From a Table ####
 
-* Selecting records from table
+Selecting records from table:
 ```sql
 SELECT column1, column2, ... FROM tb_name;
 SELECT * FROM tb_name;
