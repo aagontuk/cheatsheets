@@ -276,17 +276,20 @@ git tag
 git tag -l "v1.1.*"
 ```
 
-* Creating a annoted tag
+* Creating a annotated tag
 
 ```
 git tag -a v1.2 -m "Version 1.2"
 ```
 
-* Creating a lightwight tag
+* Creating a lightweight tag
 
 ```
 git tag v1.2-rc4
 ```
+
+In annotated tag when shown with `git show` tag information and commit will be shown.
+But in lightweight tag only commit information will be shown.
 
 * Tagging later in a specific commit
 
@@ -343,6 +346,8 @@ Creating command aliases:
 ```
 git config --global alias.unstage 'reset HEAD --'
 ```
+
+Now you can use `git unstage file1` instead of `git reset HEAD -- file1` to unstage file1.
 
 Aliasing a external tool:
 
