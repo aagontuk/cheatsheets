@@ -7,6 +7,7 @@
     4. [Showing status of the project](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#showing-status-of-the-project)
     5. [Adding files to staging area](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#adding-files-to-staging-area)
     6. [Inspect changes of a file](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#inspect-changes-of-a-file)
+    8. [Creating and applying patch file](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#creating-and-applying-patch-file)
     7. [Commiting](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#commiting)
     8. [Removing files](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#removing-files)
     9. [Moving/Renaming files](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#movingrenaming-files)
@@ -95,6 +96,36 @@ git add -p README.md    # This will bring an interactive prompt
 git diff		# Shows changes between last staged and unstaged
 git diff --staged	# Shows changes between the last commit and staged
 git diff COMMIT_HASH~ COMMIT_HASH   # Show diff between last commit and its ancestor
+```
+### Creating and applying patch file ###
+
+For creating patch file use `git diff`:
+
+```
+git diff > mypatch.patch
+```
+
+If you want add untracked files too first stage them
+using `git add` then create the patch file:
+
+```
+git diff --cached > mypatch.patch
+```
+
+Now you can
+[remove those untracked files from staging area](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#removing-files-from-staging-area)
+if you don't want to commit them.
+
+If you want to add binary files in the patch:
+
+```
+git diff --binary > mypatch.patch
+```
+
+To apply a patch:
+
+```
+git apply mypatch.patch
 ```
 
 ### Commiting ###
