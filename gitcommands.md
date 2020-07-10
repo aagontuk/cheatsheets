@@ -186,7 +186,8 @@ git log --graph				# Will show a ascii graph of commit history
 git log --relative-date			# Will show relative date(days, weeks etc) rather than exact date
 git log --since=2.weeks			# Show all commits since a specific date or relative date
 git log --until=2.weeks			# Show all commit before a specific date or relative date
-got log --author=AUTHOR			# Show the logs of a specific author
+git log --author=AUTHOR			# Show the logs of a specific author
+git log --follow -- FILE        # Show all the commits to a specific file
 ```
 
 ### Modifying last commit ###
