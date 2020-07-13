@@ -10,7 +10,7 @@
 5. [Shell Programming](https://github.com/aagontuk/cheatsheets/blob/master/bash.md)
 1. [Git & GitHub](https://github.com/rashfaqur/cheatsheets/blob/master/git_and_github.md)
 2. [Git Commands](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md)
-3. [Vim](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md)
+3. [Vim Tricks](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md)
 6. Latex
     1. [Original Latex Format](https://github.com/aagontuk/cheatsheets/blob/master/latext_cheat.tex)
     2. [Converted PDF Format](https://github.com/aagontuk/cheatsheets/blob/master/latext_cheat.pdf)
