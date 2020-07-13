@@ -6,6 +6,7 @@
 4. [File Explorer](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#file-explorer)
 5. [Repeating commands](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#repeating-commands)
 6. [Bookmarks](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#bookmarks)
+7. [Searching Text](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#searching-text)
 
 ### Setting/Unsetting Values ###
 
@@ -46,3 +47,14 @@ You can use `@@` after using `@X` once.
 * mX where X=A-Z for setting global bookmarks(In any file).
 * 'X where X=a-zA-Z to go to the bookmarks.
 * :marks to show all the bookmarks.
+
+### Searching Text ###
+
+Type `/` in normal mode, then insert keyword and press enter.
+Cursor will go to the first occurrence of the keyword. Press
+`n` to go to the next occurrence or `N` to go to previous
+occurrence.
+
+Pressing `*` will search the current word under cursor.
+
+
