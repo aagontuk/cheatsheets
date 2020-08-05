@@ -36,6 +36,56 @@ Any line begin with `#` is a comment.
 echo "hello, world"     # This is a comment too
 ```
 
+## Here documents ##
+
+Feed text as it is into the standard input including whitespace and quotation marks. 
+Here documents have the following form:
+
+```
+command << token
+text
+token
+```
+
+For example following script will feed the whole text to `cat`. As a result whole text will
+be printed as it is into the shell.
+
+```sh
+#!/bin/bash
+
+cat << __EOF__
+#include <stdio.h>
+
+int main() {
+    printf("hello, world!\n");
+    return 0;
+}
+__EOF__
+```
+
+* if `<<-` is used insted of `<<`, leading tabs will be ignored.
+* Can be used for multiline comment:
+
+```sh
+#!/bin/bash
+
+<< __TOKEN__
+    This will be ignored
+    This line too
+    And this
+__TOKEN__
+
+echo "hello, world!"
+```
+
+Output:
+
+```
+$ ./script.sh
+hello, world!
+$
+```
+
 ## Conditional Statements ##
 
 Following example will show conditional statements in shell scripting
