@@ -7,6 +7,7 @@
     2. [While Loop](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#while-loop)
     3. [Until](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#until)
     4. [break and continue statements](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#break-and-continue)
+5. [Array](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#array)
 5. [Exit Staus](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#exit-status)
 
 ## Command Line Arguments ##
@@ -132,6 +133,27 @@ done
 ### break and continue ###
 Like any other programming languages `break` and `continue`
 statement can be applied in a loop
+
+## Array ##
+
+Arrays are defined as `array_name=(0 "name" 4)`
+where `array_name` is the name of the array
+an `0`, `name` are the elements of the array.
+Array can be subscripted and iterated in following
+way:
+
+```sh
+array_name=(0, "name", 4)
+
+# Print first element of the array
+echo ${array_name[1]}
+
+# Iterating through the array
+# Print all the elements of the array
+for elem in ${array_name[@]}; do
+    echo $elem
+done
+```
 
 ## Exit Status ##
 ```sh
