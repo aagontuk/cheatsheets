@@ -114,6 +114,21 @@ else
 fi
 ```
 
+File expressions can be used to do different tests on file/directory
+
+```sh
+#!/bin/bash
+
+FILE_NAME=$HOME/hello.o
+
+# Remove file if exists
+if [ -e "$FILE_NAME" ]; then    # quotation used so that empty variable don't cause error
+    rm $FILE_NAME
+fi
+```
+
+TODO: String expressions and regular expression matching. `[[ ]]` and `(())`.
+
 To see how to write the conditional expressions see `man test`.
 
 ## `case` Statement ##
@@ -250,6 +265,54 @@ echo ${array_name[1]}
 for elem in ${array_name[@]}; do
     echo $elem
 done
+```
+
+## Functions ##
+
+Structure of a function in shell script is following:
+
+```
+func_name () {
+    commands
+    return
+}
+
+# Function call
+func_name
+```
+
+Example:
+
+```sh
+#!/bin/bash
+
+get_hostname () {
+    echo $HOSTNAME
+    return
+}
+
+get_hostname
+```
+
+* Functions must be defined before they are called.
+* In shell all variables are global. A local variable can be created using `local` command.
+
+```sh
+#!/bin/bash
+
+ID=0
+
+get_hostname () {
+    local ID
+    ID=1
+    echo $HOSTNAME
+    echo "local ID before calling function: ${ID}"
+    return
+}
+
+echo "global ID before calling function: ${ID}"
+get_hostname
+echo "global ID after calling function: ${ID}"
 ```
 
 ## Command Line Arguments ##
