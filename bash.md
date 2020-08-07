@@ -1,16 +1,16 @@
 ## INDEX ##
-1. [Introduction](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#introduction)
-2. [Commenting](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#commenting)
-1. [Conditional Statements](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#conditional-statements)
-2. [`case` Statement](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#case-statement)
-3. [Looping](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#looping)
-    1. [For Loop](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#for-loop)
-    2. [While Loop](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#while-loop)
-    3. [Until](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#until)
-    4. [break and continue statements](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#break-and-continue)
-4. [Array](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#array)
-5. [Command Line Arguments](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#command-line-arguments)
-6. [Exit Staus](https://github.com/aagontuk/cheatsheets/blob/master/bash.md#exit-status)
+1. [Introduction](bash.md#introduction)
+2. [Commenting](bash.md#commenting)
+1. [Conditional Statements](bash.md#conditional-statements)
+2. [`case` Statement](bash.md#case-statement)
+3. [Looping](bash.md#looping)
+    1. [For Loop](bash.md#for-loop)
+    2. [While Loop](bash.md#while-loop)
+    3. [Until](bash.md#until)
+    4. [break and continue statements](bash.md#break-and-continue)
+4. [Array](bash.md#array)
+5. [Command Line Arguments](bash.md#command-line-arguments)
+6. [Exit Staus](bash.md#exit-status)
 
 ## Introduction ##
 
