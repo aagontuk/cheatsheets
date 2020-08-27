@@ -19,6 +19,15 @@
     15. [Tagging](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#tagging)
     16. [Aliasing](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#aliasing)
 
+2. [Branching](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#branching)
+    1. [Creating a new branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#creating-a-new-branch)
+    2. [Switching to a branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#switching-to-a-branch)
+    4. [Deleting a branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#deleting-a-branch)
+    5. [Renaming a branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#renaming-a-branch)
+
+3. [Merging](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#merging)
+    1. [Merging a branch to another branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#merging-a-branch-to-another-branch)
+
 ## Frequently Used Git Commands ##
 
 ### Configuring Git ###
