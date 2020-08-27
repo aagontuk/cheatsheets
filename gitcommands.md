@@ -188,6 +188,8 @@ git log --since=2.weeks			# Show all commits since a specific date or relative d
 git log --until=2.weeks			# Show all commit before a specific date or relative date
 git log --author=AUTHOR			# Show the logs of a specific author
 git log --follow -- FILE        # Show all the commits to a specific file
+git log testing                 # Show the logs of testing branch
+git log --all                   # Show logs of all branches. By default shows only the logs of checked out branch
 ```
 
 ### Modifying last commit ###
@@ -385,4 +387,76 @@ Aliasing a external tool:
 
 ```
 git config --global alias.mergetool '!meld'
+```
+
+## Branching ##
+
+### Creating a new branch ###
+
+Create a new branch named *testing*:
+
+```sh
+git branch testing
+```
+
+### Switching to a branch ###
+
+Switch to a branch named *testing*:
+
+```sh
+git checkout testing
+```
+
+This shortcut can be used to create and checkout to a new branch in one command:
+
+```sh
+git checkout -b testing
+```
+
+This will create branch *testing* and switch to it.
+
+### Show all the branches ###
+
+```sh
+git branch --all
+```
+
+### Deleting a branch ###
+
+```sh
+git branch -d testing
+```
+
+### Renaming a branch ###
+
+For example you want to change your branch name from *bad_branch_name* to *good_branch_name*.
+
+```sh
+git branch --move bad_branch_name good_branch_name
+```
+
+This will only change the local branch name. To change the remote branch name too
+you have do first push the renamed branch to remote:
+
+```sh
+git push --set-upstream origin good_branch_name
+```
+
+Now there will be two branch in remote *remotes/origin/bad_branch_name* and
+*remotes/origin/good_branch_name*. Remove *remote/origin/bad_branch_name*
+
+```sh
+git push origin --delete bad_branch_name
+```
+
+## Merging ##
+
+### Merging a branch to another branch ###
+
+Let's say your are now in testing branch. You have added some changes and now
+want to merge the branch in master branch:
+
+```sh
+git checkout master
+git merge testing
 ```
