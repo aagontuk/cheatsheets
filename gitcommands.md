@@ -33,6 +33,9 @@
     4. [Pulling](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#pulling)
     5. [Deleting a remote branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#deleting-a-remote-branch)
 
+4. [Rewriting history](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#rewriting-history)
+    1. [Removing commits](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#removing-commits)
+
 ## Frequently Used Git Commands ##
 
 ### Configuring Git ###
