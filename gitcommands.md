@@ -578,3 +578,60 @@ git push origin --delete testing
 ```
 
 This will delete branch `testing` from remote repository.
+
+## Rewriting history ##
+
+### Removing commits ###
+
+Lets say your commit history looks like this:
+
+| Number | Commit Hash | Commit Message | 
+|--------|-------------|----------------|
+|1|4d884d0|Important fix|
+|2|5540e24|server fix|
+|3|4c5199f|client fix|
+|4|7879940|My awesome fix|
+|5|2c27f34|minor fix|
+
+If you want to remove consecutive commits you can use `git rebase`. For example
+if you want to remove commit 3 and 4 you can do following:
+
+```sh
+git rebase --onto <branch_name>~<number of the oldest commit you want to remove> <branch_name>~<number of the oldest commit you want to keep> <branch_name>
+```
+
+So if you want to remove 3 and 4 in master branch:
+
+```sh
+git rebase --onto master~4 master~2 master
+```
+
+Now if you want to remove non-consecutive commits, you can use `git cherry-pick`. For example if you want to
+remove commit 2 and 4 you have to do following procedure:
+
+* Go to oldest usable commit(In this case 5)
+* Create a new branch
+* cherry pick the commits you want to keep(In this case 3 and 1) after that commit(In this case 5).
+* Checkout to the previous branch you were in.
+* Do a hard reset to the last usable commit(In this case 5)
+* Merge the new branch in this branch
+
+So lets say in our case you were in master branch and want to remove commit 2 and 4:
+
+```sh
+git checkout 2c27f34
+git checkout -b new_branch
+git cherry-pick 4c5199f
+git cherry-pick 4d884d0
+git checkout master
+git reset --hard 2c27f34
+git merge new_branch
+```
+
+After deleting the commit(s) you have to force push in the remote repository:
+
+```sh
+git push --force origin master
+```
+
+Note that deleting commits can introduce merge conflicts.
