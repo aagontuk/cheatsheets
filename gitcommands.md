@@ -24,9 +24,14 @@
     2. [Switching to a branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#switching-to-a-branch)
     4. [Deleting a branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#deleting-a-branch)
     5. [Renaming a branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#renaming-a-branch)
+    6. [Merging a branch to another branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#merging-a-branch-to-another-branch)
 
-3. [Merging](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#merging)
-    1. [Merging a branch to another branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#merging-a-branch-to-another-branch)
+3. [Remote Branches](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#remote-branches)
+    1. [Fetching commits from remote repository](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#fetching-commits-from-remote-repository)
+    2. [Pushing/fetching a new branch to/from remote repository](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#pushingfetching-a-new-branch-tofrom-remote-repository)
+    3. [Tracking Branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#tracking-branch)
+    4. [Pulling](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#pulling)
+    5. [Deleting a remote branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#deleting-a-remote-branch)
 
 ## Frequently Used Git Commands ##
 
