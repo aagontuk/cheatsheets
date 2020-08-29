@@ -19,7 +19,7 @@
     15. [Tagging](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#tagging)
     16. [Aliasing](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#aliasing)
 
-2. [Branching](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#branching)
+2. [Branching and Merging](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#branching-and-merging)
     1. [Creating a new branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#creating-a-new-branch)
     2. [Switching to a branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#switching-to-a-branch)
     4. [Deleting a branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#deleting-a-branch)
