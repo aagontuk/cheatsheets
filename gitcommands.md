@@ -467,3 +467,109 @@ want to merge the commits of testing branch into master branch:
 git checkout master
 git merge testing
 ```
+
+## Remote Branches ##
+
+Remote branches are named like `<remote_name>/<remote_branch_name>`.
+For example `origin/master`. This points to the latest commit of your
+remote repository at the time of your last synchronization.
+
+### Fetching commits from remote repository ###
+
+```sh
+git fetch <remote>
+```
+
+This will synchronize the remote branch with the remote repository.
+For example if your remote branch name is `origin/master` this will
+synchronize `orgin/master` with the remote repository. Note that this
+will not merge commits from remote branch(`origin/master`) into
+your local branch(`master`). You have to do it manually.
+
+### Pushing/fetching a new branch to/from remote repository ###
+
+For example you have created a new branch named `testing` and
+added some commits to it. Now you want to upload it to your
+remote repository:
+
+```sh
+git push origin testing
+```
+
+This will create a new branch named `testing` in your remote repository.
+If you want to name the remote branch name different from the local
+branch name:
+
+```sh
+git push origin testing:experimental
+```
+
+For the next example lets say you didn't name the differently.
+Now if someone who is also forked that remote repository do fetch, a new
+remote branch named `origin/testing` will be created in their local
+repository. Not this will not create any new local branch to work on for them.
+They will have to do it manually:
+
+```sh
+git checkout -b testing origin/testing
+```
+
+You can also use this shortcut if you keep the local branch name
+and remote branch name same:
+
+```sh
+git checkout testing
+```
+
+If you want to give a different name to the local branch:
+
+```sh
+git checkout -b experimental origin/testing
+```
+
+### Tracking Branch ###
+
+Checking out a local branch from a remote branch creates
+a tracking branch. Tracking branch means that local branch
+and the remote branch has a direct relationship with each other. If you
+are in that local branch when you do a push git will automatically
+push the commits to the remote branch and when you do pull
+git will automatically merge all the commits from the remote branch
+to that local branch.
+
+For example in above example if your are in `testing` branch, when you do a
+pull git will merge all the commits from `origin/testing` to `testing` automatically.
+And after working on `testing` when you do push git will automatically push
+all the commits to `origin/testing`.
+
+If you have a local branch which don't have a tracking branch or you want to
+change the remote tracking branch. For example if you currently on `testing`
+branch and want to set `origin/testing` as you remote tracking branch:
+
+```sh
+git branch -u origin/testing
+```
+
+### Pulling ###
+
+For automatically fetching commits from remote branch and merging with
+local tracking branch use:
+
+```sh
+git pull
+```
+
+It is equivalent to:
+
+```sh
+git fetch
+git merge
+```
+
+### Deleting a remote branch ###
+
+```sh
+git push origin --delete testing
+```
+
+This will delete branch `testing` from remote repository.
