@@ -398,7 +398,7 @@ Aliasing a external tool:
 git config --global alias.mergetool '!meld'
 ```
 
-## Branching ##
+## Branching and Meging ##
 
 ### Creating a new branch ###
 
@@ -458,12 +458,10 @@ Now there will be two branch in remote *remotes/origin/bad_branch_name* and
 git push origin --delete bad_branch_name
 ```
 
-## Merging ##
-
 ### Merging a branch to another branch ###
 
 Let's say your are now in testing branch. You have added some changes and now
-want to merge the branch in master branch:
+want to merge the commits of testing branch into master branch:
 
 ```sh
 git checkout master
