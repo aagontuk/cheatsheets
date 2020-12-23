@@ -8,6 +8,8 @@
 3. [C Programming](https://github.com/rashfaqur/cheatsheets/blob/master/C_programming.md)
 4. [Ncurses Programming in C](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md)
 5. [Shell Programming](https://github.com/aagontuk/cheatsheets/blob/master/bash.md)
+5. [AWK](https://github.com/aagontuk/cheatsheets/blob/master/awk_cheatsheet.md)
+5. [Regular Expression](https://github.com/aagontuk/cheatsheets/blob/master/regexp_cheatsheet.md)
 1. [Git & GitHub](https://github.com/rashfaqur/cheatsheets/blob/master/git_and_github.md)
 2. [Git Commands](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md)
 3. [Vim Tricks](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md)
