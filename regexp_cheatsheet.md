@@ -28,3 +28,9 @@ matches with any 5 letter palindrome.
 * `?` - Matches zero or one time.
 * `+` - Matches one or more time.
 * `(abc|def)` - Matches abc or def.
+
+## grep example
+
+```bash
+echo -e "(123)-451-789\n(123)457-869" | grep "([0-9]\{3\})-[0-9]\{3\}-[0-9]\{3\}"
+```
