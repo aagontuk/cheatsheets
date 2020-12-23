@@ -86,6 +86,16 @@ hello, world!
 $
 ```
 
+## Variables ##
+
+When variable isn't set or have empty string default value can be set.
+
+```bash
+#!/bin/bash
+
+arg1=${1:-"dfile.txt"}
+```
+
 ## Conditional Statements ##
 
 Following example will show conditional statements in shell scripting
