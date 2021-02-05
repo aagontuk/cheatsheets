@@ -265,7 +265,7 @@ Array can be subscripted and iterated in following
 way:
 
 ```sh
-array_name=(0, "name", 4)
+array_name=(0 "name" 4)
 
 # Print first element of the array
 echo ${array_name[1]}
