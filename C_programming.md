@@ -188,7 +188,8 @@ p->size = 100;
 
 ### Union ###
 
-Same as structure but the fields share memory. Example:
+Same as structure but the fields share memory.
+All the fields in the union has the same address in memory. Example:
 
 ```
 #include <stdio.h>
@@ -210,6 +211,11 @@ int main(int argc, char *argv[]) {
     show_bytes((unsigned char *)&data.w, sizeof(uint32_t));
     show_bytes((unsigned char *)&data.hw, sizeof(uint16_t));
     show_bytes((unsigned char *)&data.b, sizeof(uint8_t));
+
+    // print address of the fields
+    printf("S.w -- > %p\n", &data.w);
+    printf("S.hw -- > %p\n", &data.hw);
+    printf("S.b -- > %p\n", &data.b);
     return 0;
 }
 
@@ -224,11 +230,14 @@ void show_bytes(byte_ptr bytes, int size) {
 
 Output(Bytes are reversed as this is tested in little endian machine):
 
->> 12 ef cd ab
-
->> 12 ef
-
->> 12
+```
+12 ef cd ab
+12 ef
+12
+S.w --> 0x7ffee41bda70
+S.hw --> 0x7ffee41bda70
+S.b --> 0x7ffee41bda70
+```
 
 ### Enumerated Types ###
 
