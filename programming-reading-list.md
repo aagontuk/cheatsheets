@@ -29,3 +29,7 @@
 
 1. [A Tiny Guide to Programming in 32-bit x86 Assembly Language](https://www.cs.dartmouth.edu/~sergey/cs258/tiny-guide-to-x86-assembly.pdf)
 2. [x86 Assembly Guide](http://www.cs.virginia.edu/~evans/cs216/guides/x86.html)
+
+#### Locks and Keys ####
+
+1. [Thread Locks](https://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf)
