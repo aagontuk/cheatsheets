@@ -313,6 +313,25 @@ git remote set-url origin https://github.com/aagontuk/cheatsheets.git
 git remote remove paul
 ```
 
+* Dry run merge
+
+```
+git merge --no-commit --no-ff $BRANCH_NAME
+```
+
+This will stage the changes but won't commit them.
+To see the staged changes:
+
+```
+git diff --cached
+```
+
+To undo the merge:
+
+```
+git merge --abort
+```
+
 ### Tagging ###
 
 * View tags
