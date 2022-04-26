@@ -7,6 +7,7 @@
 5. [Repeating commands](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#repeating-commands)
 6. [Bookmarks](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#bookmarks)
 7. [Searching Text](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#searching-text)
+8. [Indentation](https://github.com/aagontuk/cheatsheets/blob/master/vim_cheatsheet.md#indentation)
 
 ### Setting/Unsetting Values ###
 
@@ -57,4 +58,6 @@ occurrence.
 
 Pressing `*` will search the current word under cursor.
 
+### Indentation ###
 
+`=` is used to indent a line.
