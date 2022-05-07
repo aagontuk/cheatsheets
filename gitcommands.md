@@ -504,12 +504,12 @@ remote repository at the time of your last synchronization.
 ### Fetching commits from remote repository ###
 
 ```sh
-git fetch <remote>
+git fetch <remote_name>/<remote_branch_name>
 ```
 
-This will synchronize the remote branch with the remote repository.
+This will synchronize the remote branch with the local repository.
 For example if your remote branch name is `origin/master` this will
-synchronize `orgin/master` with the remote repository. Note that this
+synchronize `orgin/master` with the local repository. Note that this
 will not merge commits from remote branch(`origin/master`) into
 your local branch(`master`). You have to do it manually.
 
