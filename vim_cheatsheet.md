@@ -70,7 +70,14 @@ Pressing `*` will search the current word under cursor.
 
 ### Managing Windows ###
 
+Resize:
+
 * `Ctrl + w + <` - Decrease window width
 * `Ctrl + w + >` - Increase window width
 * `Ctrl + w + -` - Decrese window height
 * `Ctrl + w + +` - Increase window height
+
+Move placement:
+
+* `Ctrl + w + R` - Move window up/left
+* `Ctrl + w + r` - Move window down/right
