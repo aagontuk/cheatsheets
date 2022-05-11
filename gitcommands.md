@@ -230,6 +230,20 @@ git commit -m "Serious busfix"
 git commit --amend			# Edit busfix -> bugfix
 ```
 
+If you want to remove files that were added in a commit
+mistakenly:
+
+```
+git reset --soft HEAD~N
+```
+
+N is the commit number relative to HEAD. Which is 1 for
+the latest commit.
+
+You will see last commit was deleted and all the files
+in staging area again. Now you can
+[remove unwanted files from there](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#removing-files-from-staging-area).
+
 ### Removing files from staging area ###
 
 After files are staged in the staging are using `git add` command, to
