@@ -62,8 +62,15 @@ Pressing `*` will search the current word under cursor.
 
 `=` is used to indent a line.
 
-### Managin Tabs ###
+### Managing Tabs ###
 
 * `:tabm i` - Move current tab to i th position.
 * `:tabm +i` - Move current tab i place right.
 * `:tabm -i` - Move current tab i place left.
+
+### Managing Windows ###
+
+* `Ctrl + w + <` - Decrease window width
+* `Ctrl + w + >` - Increase window width
+* `Ctrl + w + -` - Decrese window height
+* `Ctrl + w + +` - Increase window height
