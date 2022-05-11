@@ -61,3 +61,9 @@ Pressing `*` will search the current word under cursor.
 ### Indentation ###
 
 `=` is used to indent a line.
+
+### Managin Tabs ###
+
+* `:tabm i` - Move current tab to i th position.
+* `:tabm +i` - Move current tab i place right.
+* `:tabm -i` - Move current tab i place left.
