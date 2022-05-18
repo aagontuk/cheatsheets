@@ -25,6 +25,7 @@
     4. [Deleting a branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#deleting-a-branch)
     5. [Renaming a branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#renaming-a-branch)
     6. [Merging a branch to another branch](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#merging-a-branch-to-another-branch)
+    7. [Merging a specific file from another branch](https://web.archive.org/web/20220320001756/https://jasonrudolph.com/blog/2009/02/25/git-tip-how-to-merge-specific-files-from-another-branch/)
 
 3. [Remote Branches](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#remote-branches)
     1. [Fetching commits from remote repository](https://github.com/aagontuk/cheatsheets/blob/master/gitcommands.md#fetching-commits-from-remote-repository)
