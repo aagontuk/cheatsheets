@@ -622,7 +622,7 @@ This will delete branch `testing` from remote repository.
 
 Lets say your commit history looks like this:
 
-| Number | Commit Hash | Commit Message | 
+| Number (newest-oldest) | Commit Hash | Commit Message | 
 |--------|-------------|----------------|
 |1|4d884d0|Important fix|
 |2|5540e24|server fix|
