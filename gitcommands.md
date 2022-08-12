@@ -616,6 +616,32 @@ git push origin --delete testing
 
 This will delete branch `testing` from remote repository.
 
+## Cherry Picking ##
+
+For merging a specific commit or set of commits from a brach
+to another branch.
+
+In below example `COMMIT_HASH` is the hash of the commit you want
+to cherry pick from another branch:
+```
+git checkout stable-branch
+git cherry-pick COMMIT_HASH
+```
+
+For cherry picking a set of commits(A, B are commit hash):
+```
+git checkout stable-branch
+git cherry-pick A^..D
+```
+This assumes A is older commit than D and will include commit
+hash A, B, C, D:
+```
+git checkout stable-branch
+git cherry-pick A..D
+```
+
+If you want to exclude A:
+
 ## Rewriting history ##
 
 ### Removing commits ###
