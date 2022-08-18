@@ -66,6 +66,10 @@ func main() {
 $ 15 25
 ```
 
+* Function can be passed to a function
+
+* A function can be closures
+
 ### Variables ###
 
 * `var` declares a list of variables
@@ -185,6 +189,7 @@ func main() {
 #### Switch ####
 
 * No fall through cases
+* Evaluates from top to bottom, stops when a case succeed
 
 ```go
 package main
@@ -224,3 +229,152 @@ func main() {
   }
 }
 ```
+
+* Switch without argument can be used instead of an if/else if/else chain:
+
+```go
+switch {
+  case input == "left":
+    go_left()
+  case input == "right":
+    go_right()
+  case input == "up":
+    go_up()
+  case input == "down":
+    go_down()
+  default:
+    open_portal()
+}
+```
+
+### Pointers ###
+
+* There is no pointer arithmetical
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  var p *int
+
+  i := 10
+  p = &i
+  fmt.Printf("%v\n", *p)
+}
+```
+
+### Structs ###
+
+```go
+package main
+
+import "fmt"
+
+type Pixel struct {
+  R int
+  G int
+  B int
+}
+
+func main() {
+  p := Pixel{5, 10, 0}
+  fmt.Println(p.R, p.G, p.B)
+}
+```
+
+* Pointers to struct can be used as `(*ptr).field`. Shortcut `ptr.field`:
+
+```go
+p := Pixel{5, 10, 0}
+var q *Pixel
+q = &p
+
+r := &p // implicit type
+```
+
+* Struct initialization:
+
+```go
+a = Pixel{1, 2, 3}
+b = Pixel{R: 2, B: 3} // G = 0
+c = Pixel{} // R = 0, G = 0, B = 0
+d = &Pixel{} // type &Pixel
+```
+
+### Array ###
+
+```go
+var arr [2]string
+arr[0] = "hello"
+arr[1] = "world"
+
+list := [5]int{1, 2, 3, 4, 5}
+
+var screen [1024]Pixel
+
+screen := []Pixel{Pixel{1, 2, 3}, Pixel{1, 2, 3}} // implicit size
+screen := []Pixel{{1, 2, 3}, {1, 2, 3},} // same as above
+```
+
+### Slice ###
+
+* Slice are reference to an array
+
+```
+var a [10]int
+
+s := a[1:3] // from index 1 until 3. Includes a[1],a[2]
+s := [:3] // from 0 until 3
+s := [3:] // from 3 to end
+s := [:] // full array
+```
+
+* Slices have length and capacity. Length is the number of elements and capacity
+is the undelying size.
+
+* `make` function can be used to create zero initialized arrays
+
+```
+arr := make([]int, 5) // 5 length, 5 capacity
+arr := make([]int, 0, 5) // 0 length, 5 capacity
+```
+
+* `append` function can be used to dynamically grow an array
+
+```
+var arr []int // len 0, cap 0
+
+arr = append(arr, 1, 2) // append with element 1 and 2, now len 2, cap 2
+```
+
+* Iterate array with for range
+
+```
+arr := []string{"hello", "world", "good", "bye"}
+
+// use both index and value
+for index, value := range arr {
+  fmt.Println(index, value)
+}
+
+// use only value
+for _, value := range arr {
+  fmt.Println(value)
+}
+
+// use only index
+for index, _ := range arr {
+  fmt.Println(index)
+}
+
+```
+
+### Maps ###
+
+### Loop ###
+
+#### For loop ####
+
+#### For with range ###
