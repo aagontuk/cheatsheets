@@ -2463,13 +2463,29 @@ Base *bp = &d;
 std::cout << bp->Base::getName() << "\n";
 ```
 
-* Never use virtual function in constructors and destructors
+* Return type have to match between virtual functions.
+* Never use virtual function in constructors and destructors.
 
 ### override and final Specifiers ###
 
-`override` specifier enforces virtualization of a function.
+A derived virtual function is only considered override if
+functino signature and return type matches exactly between
+the virtual functions. `override` specifier enforces virtualization of a function.
+If signature and return type doesn't match the compiler will
+generate an error. If `override` is used, no need to specify
+`virtual` keyword.
 
 ### Covariant Return Type ###
+
+### Destructors ###
+
+In case of inheritance destructors should
+always make virtual. Specially if there is
+dynamically allocated memory involved. If
+a derived class is converted to a base class
+and then call delete, only base destructor will
+be called. If dynamic memory is allocated in
+derived class, this will leak memory.
 
 ### Abstract Class, Pure Virtual Functions and Interface Class ###
 
@@ -2491,6 +2507,51 @@ In interface class has no member variables. All the functions are pure virtual.
 * Single Base class is shared by the derived classes.
 * Solves diamond problem.
 * Most derived class is responsible for constructing the virtual base class.
+
+Example:
+
+```
+#include <iostream>
+
+class PoweredDevice
+{
+public:
+    PoweredDevice(int power)
+    {
+		std::cout << "PoweredDevice: " << power << '\n';
+    }
+};
+
+class Scanner: virtual public PoweredDevice // note: PoweredDevice is now a virtual base class
+{
+public:
+    Scanner(int scanner, int power)
+        : PoweredDevice{ power } // this line is required to create Scanner objects, but ignored in this case
+    {
+		std::cout << "Scanner: " << scanner << '\n';
+    }
+};
+
+class Printer: virtual public PoweredDevice // note: PoweredDevice is now a virtual base class
+{
+public:
+    Printer(int printer, int power)
+        : PoweredDevice{ power } // this line is required to create Printer objects, but ignored in this case
+    {
+		std::cout << "Printer: " << printer << '\n';
+    }
+};
+
+class Copier: public Scanner, public Printer
+{
+public:
+    Copier(int scanner, int printer, int power)
+        : PoweredDevice{ power }, // PoweredDevice is constructed here
+        Scanner{ scanner, power }, Printer{ printer, power }
+    {
+    }
+};
+```
 
 ### Object Slicing ###
 
