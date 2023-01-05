@@ -27,7 +27,7 @@
 
 ### Data Memory Space ###
 
-Data memory space in AVR is devided into 3 parts. General Purpose Registers(GPRs), Input/Output Registers, Internal SRAM.
+Data memory space in AVR is divided into 3 parts. General Purpose Registers(GPRs), Input/Output Registers, Internal SRAM.
 
 ```
 					  Data Memory Space
@@ -241,7 +241,7 @@ Bits 		 D7							 D0
 SREG		| I | T | H | S | V | N | Z | C |
 			---------------------------------
 ```
-`C` = Carry Flag, This flag is set whenever there is a carry out from the D7 bit after an arithmetic operation(Addition, subtraction, increment, decrement etc). This flag bit is affected after an 8 bit addition or substruction.
+`C` = Carry Flag, This flag is set whenever there is a carry out from the D7 bit after an arithmetic operation(Addition, subtraction, increment, decrement etc). This flag bit is affected after an 8 bit addition or subtraction.
 
 `Z` = Zero Flag, This flag is affected after an arithmetic or logic operation. If the result is zero than `Z = 1`, else `Z = 0`.
 
@@ -255,7 +255,7 @@ SREG		| I | T | H | S | V | N | Z | C |
 
 `T` = Bit Copy Storage. Used as a temporary storage for bit. It can be used to copy a bit from a GPR to another GPR.
 
-`I` = Global Inturrupt Enable
+`I` = Global Interrupt Enable
 
 `CLC`(CLear Carry) instruction is used to clear carry bit, `C = 0`
 
