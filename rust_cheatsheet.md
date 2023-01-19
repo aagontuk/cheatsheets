@@ -187,6 +187,7 @@ fn main() {
 * Loops indefinitely.
 * break can use expression to return value.
 * Loops can be named and used in break
+  Loop labels must begin with a single quote.
 
 Example: `break` with expression
 ```rs
@@ -210,6 +211,7 @@ Example: named loop
 ```rs
 fn main() {
     let mut count = 0;
+		// Loop label have to start with '
     'counting_up: loop {
         println!("count = {count}");
         let mut remaining = 10;
@@ -271,3 +273,548 @@ fn main() {
     println!("LIFTOFF!!!");
 }
 ```
+
+## Ownership in Rust ##
+
+### Ownership Rules ###
+
+* Each value in Rust has an owner.
+* There can only be one owner at a time.
+* When the owner goes out of scope, the value will be dropped.
+
+In rust the memory is automatically returned
+once the variable that owns it goes out of scope.
+When a variable goes out of scope rust calls a special
+method `drop()`. This is implemented on the specific type.
+This function is responsible for cleaning up memory
+for that type.
+
+### Variables and Data Interacting with Move ###
+
+Rust always do shallow copy.
+
+```rs
+	let s1 = String::from("hello");
+	// s1 and s2 are pointing to the same data
+	// as data isn't copied.
+	//
+	// s1's ownership is moved to s2. s1 no longer valid
+	let s2 = s1;
+
+	println!("{}, world!", s1); // Won't compile s1 not valid
+```
+
+### Variables and Data Interacting with Clone ###
+
+It is possible to do deep copy with `clone()` method.
+
+```rs
+	let s1 = String::from("hello");
+	let s2 = s1.clone();
+
+	println!("s1 = {}, s2 = {}", s1, s2);
+```
+
+### Ownership and Functions ###
+
+Ownership is also move in function parameters:
+
+```rs
+fn main() {
+    let s = String::from("hello");  // s comes into scope
+
+    takes_ownership(s);             // s's value moves into the function...
+                                    // ... and so is no longer valid here
+
+    let x = 5;                      // x comes into scope
+
+    makes_copy(x);                  // x would move into the function,
+                                    // but i32 is Copy, so it's okay to still
+                                    // use x afterward
+
+		// This won't compile as ownership is moved
+		println!("String {s}");
+
+} // Here, x goes out of scope, then s. But because s's value was moved, nothing
+  // special happens.
+
+fn takes_ownership(some_string: String) { // some_string comes into scope
+    println!("{}", some_string);
+} // Here, some_string goes out of scope and `drop` is called. The backing
+  // memory is freed.
+
+fn makes_copy(some_integer: i32) { // some_integer comes into scope
+    println!("{}", some_integer);
+} // Here, some_integer goes out of scope. Nothing special happens.
+```
+
+### Return Values and Scope ###
+
+* Return values can also transfer ownership
+
+```rs
+fn main() {
+    let s1 = gives_ownership();         // gives_ownership moves its return
+                                        // value into s1
+
+    let s2 = String::from("hello");     // s2 comes into scope
+
+    let s3 = takes_and_gives_back(s2);  // s2 is moved into
+                                        // takes_and_gives_back, which also
+                                        // moves its return value into s3
+} // Here, s3 goes out of scope and is dropped. s2 was moved, so nothing
+  // happens. s1 goes out of scope and is dropped.
+
+fn gives_ownership() -> String {             // gives_ownership will move its
+                                             // return value into the function
+                                             // that calls it
+
+    let some_string = String::from("yours"); // some_string comes into scope
+
+    some_string                              // some_string is returned and
+                                             // moves out to the calling
+                                             // function
+}
+
+// This function takes a String and returns one
+fn takes_and_gives_back(a_string: String) -> String { // a_string comes into
+                                                      // scope
+
+    a_string  // a_string is returned and moves out to the calling function
+}
+```
+
+### Reference and Borrowing ###
+
+To use functions with parameters you need
+to give ownership of the parameters to the
+function and then return it back:
+
+```rs
+fn main() {
+    let s1 = String::from("hello");
+
+    let (s2, len) = calculate_length(s1);
+
+    println!("The length of '{}' is {}.", s2, len);
+}
+
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len(); // len() returns the length of a String
+
+    (s, length)
+}
+```
+
+To remove this hassle one can use references to refer
+to some value without taking ownership. This is called
+borrowing in rust terminology.
+
+```rs
+fn main() {
+    let s1 = String::from("hello");
+
+    let len = calculate_length(&s1);
+
+    println!("The length of '{}' is {}.", s1, len);
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+
+`&` is used to specify references.
+
+To change the value of the variable that
+a reference is pointing to, the reference also
+need to be mutable. For example following code
+won't compile:
+
+```rs
+fn main() {
+    let s = String::from("hello");
+
+    change(&s);
+}
+
+// The reference some_string isn't mutable
+// so it won't compile as it is changing
+// the value of the variable it is poiting to.
+fn change(some_string: &String) {
+    some_string.push_str(", world");
+}
+```
+
+Use `mut` keyword to specify mutable reference:
+
+```rs
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&mut s);
+
+		println!("{}", s);
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
+
+Rules for mutable references:
+* There can be as many as immutable references.
+* There can be only one mutable reference simultaneously.
+* Mutable reference can't be mixed up with immutable reference
+	as immutable reference is expecting value won't change.
+* This restrictions are given to remove data race at compile time.
+
+Example 1: This won't compile as two mutable reference
+of the same variable.
+```rs
+fn main() {
+    let mut s = String::from("hello");
+
+    let r1 = &mut s;
+    let r2 = &mut s;
+
+    println!("{}, {}", r1, r2);
+}
+```
+
+Example 2:
+```rs
+fn main() {
+    let mut s = String::from("hello");
+
+    {
+        let r1 = &mut s;
+    } // r1 goes out of scope here, so we can make a new reference with no problems.
+
+    let r2 = &mut s;
+}
+```
+
+Example 3:
+```rs
+fn main() {
+    let mut s = String::from("hello");
+
+    let r1 = &s; // no problem
+    let r2 = &s; // no problem
+    let r3 = &mut s; // BIG PROBLEM
+
+    println!("{}, {}, and {}", r1, r2, r3);
+}
+```
+
+Example 4:
+```rs
+fn main() {
+    let mut s = String::from("hello");
+
+    let r1 = &s; // no problem
+    let r2 = &s; // no problem
+    println!("{} and {}", r1, r2);
+    // variables r1 and r2 will not be used after this point
+
+    let r3 = &mut s; // no problem
+    println!("{}", r3);
+}
+```
+
+### Dangling References ###
+
+It is not possible to create dangling references
+in rust. Compiler does a lifetime analysis and will
+be caught.
+
+This will not compile and give compiler error:
+```rs
+fn main() {
+    let reference_to_nothing = dangle();
+}
+
+fn dangle() -> &String {
+    let s = String::from("hello");
+
+    &s
+}
+```
+
+### The Rules of References ###
+
+* At any given time, you can have either one mutable
+reference or any number of immutable references.
+
+* References must always be valid.
+
+## Slice Type ##
+
+Slices are a kind of reference which points
+to a portion of a value.
+
+`&str` - type of string slice.
+`&[i32]` - Type of i32 array slice.
+`&[T]` - Type of slice of array of type T.
+
+### String Slices ###
+
+Type of string slice is `&str`
+
+Example 1:
+```rs
+#![allow(unused)]
+fn main() {
+    let s = String::from("hello world");
+
+    let hello = &s[0..5];
+    let world = &s[6..11];
+}
+```
+
+Example 2:
+```rs
+#![allow(unused)]
+fn main() {
+let s = String::from("hello");
+
+let slice = &s[0..2];
+let slice = &s[..2];
+}
+```
+
+Example 3:
+```rs
+#![allow(unused)]
+fn main() {
+let s = String::from("hello");
+
+let len = s.len();
+
+let slice = &s[3..len];
+let slice = &s[3..];
+}
+```
+
+Example 4:
+```rs
+#![allow(unused)]
+fn main() {
+let s = String::from("hello");
+
+let len = s.len();
+
+let slice = &s[0..len];
+let slice = &s[..];
+}
+```
+
+Example 5:
+```rs
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
+}
+
+fn main() {
+    let mut s = String::from("hello world");
+
+    let word = first_word(&s);
+
+    s.clear(); // error!
+
+    println!("the first word is: {}", word);
+}
+```
+
+## Structs ##
+
+### Defining and Instantiating Structs ###
+
+Definition:
+```rs
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+```
+
+Using the struct:
+```rs
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+fn main() {
+    let user1 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("someusername123"),
+        active: true,
+        sign_in_count: 1,
+    };
+}
+```
+
+Specific field is specified using the dot notation:
+```rs
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+fn main() {
+		// All the fields are mutable now
+    let mut user1 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("someusername123"),
+        active: true,
+        sign_in_count: 1,
+    };
+
+    user1.email = String::from("anotheremail@example.com");
+}
+```
+
+* It's not possible to set a specific field as mutable.
+All the fields have to be mutable.
+
+Struct instantiation is an expression so it is possible to use
+as functions return:
+```
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+fn build_user(email: String, username: String) -> User {
+    User {
+        email: email,
+        username: username,
+        active: true,
+        sign_in_count: 1,
+    }
+}
+
+fn main() {
+    let user1 = build_user(
+        String::from("someone@example.com"),
+        String::from("someusername123"),
+    );
+}
+```
+
+### Using the Field Init Shorthand ###
+
+If field name and parameter name is same
+then you don't need to specify field names:
+
+```rs
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+fn build_user(email: String, username: String) -> User {
+    User {
+        email,
+        username,
+        active: true,
+        sign_in_count: 1,
+    }
+}
+
+fn main() {
+    let user1 = build_user(
+        String::from("someone@example.com"),
+        String::from("someusername123"),
+    );
+}
+```
+
+### Creating Instances From Other Instances With Struct Update Syntax ###
+
+The syntax .. specifies that the remaining fields
+not explicitly set should have the same value as
+the fields in the given instance:
+```rs
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+fn main() {
+    // --snip--
+
+    let user1 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("someusername123"),
+        active: true,
+        sign_in_count: 1,
+    };
+
+    let user2 = User {
+        email: String::from("another@example.com"),
+        ..user1
+    };
+}
+```
+
+**Update syntax uses move semantics. So if any of the fields
+uses move semantic then the ownership will be moved.
+For example user1 will be invalid
+after using the update syntaxt on user2.
+as email and username field ownership will be moved**
+
+### Using Tuple Structs without Named Fields to Create Different Types ###
+
+```rs
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+fn main() {
+    let black = Color(0, 0, 0);
+    let origin = Point(0, 0, 0);
+}
+```
+
+### Unit-Like Structs Without Any Fields ###
+
+Unit-like structs can be useful when you need to
+implement a trait on some type but don’t have any data
+that you want to store in the type itself
+
+```rs
+struct AlwaysEqual;
+
+fn main() {
+    let subject = AlwaysEqual;
+}
+```
+
+### Ownership of Struct Data ###
+
+To use a reference in a struct field you
+need to specifiy lifetime to make sure
+that the reference will be valid as long as
+the struct is valid.
