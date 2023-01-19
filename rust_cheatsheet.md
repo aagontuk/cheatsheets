@@ -1648,3 +1648,8 @@ fn read_username_from_file() -> Result<String, io::Error> {
 
 > The ? operator can only be used in functions
 whose return type is compatible with the value the ? is used on. 
+This operator can be used in a function that returns Result, Option,
+or another type that implements FromResidual.
+
+> ? operator can be used on a Result in a function that returns Result,
+and you can be use on an Option in a function that returns Option.
