@@ -1224,3 +1224,427 @@ fn main() {
     fn remove_fancy_hat() {}
 }
 ```
+
+### Concise Control Flow with if let ###
+
+* Works like reduced `match`. Only handle one case
+and ignore all the other case.
+
+Consider following code:
+```rs
+fn main() {
+    let config_max = Some(3u8);
+		// if config_max has value then print it
+		// if it is None do nothing
+    match config_max {
+        Some(max) => println!("The maximum is configured to be {}", max),
+        _ => (),
+    }
+}
+```
+
+This can be expressed more consciously with if/let combo:
+```rs
+fn main() {
+    let config_max = Some(3u8);
+		if let Some(max) = config_max {
+				println!("Maximum value {max}");
+		}
+		else {
+				println!("Maximum isn't set");
+		}
+}
+```
+
+## Common Collection ##
+
+### Vectors ###
+
+* Stores values of same type
+* You must annotate the type while creating
+a new vector.
+
+```rs
+let v: Vec<i32> = Vec::new();
+```
+
+* If initial values are provided rust will infer the type.
+
+```rs
+let v = vec![1, 2, 3];
+```
+
+* Updating a vecotr:
+
+```rs
+fn main() {
+    let mut v = Vec::new();
+
+    v.push(5);
+    v.push(6);
+    v.push(7);
+    v.push(8);
+}
+```
+
+* There are two ways to reference a value stored in a vector:
+via indexing or using the get method. If get method is used
+Option<&T> is returned.
+
+```rs
+fn main() {
+    let v = vec![1, 2, 3, 4, 5];
+
+    let third: &i32 = &v[2];
+    println!("The third element is {third}");
+
+    let third: Option<&i32> = v.get(2);
+    match third {
+        Some(third) => println!("The third element is {third}"),
+        None => println!("There is no third element."),
+    }
+}
+```
+
+* Ownership and borrowing rules are applicable for references
+to a vector. Following code won't compile:
+
+```rs
+fn main() {
+    let mut v = vec![1, 2, 3, 4, 5];
+
+    let first = &v[0];
+
+    v.push(6);
+
+    println!("The first element is: {first}");
+}
+```
+
+* Iterating over the values of a vector:
+
+Immutable reference:
+```rs
+fn main() {
+    let v = vec![100, 32, 57];
+    for i in &v {
+        println!("{i}");
+    }
+}
+```
+
+Mutable reference: To change the value that the mutable reference
+refers to, we have to use the * dereference operator to get to the value .
+```rs
+fn main() {
+    let mut v = vec![100, 32, 57];
+    for i in &mut v {
+        *i += 50;
+    }
+}
+```
+
+* Using Enum to store multiple types: Vectors can only store values
+that are the same type. Enums can be used as workaround for this.
+With enum definitions different types can coexists in a vector.
+
+```rs
+fn main() {
+    enum SpreadsheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String),
+    }
+
+    let row = vec![
+        SpreadsheetCell::Int(3),
+        SpreadsheetCell::Text(String::from("blue")),
+        SpreadsheetCell::Float(10.12),
+    ];
+}
+```
+
+### Hashmap ###
+
+* All keys have to be same type and
+all values have to same type.
+
+```rs
+fn main() {
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+}
+```
+
+* Accesing values in a hashmap: Values can be accesed
+with `get` method. Get method returns `Options<&T>`.
+`copied` method can be used to convert to `Options<T>`.
+In the following example `unwrap_or` is used to convert
+the value to 0 if returned value is None (If no such key).
+
+```rs
+fn main() {
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    let team_name = String::from("Blue");
+    let score = scores.get(&team_name).copied().unwrap_or(0);
+}
+```
+
+* Hashmap and ownership: For types that implement the Copy trait,
+like i32, the values are copied into the hash map.
+For owned values like String, the values will be moved and
+the hash map will be the owner of those values
+
+```rs
+fn main() {
+    use std::collections::HashMap;
+
+    let field_name = String::from("Favorite color");
+    let field_value = String::from("Blue");
+
+    let mut map = HashMap::new();
+    map.insert(field_name, field_value);
+    // field_name and field_value are invalid at this point, try using them and
+    // see what compiler error you get!
+}
+```
+
+* Inserting a value for the same key will overwrite it's value
+
+* Adding a Key and Value Only If a Key Isn’t Present:
+`entry` method returns an enum `Entry` that represents
+a value that might or might not exist. The `or_insert`
+method on Entry is defined to return a mutable reference
+to the value for the corresponding Entry key if that key exists,
+and if not, inserts the parameter as the new value
+for this key and returns a mutable reference to the new value.
+
+```rs
+fn main() {
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+
+    scores.entry(String::from("Yellow")).or_insert(50);
+    scores.entry(String::from("Blue")).or_insert(50);
+
+    println!("{:?}", scores);
+}
+```
+
+* Updating a Value Based on the Old Value:
+
+```rs
+fn main() {
+    use std::collections::HashMap;
+
+    let text = "hello world wonderful world";
+
+    let mut map = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+
+    println!("{:?}", map);
+}
+```
+
+## Error Handling ##
+
+* Rust doesn't have execptions.
+* `Result<T, E>` for recoverable errors.
+* `panic!()` macro for unrecoverable erros.
+
+### Recoverable Errors with Result ###
+
+* Result Enum:
+```rs
+enum Result<T, E> {
+		Ok(T),
+		Err(E),
+}
+```
+
+Example 1:
+```rs
+use std::fs::File;
+
+fn main() {
+    let greeting_file_result = File::open("hello.txt");
+
+    let greeting_file = match greeting_file_result {
+        Ok(file) => file,
+        Err(error) => panic!("Problem opening the file: {:?}", error),
+    };
+}
+```
+
+Example 2:
+```rs
+use std::fs::File;
+use std::io::ErrorKind;
+
+fn main() {
+    let greeting_file_result = File::open("hello.txt");
+
+    let greeting_file = match greeting_file_result {
+        Ok(file) => file,
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => match File::create("hello.txt") {
+                Ok(fc) => fc,
+                Err(e) => panic!("Problem creating the file: {:?}", e),
+            },
+            other_error => {
+                panic!("Problem opening the file: {:?}", other_error);
+            }
+        },
+    };
+}
+```
+
+* Using closures to write above program without match syntax
+```rs
+use std::fs::File;
+use std::io::ErrorKind;
+
+fn main() {
+    let greeting_file = File::open("hello.txt").unwrap_or_else(|error| {
+        if error.kind() == ErrorKind::NotFound {
+            File::create("hello.txt").unwrap_or_else(|error| {
+                panic!("Problem creating the file: {:?}", error);
+            })
+        } else {
+            panic!("Problem opening the file: {:?}", error);
+        }
+    });
+}
+```
+
+### Shortcuts for Panic on Error: `unwrap` and `expect` ###
+
+The unwrap method is a shortcut method implemented
+just like the match expression. If the Result value is
+the Ok variant, unwrap will return the value inside the Ok.
+If the Result is the Err variant, unwrap will call the panic! macro
+
+```rs
+use std::fs::File;
+
+fn main() {
+    let greeting_file = File::open("hello.txt").unwrap();
+}
+```
+
+* `expects` works like same but gives the ability
+to write custom panic message:
+
+```rs
+use std::fs::File;
+
+fn main() {
+    let greeting_file = File::open("hello.txt")
+        .expect("hello.txt should be included in this project");
+}
+```
+
+### Propagating erros ###
+
+Instead of handling function returns
+error to the caller to handle:
+
+```rs
+#![allow(unused)]
+fn main() {
+use std::fs::File;
+use std::io::{self, Read};
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let username_file_result = File::open("hello.txt");
+
+    let mut username_file = match username_file_result {
+        Ok(file) => file,
+        Err(e) => return Err(e),
+    };
+
+    let mut username = String::new();
+
+    match username_file.read_to_string(&mut username) {
+        Ok(_) => Ok(username),
+        Err(e) => Err(e),
+    }
+}
+}
+
+```
+
+### A Shortcut for Propagating Errors: the `?` Operator ###
+
+The ? placed after a Result value is defined to work
+in almost the same way as the match expressions is
+defined to handle the Result values.
+If the value of the Result is an Ok,
+the value inside the Ok will get returned from this expression,
+and the program will continue. If the value is an Err,
+the Err will be returned from the whole function as if
+the return keyword is used so that the error value gets
+propagated to the calling code.
+
+There is a difference between what the match expression does
+and what the ? operator does: error values that have the ? operator
+called on them go through the from function, defined in the From trait
+in the standard library, which is used to convert values from
+one type into another. When the ? operator calls the from function,
+the error type received is converted into the error type
+defined in the return type of the current function.
+This is useful when a function returns one error type to represent
+all the ways a function might fail,
+even if parts might fail for many different reasons.
+
+```rs
+#![allow(unused)]
+fn main() {
+use std::fs::File;
+use std::io::{self, Read};
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut username_file = File::open("hello.txt")?;
+    let mut username = String::new();
+    username_file.read_to_string(&mut username)?;
+    Ok(username)
+}
+}
+```
+
+This code can be made even shorter:
+
+```rs
+#![allow(unused)]
+fn main() {
+use std::fs::File;
+use std::io::{self, Read};
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut username = String::new();
+
+    File::open("hello.txt")?.read_to_string(&mut username)?;
+
+    Ok(username)
+}
+}
+```
+
+> The ? operator can only be used in functions
+whose return type is compatible with the value the ? is used on. 
