@@ -1835,3 +1835,472 @@ fn main() {
 
 > Monomorphization: Rust compiler turns the generic
 code into concrete type.
+
+## Traits ##
+
+* A trait defines functionality a particular type has
+and can share with other types.
+
+* We can use **trait bound** to specify that a generic
+type can be any type that has certain behaviour.
+
+### Defining a Trait ###
+
+Example:
+```rs
+pub trait Summary {
+    fn summarize(&self) -> String;
+}
+```
+
+### Implementing a Trait on a Type ###
+
+Example:
+```rs
+pub trait Summary {
+    fn summarize(&self) -> String;
+}
+
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+```
+
+> A trait can be implemented on a type
+if at least one of the trait or the type
+it local to the crate. For example,
+we can implement standard library traits
+like Display on a custom type like Tweet
+as part of our aggregator crate functionality,
+because the type Tweet is local to our aggregator crate.
+We can also implement Summary on Vec<T> in our
+aggregator crate, because the trait Summary is local
+to our aggregator crate. But we can’t implement
+the Display trait on Vec<T> within our aggregator crate,
+as both are external to our aggregator crate.
+
+### Default Implementations ###
+
+* If implementation is provided for a
+trait method, then it is not required
+to implement that method for a type.
+If a type doesn't implement it the
+default implementation of the function
+will be used.
+
+```rs
+pub trait Summary {
+    fn summarize(&self) -> String {
+        String::from("(Read more...)")
+    }
+}
+
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+// An empty impl block is required
+// to specify that this type has
+// Summary trait
+impl Summary for NewsArticle {}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+```
+
+* If a default implementation isn't provided,
+for a method, then a implementation must be
+provided by the types that are using the
+trait.
+
+```rs
+pub trait Summary {
+		// Default implementation isn't provided
+    fn summarize_author(&self) -> String;
+
+    fn summarize(&self) -> String {
+        format!("(Read more from {}...)", self.summarize_author())
+    }
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+// Tweet only have to implement summarize_author method
+impl Summary for Tweet {
+    fn summarize_author(&self) -> String {
+        format!("@{}", self.username)
+    }
+}
+```
+
+### Trait As Parameter ###
+
+If a Trait is used a parameter to a function,
+then that function will accept any type that
+implements that Trait.
+
+```rs
+pub trait Summary {
+    fn summarize(&self) -> String;
+}
+
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
+
+fn main() {
+    let tweet = Tweet {
+        username: String::from("aagontuk"),
+        content: String::from("Hello, world!"),
+        retweet: 0,
+        reaction: 0,
+    };
+
+    notify(tweet);
+}
+```
+
+### Trait Bound Syntax ###
+
+Function signatures can be written
+more concisely with trait bound box.
+For example notice following function:
+
+```rs
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
+```
+
+With trait bounds this can be written:
+
+```rs
+pub fn notify<T: Summary>(item: &T) {
+    println!("Breaking news! {}", item.summarize());
+}
+```
+
+Benefit of this will be more clear with multiple
+Trait parameter:
+
+```rs
+pub fn notify(item1: &impl Summary, item2: &impl Summary) {
+```
+
+With Trait bound syntax:
+
+```rs
+pub fn notify<T: Summary>(item1: &T, item2: &T) {
+```
+
+### Specifying Multiple Trait Bounds with the + Syntax ###
+
+We can specify more than one Trait bound.
+Following function will accept any type that
+implements Summary and Display trait.
+
+Without Trait bound syntax:
+```rs
+pub fn notify(item: &(impl Summary + Display)) {
+```
+
+With Trait bound syntax:
+```rs
+pub fn notify<T: Summary + Display>(item: &T) {
+```
+
+### Clearer Trait Bounds with where Clauses ###
+
+Consider following function with Trait bounds:
+```rs
+fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
+```
+
+With `where` clause this can be written:
+```rs
+fn some_function<T, U>(t: &T, u: &U) -> i32
+where
+		T: Display + Clone,
+		U: Clone + Debug,
+{
+
+}
+```
+
+### Returning Types that Implement Traits ###
+
+* `impl Trait` syntax can be used in function
+return to return a type that implements that
+trait.
+
+* `impl Trait` can only be used if the function
+returns a single type.
+
+Example:
+```rs
+pub trait Summary {
+    fn summarize(&self) -> String;
+}
+
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+
+// Uses impl Summary as return type
+fn returns_summarizable() -> impl Summary {
+    Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from(
+            "of course, as you probably already know, people",
+        ),
+        reply: false,
+        retweet: false,
+    }
+}
+```
+
+Following code won't compile as it can return different
+types:
+```rs
+pub trait Summary {
+    fn summarize(&self) -> String;
+}
+
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+
+// This functions can return either NewsArticle or Tweet
+fn returns_summarizable(switch: bool) -> impl Summary {
+    if switch {
+        NewsArticle {
+            headline: String::from(
+                "Penguins win the Stanley Cup Championship!",
+            ),
+            location: String::from("Pittsburgh, PA, USA"),
+            author: String::from("Iceburgh"),
+            content: String::from(
+                "The Pittsburgh Penguins once again are the best \
+                 hockey team in the NHL.",
+            ),
+        }
+    } else {
+        Tweet {
+            username: String::from("horse_ebooks"),
+            content: String::from(
+                "of course, as you probably already know, people",
+            ),
+            reply: false,
+            retweet: false,
+        }
+    }
+}
+```
+
+### Using Trait Bounds to Conditionally Implement Methods ###
+
+```rs
+use std::fmt::Display;
+
+struct Pair<T> {
+    x: T,
+    y: T,
+}
+
+// new() method is implemented for
+// all inner type T
+impl<T> Pair<T> {
+    fn new(x: T, y: T) -> Self {
+        Self { x, y }
+    }
+}
+
+// cmp_display() method is only
+// implemented for inner types
+// that implements Display  and PartialOrd
+impl<T: Display + PartialOrd> Pair<T> {
+    fn cmp_display(&self) {
+        if self.x >= self.y {
+            println!("The largest member is x = {}", self.x);
+        } else {
+            println!("The largest member is y = {}", self.y);
+        }
+    }
+}
+```
+
+We can also conditionally implement a trait for
+any type that implements another trait.
+Implementations of a trait on any type that
+satisfies the trait bounds are called blanket implementations.
+
+```rs
+impl<T: Display> ToString for T {
+
+}
+```
+
+## Lifetime ##
+
+* Lifetimes ensure that references are valid
+as long as we need them to be.
+
+* Most of the cases lifetime is automatically inferred.
+
+* we must annotate lifetimes when the
+lifetimes of references could be related in a few different ways.
+Rust requires us to annotate the relationships
+using generic lifetime parameters to ensure
+the actual references used at runtime will definitely be valid.
+
+* The main aim of lifetimes is to prevent dangling references,
+which cause a program to reference data other than
+the data it’s intended to reference.
+
+### The Borrow Checker ###
+
+* The Rust compiler has a borrow checker that compares
+scopes to determine whether all borrows are valid.
+
+* Following program will be rejected because the
+borrow checker will see that x's lifetime 'b is
+shorter than r's lifetime 'a which is referencing
+x.
+```rs
+fn main() {
+    let r;                // ---------+-- 'a
+                          //          |
+    {                     //          |
+        let x = 5;        // -+-- 'b  |
+        r = &x;           //  |       |
+    }                     // -+       |
+                          //          |
+    println!("r: {}", r); //          |
+}                         // ---------+
+```
+
+* Following code will be accepted x's lifetime 'b
+is longer than r's lifetime 'a. So the compiler
+knows r will be always valid when x valid.
+```rs
+fn main() {
+    let x = 5;            // ----------+-- 'b
+                          //           |
+    let r = &x;           // --+-- 'a  |
+                          //   |       |
+    println!("r: {}", r); //   |       |
+                          // --+       |
+}                         // ----------+
+```
+
+### Lifetime Annotation Syntax ###
