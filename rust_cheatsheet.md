@@ -964,3 +964,263 @@ fn main() {
     println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
 }
 ```
+
+## Enum and Pattern Matching ##
+
+### Defining Enum ###
+
+```rs
+enum IpAddrKind {
+    V4,
+    V6,
+}
+
+fn main() {
+    let four = IpAddrKind::V4;
+    let six = IpAddrKind::V6;
+
+    route(IpAddrKind::V4);
+    route(IpAddrKind::V6);
+}
+
+fn route(ip_kind: IpAddrKind) {}
+```
+
+Enum's can have data in them.
+Consider following example:
+
+```rs
+fn main() {
+    enum IpAddrKind {
+        V4,
+        V6,
+    }
+
+    struct IpAddr {
+        kind: IpAddrKind,
+        address: String,
+    }
+
+    let home = IpAddr {
+        kind: IpAddrKind::V4,
+        address: String::from("127.0.0.1"),
+    };
+
+    let loopback = IpAddr {
+        kind: IpAddrKind::V6,
+        address: String::from("::1"),
+    };
+}
+```
+
+This same program can be expresses with:
+
+```rs
+fn main() {
+    enum IpAddr {
+        V4(String),
+        V6(String),
+    }
+
+    let home = IpAddr::V4(String::from("127.0.0.1"));
+
+    let loopback = IpAddr::V6(String::from("::1"));
+}
+```
+
+### Methods on Enums ###
+
+Similar to structs it is possible to implement
+method on enums:
+
+```rs
+fn main() {
+    enum Message {
+        Quit,
+        Move { x: i32, y: i32 },
+        Write(String),
+        ChangeColor(i32, i32, i32),
+    }
+
+    impl Message {
+        fn call(&self) {
+            // method body would be defined here
+        }
+    }
+
+    let m = Message::Write(String::from("hello"));
+    m.call();
+}
+```
+
+### The `Option` Enum and Its Advantages Over Null Values ###
+
+* Rust doesn't have NULL
+
+* The `Option` type encodes the scenario in which
+a value could be something or it could be nothing.
+
+* Expressing this concept in terms of the type system
+means the compiler can check whether you’ve handled
+all the cases you should be handling
+
+* `Option` is implemented as following enum:
+```rs
+enum Option<T> {
+    None,
+    Some(T),
+}
+```
+
+Example:
+```rs
+fn main() {
+    let some_number = Some(5);
+    let some_char = Some('e');
+
+    let absent_number: Option<i32> = None;
+}
+```
+
+* `Option<T>` can be used with `T`. `Option<T>` can
+be converted to `T` by handling null case.
+
+Example:
+```rs
+fn main() {
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
+}
+    
+fn plus_one(x: Option<i32>) -> Option<i32> {
+		match x {
+				None => None,
+				Some(i) => Some(i + 1),
+		}
+}
+```
+
+### The `match` Control Flow Construct ###
+
+* Can be used to compare a value agains a
+series of patters and execute code based
+on the pattern matched.
+
+* This confirms the compiler that all possible
+cases are handled.
+
+* Each pattern is called an arm
+
+Example:
+```rs
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter,
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter => 25,
+    }
+}
+
+fn main() {}
+```
+
+Another Example 2:
+```rs
+#[derive(Debug)]
+enum UsState {
+    Alabama,
+    Alaska,
+    // --snip--
+}
+
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter(UsState),
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter(state) => {
+            println!("State quarter from {:?}!", state);
+            25
+        }
+    }
+}
+
+fn main() {
+    value_in_cents(Coin::Quarter(UsState::Alaska));
+}
+```
+
+* Matches are exhaustive. You have to handle
+all the possible cases.
+
+### Catch-all Patterns and the `_` Placeholder ###
+
+Example 1:
+```rs
+fn main() {
+    let dice_roll = 9;
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        other => move_player(other),
+    }
+
+    fn add_fancy_hat() {}
+    fn remove_fancy_hat() {}
+    fn move_player(num_spaces: u8) {}
+}
+```
+
+* Rust will warn if any arm is specified after the catch all
+pattern.
+
+* It is possbile to use `_` to add a catch all pattern
+but don't use the value.
+
+```rs
+fn main() {
+    let dice_roll = 9;
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        _ => reroll(),
+    }
+
+    fn add_fancy_hat() {}
+    fn remove_fancy_hat() {}
+    fn reroll() {}
+}
+```
+
+* It also possible to take no action
+for an arm:
+
+```rs
+fn main() {
+    let dice_roll = 9;
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        _ => (),
+    }
+
+    fn add_fancy_hat() {}
+    fn remove_fancy_hat() {}
+}
+```
