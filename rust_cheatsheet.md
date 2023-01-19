@@ -853,7 +853,7 @@ instead, Rust has a feature called automatic referencing and dereferencing.**
 
 ### Methods with More Parameters ###
 
-```
+```rs
 #[derive(Debug)]
 struct Rectangle {
     width: u32,
