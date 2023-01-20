@@ -2304,3 +2304,165 @@ fn main() {
 ```
 
 ### Lifetime Annotation Syntax ###
+
+```rs
+&i32        // a reference
+&'a i32     // a reference with an explicit lifetime
+&'a mut i32 // a mutable reference with an explicit lifetime
+```
+
+### Lifetime Annotations in Function Signatures ###
+
+Following function signature tells Rust that
+for some lifetime 'a, the function takes two parameters,
+both of which are string slices that live
+at least as long as lifetime 'a.
+The function signature also tells Rust
+that the string slice returned from the function
+will live at least as long as lifetime 'a.
+```rs
+fn main() {
+    let string1 = String::from("abcd");
+    let string2 = "xyz";
+
+    let result = longest(string1.as_str(), string2);
+    println!("The longest string is {}", result);
+}
+
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+```
+
+* When returning a reference from a function,
+the lifetime parameter for the return type
+needs to match the lifetime parameter for one of the parameters.
+
+### Lifetime Annotations in Struct Definitions ###
+
+* We can define structs to hold references,
+but in that case we would need to add
+a lifetime annotation on every reference
+in the struct’s definition. 
+
+```rs
+struct ImportantExcerpt<'a> {
+    part: &'a str,
+}
+
+fn main() {
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    let first_sentence = novel.split('.').next().expect("Could not find a '.'");
+    let i = ImportantExcerpt {
+        part: first_sentence,
+    };
+}
+```
+
+* This annotation means an instance of ImportantExcerpt
+can’t outlive the reference it holds in its part field.
+
+### Lifetime Elision ###
+
+The compiler uses three rules to figure out
+the lifetimes of the references when there aren’t 
+explicit annotations. The first rule applies to
+input lifetimes, and the second and third rules
+apply to output lifetimes. If the compiler 
+gets to the end of the three rules and there are still
+references for which it can’t figure out lifetimes,
+the compiler will stop with an error.
+These rules apply to fn definitions as well as impl blocks.
+
+* The first rule is that the compiler assigns
+a lifetime parameter to each parameter that’s a reference. 
+In other words, a function with one parameter gets
+one lifetime parameter: `fn foo<'a>(x: &'a i32);`
+a function with two parameters gets two separate
+lifetime parameters: `fn foo<'a, 'b>(x: &'a i32, y: &'b i32);` and so on.
+
+* The second rule is that, if there is
+exactly one input lifetime parameter,
+that lifetime is assigned to all output
+lifetime parameters: `fn foo<'a>(x: &'a i32) -> &'a i32.`
+
+* The third rule is that, if there
+are multiple input lifetime parameters,
+but one of them is `&self` or `&mut` self because this is a method,
+the lifetime of self is assigned to all output lifetime parameters. 
+
+### Lifetime Annotations in Method Definitions ###
+
+Example 1:
+```rs
+struct ImportantExcerpt<'a> {
+    part: &'a str,
+}
+
+impl<'a> ImportantExcerpt<'a> {
+    fn level(&self) -> i32 {
+        3
+    }
+}
+
+impl<'a> ImportantExcerpt<'a> {
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}
+
+fn main() {
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    let first_sentence = novel.split('.').next().expect("Could not find a '.'");
+    let i = ImportantExcerpt {
+        part: first_sentence,
+    };
+}
+```
+
+### The Static Lifetime ###
+
+* `'static` lifetime denotes that the
+affected reference can live for
+the entire duration of the program.
+
+* All string literals have the `'static` lifetime
+
+### Generic Type Parameters, Trait Bounds, and Lifetimes Together ###
+
+```rs
+fn main() {
+    let string1 = String::from("abcd");
+    let string2 = "xyz";
+
+    let result = longest_with_an_announcement(
+        string1.as_str(),
+        string2,
+        "Today is someone's birthday!",
+    );
+    println!("The longest string is {}", result);
+}
+
+use std::fmt::Display;
+
+fn longest_with_an_announcement<'a, T>(
+    x: &'a str,
+    y: &'a str,
+    ann: T,
+) -> &'a str
+where
+    T: Display,
+{
+    println!("Announcement! {}", ann);
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+```
