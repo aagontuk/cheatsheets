@@ -2734,3 +2734,136 @@ fn main() {
     println!("{:#?}", list);
 }
 ```
+
+## Iterators ##
+
+### Processing a Series of Items with Iterators ###
+
+Example:
+```rs
+fn main() {
+    let v1 = vec![1, 2, 3];
+
+    let v1_iter = v1.iter();
+
+    for val in v1_iter {
+        println!("Got: {}", val);
+    }
+}
+```
+
+### The Iterator Trait and the next Method ###
+
+All iterators implement a trait named Iterator that is defined in the standard library.
+The definition of the trait looks like this:
+```rs
+pub trait Iterator {
+    type Item;
+
+    fn next(&mut self) -> Option<Self::Item>;
+
+    // methods with default implementations elided
+}
+```
+
+To use iterator for a custom type it has to implement
+Iterator trait. To implement Iterator define an Item type,
+and use this Item type in the return type of the next method.
+
+> values we get from the calls to next are immutable references to the values in the vector.
+The iter method produces an iterator over immutable references.
+If we want to create an iterator that takes ownership of v1 and returns owned values,
+we can call `into_iter` instead of iter.
+Similarly, if we want to iterate over mutable references, we can call `iter_mut` instead of iter.
+
+### Methods that Consume the Iterator ###
+
+* Methods that call next are called consuming adaptors,
+because calling them uses up the iterator. 
+
+Example: sum method, which takes ownership of the iterator
+and iterates through the items by repeatedly calling next, thus consuming the iterator.
+```rs
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn iterator_sum() {
+        let v1 = vec![1, 2, 3];
+
+        let v1_iter = v1.iter();
+
+        let total: i32 = v1_iter.sum();
+
+        assert_eq!(total, 6);
+    }
+}
+```
+
+### Methods that Produce Other Iterators ###
+
+* Iterator adaptors are methods defined on the Iterator trait
+that don’t consume the iterator. Instead, they produce
+different iterators by changing some aspect of the original iterator.
+
+```rs
+fn main() {
+    let v1: Vec<i32> = vec![1, 2, 3];
+
+    let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();
+
+    assert_eq!(v2, vec![2, 3, 4]);
+}
+```
+
+### Using Closures that Capture Their Environment ###
+
+```rs
+#[derive(PartialEq, Debug)]
+struct Shoe {
+    size: u32,
+    style: String,
+}
+
+fn shoes_in_size(shoes: Vec<Shoe>, shoe_size: u32) -> Vec<Shoe> {
+    shoes.into_iter().filter(|s| s.size == shoe_size).collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn filters_by_size() {
+        let shoes = vec![
+            Shoe {
+                size: 10,
+                style: String::from("sneaker"),
+            },
+            Shoe {
+                size: 13,
+                style: String::from("sandal"),
+            },
+            Shoe {
+                size: 10,
+                style: String::from("boot"),
+            },
+        ];
+
+        let in_my_size = shoes_in_size(shoes, 10);
+
+        assert_eq!(
+            in_my_size,
+            vec![
+                Shoe {
+                    size: 10,
+                    style: String::from("sneaker")
+                },
+                Shoe {
+                    size: 10,
+                    style: String::from("boot")
+                },
+            ]
+        );
+    }
+}
+```
