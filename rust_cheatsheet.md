@@ -2867,3 +2867,10 @@ mod tests {
     }
 }
 ```
+
+## Fearless Concurrency ##
+
+### Using Threads to Run Code Simultaneously ###
+
+* The Rust standard library uses a 1:1 model of thread implementation,
+whereby a program uses one operating system thread per one language thread.
