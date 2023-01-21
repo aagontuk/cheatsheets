@@ -3102,7 +3102,7 @@ fn main() {
 It is not possible to disable drop functionality or
 call drop method on a type directly but memory
 can be freed earlier using the std::mem::drop function.
-```
+```rs
 struct CustomSmartPointer {
     data: String,
 }
@@ -3120,5 +3120,63 @@ fn main() {
     println!("CustomSmartPointer created.");
     drop(c);
     println!("CustomSmartPointer dropped before the end of main.");
+}
+```
+
+### `Rc<T>`, the Reference Counted Smart Pointer ###
+
+* Share ownership among multiple owners.
+* Only applicable for single threaded case. (Arc<T> for multi threade).
+
+* `Rc<T>` is useful to allocate data from the heap for multiple
+parts of a program to read and it is not possible to determine at
+compile time which part will finish using the data last
+
+* Keeps a reference count of the owners. Will free the object when
+count goes to zero.
+
+* Convention is to use `Rc::clone(&T)` instead of `T.clone()`.
+As in most cases `T.clone()` does deep copy. Though in this case
+it will do a referance count instead of deep copy. But by using
+`Rc::clone(&T)` it possible to visually tell that it is doing
+reference counting.
+
+Example 1:
+```rs
+enum List {
+    Cons(i32, Rc<List>),
+    Nil,
+}
+
+use crate::List::{Cons, Nil};
+use std::rc::Rc;
+
+fn main() {
+    let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
+    let b = Cons(3, Rc::clone(&a));
+    let c = Cons(4, Rc::clone(&a));
+}
+```
+
+Example 2:
+```rs
+enum List {
+    Cons(i32, Rc<List>),
+    Nil,
+}
+
+use crate::List::{Cons, Nil};
+use std::rc::Rc;
+
+fn main() {
+    let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
+    println!("count after creating a = {}", Rc::strong_count(&a));
+    let b = Cons(3, Rc::clone(&a));
+    println!("count after creating b = {}", Rc::strong_count(&a));
+    {
+        let c = Cons(4, Rc::clone(&a));
+        println!("count after creating c = {}", Rc::strong_count(&a));
+    }
+    println!("count after c goes out of scope = {}", Rc::strong_count(&a));
 }
 ```
