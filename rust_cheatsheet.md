@@ -2874,3 +2874,251 @@ mod tests {
 
 * The Rust standard library uses a 1:1 model of thread implementation,
 whereby a program uses one operating system thread per one language thread.
+
+## Smart Pointers ##
+
+### Box<T> to Point to Data on the Heap ###
+
+Situations:
+
+* To use a type whose size can't be known at compile time
+and to use a value of that type in a context that requires
+an exact size.
+
+* To handle large amount of data and transfer ownership but
+unsure data won't be copied while transfering ownership.
+
+* To own a value and you care only that it’s a type that implements
+a particular trait rather than being of a specific type
+
+### Usage ###
+
+```rs
+fn main() {
+    let b = Box::new(5);
+    println!("b = {}", b);
+}
+```
+
+### Enabling Recursive Types with Boxes ###
+
+* Rust Doesn't allow recursive types as their size can't be
+known in compile time.
+
+```rs
+// Infinite recursion here
+// when measuring space
+enum List {
+    Cons(i32, List),
+    Nil,
+}
+
+use crate::List::{Cons, Nil};
+
+fn main() {
+    let list = Cons(1, Cons(2, Cons(3, Nil)));
+}
+```
+
+### Using Box<T> to Get a Recursive Type with a Known Size ###
+
+```
+enum List {
+    Cons(i32, Box<List>),
+    Nil,
+}
+
+use crate::List::{Cons, Nil};
+
+fn main() {
+    let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
+}
+```
+
+### Treating Smart Pointers Like Regular References with the Deref Trait ###
+
+#### Following the Pointer to the Value ####
+
+```rs
+fn main() {
+    let x = 5;
+    let y = &x;
+
+    assert_eq!(5, x);
+    assert_eq!(5, *y);
+}
+```
+
+#### Using Box<T> Like a Reference ####
+
+```rs
+fn main() {
+    let x = 5;
+    let y = Box::new(x);
+
+    assert_eq!(5, x);
+    assert_eq!(5, *y);
+}
+```
+
+#### Defining Your Own Smart Pointer ####
+
+Create a new type `MyBox<T>`
+```rs
+struct MyBox<T>(T);
+
+impl<T> MyBox<T> {
+    fn new(x: T) -> MyBox<T> {
+        MyBox(x)
+    }
+}
+
+fn main() {}
+```
+
+But deferencing won't work on MyBox<T>. Following code won't compile:
+
+```rs
+fn main() {
+	let b = MyBox::new(5);
+	assert_eq!(5, *b);
+}
+```
+
+#### Implementing the Deref Trait ###
+
+```rs
+use std::ops::Deref;
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+struct MyBox<T>(T);
+
+impl<T> MyBox<T> {
+    fn new(x: T) -> MyBox<T> {
+        MyBox(x)
+    }
+}
+
+fn main() {
+    let x = 5;
+    let y = MyBox::new(x);
+
+    assert_eq!(5, x);
+    assert_eq!(5, *y);
+}
+```
+
+#### Implicit Deref Coercions with Functions and Methods ####
+
+* Deref coercion converts a reference to a type that implements
+the Deref trait into a reference to another type.
+
+* Deref coercion is a convenience Rust performs on arguments to
+functions and methods, and works only on types that implement the Deref trait.
+
+* It happens automatically when we pass a reference to a particular type’s
+value as an argument to a function or method that doesn’t match the parameter
+type in the function or method definition
+
+Example: Reference to MyBox converts into &str
+```rs
+use std::ops::Deref;
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        &self.0
+    }
+}
+
+struct MyBox<T>(T);
+
+impl<T> MyBox<T> {
+    fn new(x: T) -> MyBox<T> {
+        MyBox(x)
+    }
+}
+
+fn hello(name: &str) {
+    println!("Hello, {name}!");
+}
+
+fn main() {
+    let m = MyBox::new(String::from("Rust"));
+
+		// Deref coersion from &MyBox to &str
+    hello(&m);
+}
+```
+
+#### How Deref Coercion Interacts with Mutability ###
+
+Rust does deref coercion when it finds types and trait
+implementations in three cases:
+
+1. From `&T` to `&U` when `T: Deref<Target=U>`
+2. From `&mut T` to `&mut U` when `T: DerefMut<Target=U>`
+3. From `&mut T` to `&U` when `T: Deref<Target=U>`
+
+* In 1: Converts &T to &U
+* In 2: Converts &mut T to &mut U
+* In 3: Converts &mut T to &U. But &T to &mut U isn't allowed
+
+### Cleanup with the Drop Trait ###
+
+Example implementing Drop trait:
+```rs
+struct CustomSmartPointer {
+    data: String,
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping CustomSmartPointer with data `{}`!", self.data);
+    }
+}
+
+fn main() {
+    let c = CustomSmartPointer {
+        data: String::from("my stuff"),
+    };
+    let d = CustomSmartPointer {
+        data: String::from("other stuff"),
+    };
+    println!("CustomSmartPointers created.");
+}
+```
+
+#### Dropping a Value Early with std::mem::drop ###
+
+It is not possible to disable drop functionality or
+call drop method on a type directly but memory
+can be freed earlier using the std::mem::drop function.
+```
+struct CustomSmartPointer {
+    data: String,
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping CustomSmartPointer with data `{}`!", self.data);
+    }
+}
+
+fn main() {
+    let c = CustomSmartPointer {
+        data: String::from("some data"),
+    };
+    println!("CustomSmartPointer created.");
+    drop(c);
+    println!("CustomSmartPointer dropped before the end of main.");
+}
+```
