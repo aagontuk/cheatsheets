@@ -3180,3 +3180,144 @@ fn main() {
     println!("count after c goes out of scope = {}", Rc::strong_count(&a));
 }
 ```
+
+### `RefCell<T>` and the Interior Mutability Pattern ###
+
+Interior mutability: Interior mutability is a design pattern
+in Rust that allows you to mutate data even when there are
+immutable references to that data. To mutate data,
+the pattern uses unsafe code inside a data structure
+to bend Rust’s usual rules that govern mutation and borrowing.
+
+* With references and `Box<T>` borrowing rules are enforced
+at compile time but with `RefCell<T>` borrowing rules are
+enforced at runtime.
+
+* Can only be used in single threaded scenario.
+
+* Interior mutability is possible with `RefCell<T>`.
+
+* To get interior mutability enclose the type
+in `RefCell<T>`, then call `borrow_mut()` method
+on the object to get mutable reference and `borrow()`
+method to get immutable reference.
+
+* `borrow()` method returns `Ref<T>` and `borrow_mut()`
+returns `RefMut<T>`.
+
+* Same borrowing rules applied for `RefCell<T>` but
+enforced at runtime.
+
+Example:
+```rs
+pub trait Messenger {
+    fn send(&self, msg: &str);
+}
+
+pub struct LimitTracker<'a, T: Messenger> {
+    messenger: &'a T,
+    value: usize,
+    max: usize,
+}
+
+impl<'a, T> LimitTracker<'a, T>
+where
+    T: Messenger,
+{
+    pub fn new(messenger: &'a T, max: usize) -> LimitTracker<'a, T> {
+        LimitTracker {
+            messenger,
+            value: 0,
+            max,
+        }
+    }
+
+    pub fn set_value(&mut self, value: usize) {
+        self.value = value;
+
+        let percentage_of_max = self.value as f64 / self.max as f64;
+
+        if percentage_of_max >= 1.0 {
+            self.messenger.send("Error: You are over your quota!");
+        } else if percentage_of_max >= 0.9 {
+            self.messenger
+                .send("Urgent warning: You've used up over 90% of your quota!");
+        } else if percentage_of_max >= 0.75 {
+            self.messenger
+                .send("Warning: You've used up over 75% of your quota!");
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::cell::RefCell;
+
+    struct MockMessenger {
+				// With RefCell<T> it isn't
+				// possible to mutate this in
+				// send() method of Messanger trait
+        sent_messages: RefCell<Vec<String>>,
+    }
+
+    impl MockMessenger {
+        fn new() -> MockMessenger {
+            MockMessenger {
+                sent_messages: RefCell::new(vec![]),
+            }
+        }
+    }
+
+    impl Messenger for MockMessenger {
+        fn send(&self, message: &str) {
+            self.sent_messages.borrow_mut().push(String::from(message));
+        }
+    }
+
+    #[test]
+    fn it_sends_an_over_75_percent_warning_message() {
+        // --snip--
+        let mock_messenger = MockMessenger::new();
+        let mut limit_tracker = LimitTracker::new(&mock_messenger, 100);
+
+        limit_tracker.set_value(80);
+
+        assert_eq!(mock_messenger.sent_messages.borrow().len(), 1);
+    }
+}
+```
+
+### Having Multiple Owners of Mutable Data by Combining `Rc<T>` and `RefCell<T>` ###
+
+`Rc<T>` provides multiple ownership to immutable data.
+But with combination of `RefCell<T>` we can get multiple
+ownership of immutable data.
+
+Example:
+```
+#[derive(Debug)]
+enum List {
+    Cons(Rc<RefCell<i32>>, Rc<List>),
+    Nil,
+}
+
+use crate::List::{Cons, Nil};
+use std::cell::RefCell;
+use std::rc::Rc;
+
+fn main() {
+    let value = Rc::new(RefCell::new(5));
+
+    let a = Rc::new(Cons(Rc::clone(&value), Rc::new(Nil)));
+
+    let b = Cons(Rc::new(RefCell::new(3)), Rc::clone(&a));
+    let c = Cons(Rc::new(RefCell::new(4)), Rc::clone(&a));
+
+    *value.borrow_mut() += 10;
+
+    println!("a after = {:?}", a);
+    println!("b after = {:?}", b);
+    println!("c after = {:?}", c);
+}
+```
