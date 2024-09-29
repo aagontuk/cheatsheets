@@ -6,6 +6,8 @@
 5. [Python Programming](https://github.com/aagontuk/cheatsheets/blob/master/py_cheat.md)
 4. [C++ Programming](https://github.com/aagontuk/cheatsheets/blob/master/cpp_cheatsheet.md)
 3. [C Programming](https://github.com/rashfaqur/cheatsheets/blob/master/C_programming.md)
+4. [Rust Programming](https://github.com/rashfaqur/cheatsheets/blob/master/rust_cheatsheet.md)
+5. [CUDA Programming](https://github.com/rashfaqur/cheatsheets/blob/master/cuda_cheatsheet.md)
 4. [Ncurses Programming in C](https://github.com/aagontuk/cheatsheets/blob/master/ncurses_api.md)
 5. [Shell Programming](https://github.com/aagontuk/cheatsheets/blob/master/bash.md)
 5. [AWK](https://github.com/aagontuk/cheatsheets/blob/master/awk_cheatsheet.md)
