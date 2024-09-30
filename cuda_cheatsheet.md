@@ -25,6 +25,7 @@ add<<<TOTAL_THREADS/THREADS_PER_BLOCK, THREADS_PER_BLOCK>>>(d_a, d_b, d_c);
 * Memory types:
     * global memory
     * shared memory: on-chip memory. low latency, high bandwidth. Shared between threads in a block. Declared as `__shared__` and user managed.
+    * Typically > 48KB shared memory per SM.
 * `__syncthreads()` - Synchronize all threads in a block
 
 * 1D stencil example:
@@ -51,3 +52,22 @@ __global__ void stencil_1d(int *in, int *out) {
     out[gindex] = result;
 }
 ```
+
+* Execution Model:
+    * Threads can be mapped to functional units in SM.
+    * 32 threads are grouped into a warp.
+    * A warp is the smallest unit of execution. All threads in a warp execute the same instruction.
+    * A block is a collection of threads and warps.
+    * All the threads in a block are executed on the same SM.
+    * Typically there are 64 warps per SM.
+    * A block contains 32 * 64 = 2048 threads.
+    * SM can concurrently execute 16-32 thread blocks.
+* GPUs are in order processors. They can execute multiple warps in parallel.
+* Memory reads doesn't stall execution. Threads stalls when operands are not ready.
+* Global memory latency 100-400 cycles.
+* Each SM has it's own L1 cache and L2 cache is shared by all SMs.
+* Cache line size is 128 bytes.
+* Loads can be caching or non-caching.
+    * Caching loads: L1 cache hit -> L2 cache hit -> global memory
+    * Non-caching loads: L1 cache miss -> L2 cache hit -> global memory
+* Stores invalidate L1 and write back to L2.
